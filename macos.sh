@@ -184,6 +184,8 @@ else
             if [[ -z "$INVITE_CODE" || ${#INVITE_CODE} -lt 12 ]]; then
                 echo -e "Invalid invite code. Please check and try again."
                 continue
+            else
+                break
             fi
         done
         animate_text "Creating your node identity..."
