@@ -86,32 +86,38 @@ else
     animate_text "Project directory already exists: $PROJECT_DIR"
 fi
 
+# Pastikan kepemilikan folder
 USER=$(logname)
-chown "$USER:$USER" "$PROJECT_DIR"
+chown "$USER:$USER" "$PROJECT_DIR" 2>/dev/null
 
+# Pastikan curl sudah terinstal
 if ! command -v curl &> /dev/null; then
     animate_text "curl is not installed. Installing curl..."
     apt update && apt install -y curl
 fi
 
+# Cek versi terbaru PROTOCOL
 PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest")
 animate_text "Latest protocol version is $PROTOCOL_VERSION"
 DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-linux-amd64"
 
+# Cek versi terbaru CAPSULE
 CAPSULE_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest")
 animate_text "Latest capsule version is $CAPSULE_VERSION"
 DOWNLOAD_CAPSULE_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-linux-amd64"
 
+# Cek versi terbaru UTILS
 UTILS_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/latest")
 animate_text "Latest utils version is $UTILS_VERSION"
 DOWNLOAD_UTILS_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsLinux"
 
 animate_text "Downloading and configuring core components..."
 
+# Download / update CAPSULE
 if [[ -f "$CAPSULE_EXEC" ]]; then
     CURRENT_CAPSULE_VERSION_OUTPUT=$("$CAPSULE_EXEC" --version 2>/dev/null)
     if [[ "$CURRENT_CAPSULE_VERSION_OUTPUT" == *"$CAPSULE_VERSION"* ]]; then
-        animate_text "Capsule is already up to date (version found: $CURRENT_PROTOCOL_VERSION_OUTPUT). Skipping download."
+        animate_text "Capsule is already up to date (version found: $CURRENT_CAPSULE_VERSION_OUTPUT). Skipping download."
     else
         if command -v nvidia-smi &> /dev/null; then
             animate_text "NVIDIA detected. Downloading capsule for NVIDIA systems..."
@@ -135,10 +141,9 @@ else
     animate_text "Capsule downloaded to: $CAPSULE_EXEC"
 fi
 
-
+# Download / update PROTOCOL
 if [[ -f "$PROTOCOL_EXEC" ]]; then
     CURRENT_PROTOCOL_VERSION_OUTPUT=$("$PROTOCOL_EXEC" --version 2>/dev/null)
-
     if [[ "$CURRENT_PROTOCOL_VERSION_OUTPUT" == *"$PROTOCOL_VERSION"* ]]; then
         animate_text "Node is already up to date (version found: $CURRENT_PROTOCOL_VERSION_OUTPUT). Skipping download."
     else
@@ -153,20 +158,28 @@ else
     chmod +x "$PROTOCOL_EXEC"
     animate_text "Node downloaded to: $PROTOCOL_EXEC"
 fi
+
+# Download / update UTILS
 if [[ ! -f "$UTILS_EXEC" ]]; then
-    CURRENT_UTILS_VERSION_OUTPUT=$("$UTILS_EXEC" --version 2>/dev/null)
-    if [[ "CURRENT_UTILS_VERSION_OUTPUT" == *"UTILS_VERSION"* ]]; then
-        animate_text "Utils is already up to date (version found: $CURRENT_UTILS_VERSION_OUTPUT). Skipping download."
-    else
-        animate_text "Utils is outdated (found version: $CURRENT_UTILS_VERSION_OUTPUT, expected: $UTILS_VERSION). Downloading new version..."
-        curl -L -o "$UTILS_EXEC" "$DOWNLOAD_UTILS_URL"
-        chmod +x "$UTILS_EXEC"
-    fi
+    animate_text "Utils not found. Downloading FortytwoUtils..."
 else
-    curl -L -o "$UTILS_EXEC" "$DOWNLOAD_UTILS_URL"
-    chmod +x "$UTILS_EXEC"
+    animate_text "Redownloading latest version of FortytwoUtils..."
 fi
 
+curl -L -o "$UTILS_EXEC" "$DOWNLOAD_UTILS_URL"
+# Pastikan benar-benar terunduh
+if [[ ! -f "$UTILS_EXEC" || ! -s "$UTILS_EXEC" ]]; then
+    echo "❌ Error: Failed to download FortytwoUtils from:"
+    echo "   $DOWNLOAD_UTILS_URL"
+    echo "   Please check your internet connection or the URL."
+    exit 1
+fi
+
+chmod +x "$UTILS_EXEC"
+animate_text "FortytwoUtils downloaded successfully to $UTILS_EXEC"
+
+
+# Cek identity (private key)
 if [[ -f "$ACCOUNT_PRIVATE_KEY_FILE" ]]; then
     ACCOUNT_PRIVATE_KEY=$(cat "$ACCOUNT_PRIVATE_KEY_FILE")
     animate_text "Using saved account private key."
@@ -188,11 +201,13 @@ else
     read -r -p "Select option [1-2]: " IDENTITY_OPTION
     echo
     IDENTITY_OPTION=${IDENTITY_OPTION:-1}
+
     if [[ "$IDENTITY_OPTION" == "2" ]]; then
         animate_text "Recovering existing identity"
         while true; do
             read -r -p "Enter your account recovery phrase (12, 18, or 24 words), then press Enter: " ACCOUNT_SEED_PHRASE
             echo
+            # Gunakan FortytwoUtils untuk generate private key dari seed phrase
             if ! ACCOUNT_PRIVATE_KEY=$("$UTILS_EXEC" --phrase "$ACCOUNT_SEED_PHRASE"); then
                 echo "Error: Please check the recovery phrase and try again."
                 continue
@@ -210,14 +225,17 @@ else
                 echo -e "Invalid invite code. Please check and try again."
                 continue
             fi
+            break
         done
         animate_text "Creating your node identity..."
+        # Buat wallet baru & simpan private key
         "$UTILS_EXEC" --create-wallet "$ACCOUNT_PRIVATE_KEY_FILE" --drop-code "$INVITE_CODE"
         ACCOUNT_PRIVATE_KEY=$(<"$ACCOUNT_PRIVATE_KEY_FILE")
         animate_text "Identity configured and securely stored!"
         read -n 1 -s -r -p "Press any key to continue..."
     fi
 fi
+
 echo
 animate_text "Time to choose your node's specialization!"
 echo
@@ -340,10 +358,10 @@ case $NODE_CLASS in
         auto_select_model
         ;;
 esac
+
 animate_text "${NODE_NAME} is selected"
 animate_text "Downloading model and preparing the environment (this may take several minutes)..."
 "$UTILS_EXEC" --hf-repo "$LLM_HF_REPO" --hf-model-name "$LLM_HF_MODEL_NAME" --model-cache "$PROJECT_MODEL_CACHE_DIR"
-
 
 animate_text "Setup completed."
 clear
@@ -363,6 +381,7 @@ while true; do
         sleep 5
     fi
 done
+
 animate_text "Starting Protocol.."
 "$PROTOCOL_EXEC" --account-private-key "$ACCOUNT_PRIVATE_KEY" --db-folder "$PROTOCOL_DB_DIR" &
 PROTOCOL_PID=$!
