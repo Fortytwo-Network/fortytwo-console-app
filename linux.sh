@@ -86,27 +86,27 @@ else
     animate_text "Project directory already exists: $PROJECT_DIR"
 fi
 
-# Pastikan kepemilikan folder
+# Ensure folder ownership
 USER=$(logname)
 chown "$USER:$USER" "$PROJECT_DIR" 2>/dev/null
 
-# Pastikan curl sudah terinstal
+# Make sure curl is installed
 if ! command -v curl &> /dev/null; then
     animate_text "curl is not installed. Installing curl..."
     apt update && apt install -y curl
 fi
 
-# Cek versi terbaru PROTOCOL
+# Check the latest version of PROTOCOL
 PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest")
 animate_text "Latest protocol version is $PROTOCOL_VERSION"
 DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-linux-amd64"
 
-# Cek versi terbaru CAPSULE
+# Check the latest version of CAPSULE
 CAPSULE_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest")
 animate_text "Latest capsule version is $CAPSULE_VERSION"
 DOWNLOAD_CAPSULE_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-linux-amd64"
 
-# Cek versi terbaru UTILS
+# Check the latest version of UTILS
 UTILS_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/latest")
 animate_text "Latest utils version is $UTILS_VERSION"
 DOWNLOAD_UTILS_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsLinux"
@@ -167,7 +167,7 @@ else
 fi
 
 curl -L -o "$UTILS_EXEC" "$DOWNLOAD_UTILS_URL"
-# Pastikan benar-benar terunduh
+# Make sure it's completely downloaded
 if [[ ! -f "$UTILS_EXEC" || ! -s "$UTILS_EXEC" ]]; then
     echo "❌ Error: Failed to download FortytwoUtils from:"
     echo "   $DOWNLOAD_UTILS_URL"
@@ -179,7 +179,7 @@ chmod +x "$UTILS_EXEC"
 animate_text "FortytwoUtils downloaded successfully to $UTILS_EXEC"
 
 
-# Cek identity (private key)
+# Check identity (private key)
 if [[ -f "$ACCOUNT_PRIVATE_KEY_FILE" ]]; then
     ACCOUNT_PRIVATE_KEY=$(cat "$ACCOUNT_PRIVATE_KEY_FILE")
     animate_text "Using saved account private key."
@@ -207,7 +207,7 @@ else
         while true; do
             read -r -p "Enter your account recovery phrase (12, 18, or 24 words), then press Enter: " ACCOUNT_SEED_PHRASE
             echo
-            # Gunakan FortytwoUtils untuk generate private key dari seed phrase
+            # Use FortytwoUtils to generate private key from seed phrase
             if ! ACCOUNT_PRIVATE_KEY=$("$UTILS_EXEC" --phrase "$ACCOUNT_SEED_PHRASE"); then
                 echo "Error: Please check the recovery phrase and try again."
                 continue
@@ -228,7 +228,7 @@ else
             break
         done
         animate_text "Creating your node identity..."
-        # Buat wallet baru & simpan private key
+        # Create new wallet & save private key
         "$UTILS_EXEC" --create-wallet "$ACCOUNT_PRIVATE_KEY_FILE" --drop-code "$INVITE_CODE"
         ACCOUNT_PRIVATE_KEY=$(<"$ACCOUNT_PRIVATE_KEY_FILE")
         animate_text "Identity configured and securely stored!"
