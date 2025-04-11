@@ -26,8 +26,8 @@ function Auto-Select-Model {
     $AVAILABLE_MEM_INT = [math]::Round($AVAILABLE_MEM)
     if ($AVAILABLE_MEM_INT -ge 22) {
         Animate-Text "Recommended: SAPIENCE PYLON for problem solving & logical reasoning"
-        $global:LLM_HF_REPO = "Qwen/QwQ-32B-GGUF"
-        $global:LLM_HF_MODEL_NAME = "qwq-32b-q4_k_m.gguf"
+        $global:LLM_HF_REPO = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF"
+        $global:LLM_HF_MODEL_NAME = "qwen2.5-coder-32b-instruct-q4_k_m-00001-of-00003.gguf"
         $global:NODE_NAME = "SAPIENCE PYLON"
     } elseif ($AVAILABLE_MEM_INT -ge 16) {
         Animate-Text "Recommended: NUMERICON PYLON for mathematical intelligence"
@@ -243,11 +243,25 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
             }
         }
         Write-Host "Creating your node identity..."
-        & $UTILS_EXEC --create-wallet $ACCOUNT_PRIVATE_KEY_FILE --drop-code $INVITE_CODE
+        $WALLET_UTILS_EXEC_OUTPUT = & $UTILS_EXEC --create-wallet $ACCOUNT_PRIVATE_KEY_FILE --drop-code $INVITE_CODE
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host ($WALLET_UTILS_EXEC_OUTPUT | Select-Object -Last 1)
+            Write-Host "Error: Invalid invite code. Please check your code and try again. You entered: $INVITE_CODE"
+            if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
+                Remove-Item $ACCOUNT_PRIVATE_KEY_FILE -Force
+            }
+            exit 1
+        }
         $ACCOUNT_PRIVATE_KEY = Get-Content $ACCOUNT_PRIVATE_KEY_FILE
+        Write-Host $WALLET_UTILS_EXEC_OUTPUT
         Write-Host "Identity configured and securely stored!"
-        Write-Host "Press any key to continue..."
-        [System.Console]::ReadKey($true)
+        while ($true) {
+            $user_input = Read-Host "To continue, please type '42'"
+            if ($user_input -eq "42") {
+                break
+            }
+            Write-Host "Input not recognized. Please type '42' to continue."
+        }
     }
 }
 
@@ -284,8 +298,8 @@ Write-Host "|    Optimized for creative writing, analysis, and linguistic proces
 Write-Host "|    Model: Qwen2.5-7B-Instruct (4.8GB VRAM)                                |"
 Write-Host "|===========================================================================|"
 Write-Host "| 6. SAPIENCE PYLON - Problem Solving & Logical Reasoning                   |"
-Write-Host "|    Engineered for high-level reasoning, mathematical logic, and strategy. |"
-Write-Host "|    Model: QwQ-32B (21GB VRAM)                                             |"
+Write-Host "|    Engineered for high-level coding, mathematical logic, and strategy.    |"
+Write-Host "|    Model: Qwen2.5-Coder-32B-Instruct (21GB VRAM)                          |"
 Write-Host "|===========================================================================|"
 Write-Host "| 7. NUMERICON PYLON - Mathematical Intelligence                            |"
 Write-Host "|    Optimized for complex symbolic reasoning and stepwise math solutions.  |"
@@ -336,8 +350,8 @@ switch ($NODE_CLASS) {
         $NODE_NAME = "LOGOTOPOLOGY PYLON"
     }
     "6" {
-        $LLM_HF_REPO = "Qwen/QwQ-32B-GGUF"
-        $LLM_HF_MODEL_NAME = "qwq-32b-q4_k_m.gguf"
+        $LLM_HF_REPO = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF"
+        $LLM_HF_MODEL_NAME = "qwen2.5-coder-32b-instruct-q4_k_m-00001-of-00003.gguf"
         $NODE_NAME = "SAPIENCE PYLON"
     }
     "7" {
