@@ -22,8 +22,8 @@ auto_select_model() {
 
     if [ "$AVAILABLE_MEM_INT" -ge 22 ]; then
         animate_text "Recommended: SAPIENCE PYLON for problem solving & logical reasoning"
-        LLM_HF_REPO="Qwen/QwQ-32B-GGUF"
-        LLM_HF_MODEL_NAME="qwq-32b-q4_k_m.gguf"
+        LLM_HF_REPO="Qwen/Qwen2.5-Coder-32B-Instruct-GGUF"
+        LLM_HF_MODEL_NAME="qwen2.5-coder-32b-instruct-q4_k_m-00001-of-00003.gguf"
         NODE_NAME="SAPIENCE PYLON"
     elif [ "$AVAILABLE_MEM_INT" -ge 16 ]; then
         animate_text "Recommended: NUMERICON PYLON for mathematical intelligence"
@@ -213,10 +213,25 @@ else
             break
         done
         animate_text "Creating your node identity..."
-        "$UTILS_EXEC" --create-wallet "$ACCOUNT_PRIVATE_KEY_FILE" --drop-code "$INVITE_CODE"
+        WALLET_UTILS_EXEC_OUTPUT="$("$UTILS_EXEC" --create-wallet "$ACCOUNT_PRIVATE_KEY_FILE" --drop-code "$INVITE_CODE" 2>&1)"
+        UTILS_EXEC_CODE=$?
+
+        if [ "$UTILS_EXEC_CODE" -gt 0 ]; then
+            echo "$WALLET_UTILS_EXEC_OUTPUT" | tail -n 1
+            echo "Error: Invalid invite code. Please check your code and try again. You entered: $INVITE_CODE"
+            rm -f "$ACCOUNT_PRIVATE_KEY_FILE"
+            exit 1
+        fi
+        echo "$WALLET_UTILS_EXEC_OUTPUT"
         ACCOUNT_PRIVATE_KEY=$(<"$ACCOUNT_PRIVATE_KEY_FILE")
         animate_text "Identity configured and securely stored!"
-        read -n 1 -s -r -p "Press any key to continue..."
+        while true; do
+            read -r -p "To continue, please type '42': " user_input
+            if [ "$user_input" = "42" ]; then
+                break
+            fi
+            echo "Input not recognized. Please type '42' to continue."
+        done
     fi
 fi
 echo
@@ -252,9 +267,9 @@ echo "║    Enhanced natural language and communication protocol interface.    
 echo "║    Model: Qwen2.5-7B-Instruct (4.8GB VRAM)                                ║"
 echo "╠═══════════════════════════════════════════════════════════════════════════╣"
 echo "║ 6. ⏃  SAPIENCE PYLON - Problem Solving & Logical Reasoning                ║"
-echo "║    High-level reasoning, mathematical problem-solving                     ║"
+echo "║    High-level coding, mathematical problem-solving                        ║"
 echo "║         and competitive coding.                                           ║"
-echo "║    Model: QwQ-32B (21GB VRAM)                                             ║"
+echo "║    Model: Qwen2.5-Coder-32B-Instruct (21GB VRAM)                          ║"
 echo "╠═══════════════════════════════════════════════════════════════════════════╣"
 echo "║ 7. ✶  NUMERICON PYLON - Mathematical Intelligence                         ║"
 echo "║    Optimized for symbolic reasoning, step-by-step math solutions          ║"
@@ -308,8 +323,8 @@ case $NODE_CLASS in
         NODE_NAME="LOGOTOPOLOGY PYLON"
         ;;
     6)
-        LLM_HF_REPO="Qwen/QwQ-32B-GGUF"
-        LLM_HF_MODEL_NAME="qwq-32b-q4_k_m.gguf"
+        LLM_HF_REPO="Qwen/Qwen2.5-Coder-32B-Instruct-GGUF"
+        LLM_HF_MODEL_NAME="qwen2.5-coder-32b-instruct-q4_k_m-00001-of-00003.gguf"
         NODE_NAME="SAPIENCE PYLON"
         ;;
     7)
