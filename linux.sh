@@ -338,11 +338,11 @@ else
         echo -e "╚═════════════════════════════════════════════════════════╝"
         echo
         while true; do
-            read -r -p "To continue, please type 'Done': " user_input
-            if [ "$user_input" = "Done" ]; then
+            read -r -p "To continue, please type 'I wrote down my recovery phrase': " user_input
+            if [ "$user_input" = "I wrote down my recovery phrase" ]; then
                 break
             fi
-            echo "Incorrect input. Please type 'Done' to continue."
+            echo "Incorrect input. Please type 'I wrote down my recovery phrase' to continue."
         done
     fi
 fi

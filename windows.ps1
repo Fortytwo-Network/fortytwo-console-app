@@ -410,11 +410,11 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
         Write-Host "|=========================================================|"
         Write-Host ""
         while ($true) {
-            $user_input = Read-Host "To continue, please type 'Done'"
-            if ($user_input -eq "Done") {
+            $user_input = Read-Host "To continue, please type 'I wrote down my recovery phrase'"
+            if ($user_input -eq "I wrote down my recovery phrase") {
                 break
             }
-            Write-Host "Incorrect input. Please type 'Done' to continue."
+            Write-Host "Incorrect input. Please type 'I wrote down my recovery phrase' to continue."
         }
     }
 }
