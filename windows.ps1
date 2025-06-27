@@ -391,7 +391,7 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
         }
         Animate-Text "    $SYMBOL_NEWLINE Write down your new node identity:"
         $ACCOUNT_PRIVATE_KEY = Get-Content $ACCOUNT_PRIVATE_KEY_FILE
-        Write-Host $WALLET_UTILS_EXEC_OUTPUT
+        $WALLET_UTILS_EXEC_OUTPUT
         Write-Host ""
         Animate-Text "    $SYMBOL_STATE_SUCCESS Identity configured and securely stored!"
         Write-Host ""
