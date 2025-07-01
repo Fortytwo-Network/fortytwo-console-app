@@ -391,7 +391,7 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
         }
         Animate-Text "    $SYMBOL_NEWLINE Write down your new node identity:"
         $ACCOUNT_PRIVATE_KEY = Get-Content $ACCOUNT_PRIVATE_KEY_FILE
-        Write-Host $WALLET_UTILS_EXEC_OUTPUT
+        $WALLET_UTILS_EXEC_OUTPUT
         Write-Host ""
         Animate-Text "    $SYMBOL_STATE_SUCCESS Identity configured and securely stored!"
         Write-Host ""
@@ -410,11 +410,11 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
         Write-Host "|=========================================================|"
         Write-Host ""
         while ($true) {
-            $user_input = Read-Host "To continue, please type 'Done'"
-            if ($user_input -eq "Done") {
+            $user_input = Read-Host "To continue, please type 'I wrote down my recovery phrase'"
+            if ($user_input -eq "I wrote down my recovery phrase") {
                 break
             }
-            Write-Host "Incorrect input. Please type 'Done' to continue."
+            Write-Host "Incorrect input. Please type 'I wrote down my recovery phrase' to continue."
         }
     }
 }
