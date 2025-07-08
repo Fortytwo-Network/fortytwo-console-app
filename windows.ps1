@@ -104,7 +104,6 @@ $CAPSULE_ERR_LOGS = "$PROJECT_DEBUG_DIR\FortytwoCapsule_err.log"
 $CAPSULE_READY_URL = "http://localhost:42442/ready"
 
 $PROTOCOL_EXEC = "$PROJECT_DIR\FortytwoProtocol.exe"
-$PROTOCOL_DB_DIR = "$PROJECT_DEBUG_DIR\internal_db"
 
 $ACCOUNT_PRIVATE_KEY_FILE = "$PROJECT_DIR\.account_private_key"
 
@@ -645,7 +644,7 @@ Animate-Text " $SYMBOL_COMP_CAPSULE Starting Capsule..."
     Write-Host "" 
     Animate-Text "Joining ::||"
     Write-Host "" 
-    $global:PROTOCOL_PROC = Start-Process -FilePath $PROTOCOL_EXEC -ArgumentList "--account-private-key $ACCOUNT_PRIVATE_KEY --db-folder $PROTOCOL_DB_DIR" -PassThru -NoNewWindow
+    $global:PROTOCOL_PROC = Start-Process -FilePath $PROTOCOL_EXEC -ArgumentList "--account-private-key $ACCOUNT_PRIVATE_KEY" -PassThru -NoNewWindow
 }
 
 Node-Startup
