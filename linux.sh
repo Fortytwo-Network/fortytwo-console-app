@@ -92,7 +92,6 @@ CAPSULE_LOGS="$PROJECT_DEBUG_DIR/FortytwoCapsule.logs"
 CAPSULE_READY_URL="http://0.0.0.0:42442/ready"
 
 PROTOCOL_EXEC="$PROJECT_DIR/FortytwoProtocol"
-PROTOCOL_DB_DIR="$PROJECT_DEBUG_DIR/internal_db"
 
 ACCOUNT_PRIVATE_KEY_FILE="$PROJECT_DIR/.account_private_key"
 
@@ -562,7 +561,7 @@ startup() {
     echo
     animate_text "Joining ::||"
     echo
-    "$PROTOCOL_EXEC" --account-private-key "$ACCOUNT_PRIVATE_KEY" --db-folder "$PROTOCOL_DB_DIR" &
+    "$PROTOCOL_EXEC" --account-private-key "$ACCOUNT_PRIVATE_KEY" &
     PROTOCOL_PID=$!
 }
 
