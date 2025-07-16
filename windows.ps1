@@ -671,8 +671,19 @@ while ($true) {
 
     # Check if Protocol process is running
     if (-not (Get-Process -Id $PROTOCOL_PROC.Id -ErrorAction SilentlyContinue)) {
+        $PROTOCOL_EXIT_CODE = $PROTOCOL_PROC.ExitCode
         Write-Host ""
-        Write-Output " $SYMBOL_COMP_NODE Node has stopped. Restarting..."
+        Write-Output " $SYMBOL_COMP_NODE Node has stopped with exit code: $PROTOCOL_EXIT_CODE"
+        
+        if ($PROTOCOL_EXIT_CODE -eq 20) {
+            Write-Output " $SYMBOL_STATE_WARNING New protocol version is available!"
+            $PROTOCOL_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest").Trim()
+            Animate-Text " $SYMBOL_COMP_NODE Protocol Node - version $PROTOCOL_VERSION"
+            $DOWNLOAD_PROTOCOL_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-windows-amd64.exe"
+            Animate-Text "    $SYMBOL_NEWLINE Updating..."
+            Start-BitsTransfer -Source $DOWNLOAD_PROTOCOL_URL -Destination $PROTOCOL_EXEC
+            Animate-Text "    $SYMBOL_STATE_SUCCESS Successfully updated"
+        }
         $IsAlive = $false
     }
 

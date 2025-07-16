@@ -567,12 +567,26 @@ trap cleanup SIGINT SIGTERM EXIT
 while true; do
     IS_ALIVE="true"
     if ! ps -p "$CAPSULE_PID" > /dev/null; then
-        animate_text "Capsule has stopped. Restarting..."
+        wait "$CAPSULE_PID"
+        CAPSULE_EXIT_CODE=$?
+        animate_text "Capsule has stopped with exit code: $CAPSULE_EXIT_CODE"
         IS_ALIVE="false"
     fi
 
     if ! ps -p "$PROTOCOL_PID" > /dev/null; then
-        animate_text "Node has stopped. Restarting..."
+        wait "$PROTOCOL_PID"
+        PROTOCOL_EXIT_CODE=$?
+        animate_text "Node has stopped with exit code: $PROTOCOL_EXIT_CODE"
+        if [ "$PROTOCOL_EXIT_CODE" -eq 20 ]; then
+            animate_text "New protocol version is available!"
+            PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest")
+            animate_text "⏃ Protocol Node — version $PROTOCOL_VERSION"
+            DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-darwin"
+            animate_text "    ↳ Updating..."
+            curl -L -o "$PROTOCOL_EXEC" "$DOWNLOAD_PROTOCOL_URL"
+            chmod +x "$PROTOCOL_EXEC"
+            animate_text "    ✓ Successfully updated"
+        fi
         IS_ALIVE="false"
     fi
 
