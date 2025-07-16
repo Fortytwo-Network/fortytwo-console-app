@@ -1,12 +1,26 @@
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$Host.UI.RawUI.OutputEncoding = [System.Text.Encoding]::UTF8
+
+try {
+    Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
+} catch {
+}
+
 function Animate-Text {
     param (
         [string]$text
     )
 
     if (![string]::IsNullOrEmpty($text)) {
-        foreach ($char in $text.ToCharArray()) {
-            Write-Host -NoNewline $char
-            Start-Sleep -Milliseconds 1
+        try {
+            foreach ($char in $text.ToCharArray()) {
+                if (-not [System.Char]::IsControl($char)) {
+                    Write-Host -NoNewline $char -ErrorAction SilentlyContinue
+                    Start-Sleep -Milliseconds 1
+                }
+            }
+        } catch {
+            Write-Host $text -ErrorAction SilentlyContinue
         }
         Write-Host ""
     }
@@ -16,9 +30,15 @@ function Animate-Text-x2 {
         [string]$text
     )
 
-    foreach ($char in $text.ToCharArray()) {
-        Write-Host -NoNewline $char
-        Start-Sleep -Milliseconds 0.4
+    try {
+        foreach ($char in $text.ToCharArray()) {
+            if (-not [System.Char]::IsControl($char)) {
+                Write-Host -NoNewline $char -ErrorAction SilentlyContinue
+                Start-Sleep -Milliseconds 0.4
+            }
+        }
+    } catch {
+        Write-Host $text -ErrorAction SilentlyContinue
     }
     Write-Host ""
 }
