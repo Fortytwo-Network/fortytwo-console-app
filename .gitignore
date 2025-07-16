@@ -2,3 +2,4 @@
 .vscode
 FortytwoNode
 .DS_Store
+.p2p_known_peers.json

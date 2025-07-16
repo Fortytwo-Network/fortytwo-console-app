@@ -5,8 +5,12 @@ function Animate-Text {
 
     if (![string]::IsNullOrEmpty($text)) {
         foreach ($char in $text.ToCharArray()) {
-            Write-Host -NoNewline $char
-            Start-Sleep -Milliseconds 1
+            try {
+                Write-Host -NoNewline $char -ErrorAction SilentlyContinue
+                Start-Sleep -Milliseconds 1
+            } catch {
+                Write-Host $text -ErrorAction SilentlyContinue
+            }
         }
         Write-Host ""
     }
@@ -15,12 +19,17 @@ function Animate-Text-x2 {
     param (
         [string]$text
     )
-
-    foreach ($char in $text.ToCharArray()) {
-        Write-Host -NoNewline $char
-        Start-Sleep -Milliseconds 0.4
+    if (![string]::IsNullOrEmpty($text)) {
+        foreach ($char in $text.ToCharArray()) {
+            try {
+                Write-Host -NoNewline $char -ErrorAction SilentlyContinue
+                Start-Sleep -Milliseconds 0.4
+            } catch {
+                Write-Host $text -ErrorAction SilentlyContinue
+            }
+        }
+        Write-Host ""
     }
-    Write-Host ""
 }
 
 # Custom symbols
