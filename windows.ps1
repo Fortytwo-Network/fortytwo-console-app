@@ -7,7 +7,7 @@ function Animate-Text {
         foreach ($char in $text.ToCharArray()) {
             try {
                 Write-Host -NoNewline $char -ErrorAction SilentlyContinue
-                Start-Sleep -Milliseconds 1
+                Start-Sleep -Milliseconds 2
             } catch {
                 Write-Host $text -ErrorAction SilentlyContinue
             }
@@ -23,7 +23,7 @@ function Animate-Text-x2 {
         foreach ($char in $text.ToCharArray()) {
             try {
                 Write-Host -NoNewline $char -ErrorAction SilentlyContinue
-                Start-Sleep -Milliseconds 0.4
+                Start-Sleep -Milliseconds 0.5
             } catch {
                 Write-Host $text -ErrorAction SilentlyContinue
             }
@@ -68,25 +68,25 @@ function Auto-Select-Model {
 
     $AVAILABLE_MEM_INT = [math]::Round($AVAILABLE_MEM)
     if ($AVAILABLE_MEM_INT -ge 22) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 3 Qwen3 for problem solving & logical reasoning"
-        $global:LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-GGUF"
-        $global:LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Q4_K_M.gguf"
-        $global:NODE_NAME = "Qwen3 30B A3B Q4"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 6 Qwen3 for problem solving & coding"
+        $global:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+        $global:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+        $global:NODE_NAME = "Qwen3 Coder 30B A3B Instruct Q4"
     } elseif ($AVAILABLE_MEM_INT -ge 15) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 8 Qwen3 14B for high-precision logical analysis"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 12 Qwen3 14B for high-precision logical analysis"
         $global:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
         $global:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
         $global:NODE_NAME = "Qwen3 14B Q4"
     } elseif ($AVAILABLE_MEM_INT -ge 7) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 7 Qwen3 8B for balanced capability"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 13 Qwen3 8B for balanced capability"
         $global:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
         $global:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
         $global:NODE_NAME = "Qwen3 8B Q4"
     } else {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 16 Qwen 3 7.1B optimized for efficiency"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 22 Qwen 3 7.1B optimized for efficiency"
         $global:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
         $global:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
-        $global:NODE_NAME = "Qwen 3 1.7B Q4"
+        $global:NODE_NAME = "Qwen3 1.7B Q4"
     }
 }
 
@@ -430,11 +430,11 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
 Write-Host ""
 Animate-Text ($SYMBOL_HEADER_IN -join ''),"The Unique Strength of Your Node",($SYMBOL_HEADER_OUT -join '')
 Write-Host ""
-Animate-Text "Each AI node has unique strengths."
-Animate-Text "Choose how your node will contribute to the collective intelligence:"
+Animate-Text "Choose how your node will contribute its unique strengths to the collective intelligence."
 Write-Host ""
 Auto-Select-Model
-# Write-Host "    Already downloaded models: $SYMBOL_MODEL_SELECTED 4, $SYMBOL_MODEL_SELECTED 5"
+Write-Host ""
+Animate-Text "Use setup assist options [0-1] or pick an option from three model tiers [2-22]:"
 Write-Host ""
 Write-Host "|============================================================================|"
 Animate-Text-x2 "| 0 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                                    |"
@@ -442,74 +442,122 @@ Write-Host "|     Let the system determine the best model for your hardware.    
 Write-Host "|     Balanced for performance and capabilities.                             |"
 Write-Host "|============================================================================|"
 Animate-Text-x2 "| 1 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                                 |"
-# Animate-Text-x2 "| 2 $SYMBOL_MODEL_LASTUSED LAST USED - Run the model that was run the last time                  |"
-Write-Host "|============================================================================|"
-Write-Host "                HEAVY TIER | Dedicating all Compute to the Node              "
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 2 $SYMBOL_MODEL_SELECTED GENERAL KNOWLEDGE                           Qwen3 32B Q4 $SYMBOL_SEPARATOR_DOT 19.8GB $MEMORY_TYPE |"
-Write-Host "|     Excels at multilingual tasks, logical reasoning,                       |"
-Write-Host "|     and following complex instructions across a wide range of topics.      |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 3 $SYMBOL_MODEL_SELECTED ADVANCED REASONING                      Qwen3 30B A3B Q4 $SYMBOL_SEPARATOR_DOT 18.6GB $MEMORY_TYPE |"
-Write-Host "|     High-performing reasoning for depth and clarity across topics          |"
-Write-Host "|     like logic, math, and coding - designed to be both fast and capable.   |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 4 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS             OlympicCoder 32B Q4 $SYMBOL_SEPARATOR_DOT 19.9GB $MEMORY_TYPE |"
-Write-Host "|     Optimized for symbolic reasoning, step-by-step math solutions          |"
-Write-Host "|     and logic-based inference.                                             |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 5 $SYMBOL_MODEL_SELECTED COMPLEX RESEARCH                         GLM-4-Z1 32B Q4 $SYMBOL_SEPARATOR_DOT 19.7GB $MEMORY_TYPE |"
-Write-Host "|     Enhanced for deep reasoning, excels in mathematics,                    |"
-Write-Host "|     logic, and code generation, rivaling larger models in complex tasks.   |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 6 $SYMBOL_MODEL_SELECTED ACADEMIC KNOWLEDGE     Llama-4 Scout 17B 16E Instruct Q4 $SYMBOL_SEPARATOR_DOT 65.4GB $MEMORY_TYPE |"
-Write-Host "|     Strong at step-by-step thinking and following complex instructions,    |"
-Write-Host "|     good for creative problem-solving.                                     |"
-Write-Host "|============================================================================|"
-Write-Host "                 LIGHT TIER | Operating the Node in Background                "
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 7 $SYMBOL_MODEL_SELECTED GENERAL KNOWLEDGE                             Qwen3 8B Q4 $SYMBOL_SEPARATOR_DOT 5.1GB $MEMORY_TYPE |"
-Write-Host "|     Handles everyday queries efficiently, offering reliable reasoning      |"
-Write-Host "|     and clear conversational support.                                      |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 8 $SYMBOL_MODEL_SELECTED ADVANCED REASONING                           Qwen3 14B Q4 $SYMBOL_SEPARATOR_DOT 9.1GB $MEMORY_TYPE |"
-Write-Host "|     Strong multilingual support and reasoning capabilities,                |"
-Write-Host "|     suitable for diverse general-purpose applications.                     |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 9 $SYMBOL_MODEL_SELECTED PROGRAMMING & TECHNICAL                  DeepCoder 14B Q4 $SYMBOL_SEPARATOR_DOT 9.1GB $MEMORY_TYPE |"
-Write-Host "|     Generates accurate code and understands complex programming logic,     |"
-Write-Host "|     making it suitable for development tasks.                              |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 10 $SYMBOL_MODEL_SELECTED MATH & CODE                                MiMo 7B RL Q4 $SYMBOL_SEPARATOR_DOT 5.1GB $MEMORY_TYPE |"
-Write-Host "|     Solves math and logic problems effectively,                            |"
-Write-Host "|     with strong performance in structured reasoning and code tasks.        |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 11 $SYMBOL_MODEL_SELECTED MATHEMATICAL INTELLIGENCE       OpenMath-Nemotron 14B Q4 $SYMBOL_SEPARATOR_DOT 9.1GB $MEMORY_TYPE |"
-Write-Host "|     Excels at math questions, particularly useful for academic             |"
-Write-Host "|     and competition-style problem-solving.                                 |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 12 $SYMBOL_MODEL_SELECTED THEOREM PROVER                  DeepSeek-Prover V2 7B Q4 $SYMBOL_SEPARATOR_DOT 4.3GB $MEMORY_TYPE |"
-Write-Host "|     Expert in formal logic and proof solving,                              |"
-Write-Host "|     perfect for mathematics, theorem work, and structured reasoning tasks. |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 13 $SYMBOL_MODEL_SELECTED MULTILINGUAL UNDERSTANDING                 Gemma-3 4B Q4 $SYMBOL_SEPARATOR_DOT 2.6GB $MEMORY_TYPE |"
-Write-Host "|     Supports over 140 languages with solid instruction-following           |"
-Write-Host "|     and fast response capabilities.                                        |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING                     Tessa-Rust-T1 7B Q4 $SYMBOL_SEPARATOR_DOT 6.3GB $MEMORY_TYPE |"
-Write-Host "|     Focused on Rust programming, offering high-quality code generation.    |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 15 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS              OlympicCoder 7B Q4 $SYMBOL_SEPARATOR_DOT 6.3GB $MEMORY_TYPE |"
-Write-Host "|     Optimized for symbolic reasoning, step-by-step math solutions          |"
-Write-Host "|     and logic-based inference.                                             |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 16 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL                           Qwen3 1.7B Q4 $SYMBOL_SEPARATOR_DOT 1.2GB $MEMORY_TYPE |"
-Write-Host "|     Ultra-efficient for resource-constrained environments,                 |"
-Write-Host "|     providing basic instruction-following and reasoning functionalities.   |"
 Write-Host "|============================================================================|"
 Write-Host ""
+Write-Host "|========= EXTREME TIER | Models with very high memory requirements"
+Animate-Text-x2 "| 2 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
+Write-Host "|     65.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GPT-oss 120B Q4"
+Write-Host "|     Frontier-level multi-step answers across coding, math, science,"
+Write-Host "|     general knowledge questions."
+Write-Host "|"
+Animate-Text-x2 "| 3 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
+Write-Host "|     76.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GLM-4.5-Air Q4"
+Write-Host "|     Deliberate multi-step reasoning in logic, math, and coding;"
+Write-Host "|     excels at clear, long-form breakdowns of complex questions."
+Write-Host "|"
+Animate-Text-x2 "| 4 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
+Write-Host "|     31.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Nemotron-Super-49B-v1.5 Q4"
+Write-Host "|     High-precision multi-step reasoning in general domains, math and"
+Write-Host "|     coding; produces clear step-by-step solutions to complex problems."
+Write-Host "|========= EXTREME TIER END"
+Write-Host ""
+Write-Host "|========= HEAVY TIER | Dedicating all Compute to the Node"
+Animate-Text-x2 "| 5 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
+Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 30B A3B Thinking 2507 Q4"
+Write-Host "|     Long-context reasoning at high efficiency, with steady logic,"
+Write-Host "|     math, and coding across large inputs."
+Write-Host "|"
+Animate-Text-x2 "| 6 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3-Coder-30B-A3B-Instruct Q4"
+Write-Host "|     Writes robust, well-structured code with step-by-step reasoning;"
+Write-Host "|     handles large, multi-file tasks and refactors."
+Write-Host "|"
+Animate-Text-x2 "| 7 $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST"
+Write-Host "|     12.2 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT gpt-oss-20b Q4"
+Write-Host "|     Fast, capable multi-domain reasoning;"
+Write-Host "|     solid for day-to-day coding, math, and research."
+Write-Host "|"
+Animate-Text-x2 "| 8 $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING"
+Write-Host "|     20.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenReasoning Nemotron 32B Q4"
+Write-Host "|     Meticulous step-by-step logic in math, science and code;"
+Write-Host "|     great for explainable solutions and error analysis."
+Write-Host "|"
+Animate-Text-x2 "| 9 $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST"
+Write-Host "|     20.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT EXAONE 4.0 32B Q4"
+Write-Host "|     Strong science and world knowledge with dependable math and coding;"
+Write-Host "|     clear, well-grounded explanations."
+Write-Host "|"
+Animate-Text-x2 "| 10 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+Write-Host "|     20.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 32B Q4"
+Write-Host "|     Excels at contest-style algorithms;"
+Write-Host "|     produces correct, efficient code with clear step-by-step reasoning."
+Write-Host "|"
+Animate-Text-x2 "| 11 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
+Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Apriel-Nemotron-15b-Thinker Q4"
+Write-Host "|     Deliberate, reflective multi-step reasoning across mixed tasks;"
+Write-Host "|     steady performance on logic, math, and coding."
+Write-Host "|========= HEAVY TIER END"
+Write-Host ""
+Write-Host "|========= LIGHT TIER | Operating the Node in Background"
+Animate-Text-x2 "| 12 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
+Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 14B Q4"
+Write-Host "|     Balanced everyday reasoning with multilingual support;"
+Write-Host "|     clear, reliable answers across common topics."
+Write-Host "|"
+Animate-Text-x2 "| 13 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
+Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 8B Q4"
+Write-Host "|     Smooth daily Q&A with concise reasoning;"
+Write-Host "|     dependable on summaries, explanations, and light code."
+Write-Host "|"
+Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST"
+Write-Host "|     7.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Gemma-3 4B Q4"
+Write-Host "|     Multilingual chat with long-context support;"
+Write-Host "|     dependable everyday assistant with clear explanations."
+Write-Host "|"
+Animate-Text-x2 "| 15 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT DeepCoder 14B Q4"
+Write-Host "|     Generates accurate code and understands complex programming logic;"
+Write-Host "|     reliable for feature drafts and fixes."
+Write-Host "|"
+Animate-Text-x2 "| 16 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+Write-Host "|     4.8 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 7B Q4"
+Write-Host "|     Balanced coding contest solver;"
+Write-Host "|     step-by-step algorithmic reasoning and efficient code."
+Write-Host "|"
+Animate-Text-x2 "| 17 $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC"
+Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenMath-Nemotron 14B Q4"
+Write-Host "|     Excels at math questions and structured problem-solving;"
+Write-Host "|     clear steps for academic and competition problems."
+Write-Host "|"
+Animate-Text-x2 "| 18 $SYMBOL_MODEL_SELECTED MATH & CODING"
+Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT AceReason-Nemotron-1.1-7B Q4"
+Write-Host "|     Handles math and logic puzzles with minimal resources;"
+Write-Host "|     concise, step-by-step solutions."
+Write-Host "|"
+Animate-Text-x2 "| 19 $SYMBOL_MODEL_SELECTED THEOREM PROVER"
+Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Kimina Prover Distill 8B Q4"
+Write-Host "|     Specialist in formal logic and proof steps;"
+Write-Host "|     ideal for theorem-style tasks and verification."
+Write-Host "|"
+Animate-Text-x2 "| 20 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING"
+Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Tessa-Rust-T1 7B Q4"
+Write-Host "|     Focused on Rust programming; produces idiomatic Rust and"
+Write-Host "|     helps with code generation, fixes and refactors."
+Write-Host "|"
+Animate-Text-x2 "| 21 $SYMBOL_MODEL_SELECTED MEDICAL EXPERT"
+Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT II-Medical-8B Q5"
+Write-Host "|     Works through clinical Q&A step by step;"
+Write-Host "|     useful for study and drafting (non-diagnostic)."
+Write-Host "|"
+Animate-Text-x2 "| 22 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL"
+Write-Host "|     1.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 1.7B Q4"
+Write-Host "|     Ultra-efficient for basic instructions and quick answers;"
+Write-Host "|     suitable for nodes with tight memory."
+Write-Host "|========= LIGHT TIER END"
+Write-Host ""
+Write-Host "[0] Auto, [1] Import, [2-22] Specialized Model"
 
-$NODE_CLASS = Read-Host "Select your node's specialization [0-16] (0 for auto-select)"
+$NODE_CLASS = Read-Host "Select your node's specialization option: "
 
 switch ($NODE_CLASS) {
     "0" {
@@ -525,76 +573,106 @@ switch ($NODE_CLASS) {
         $NODE_NAME = " $SYMBOL_MODEL_CUSTOM CUSTOM IMPORT: HuggingFace $($LLM_HF_REPO -split '/' | Select-Object -Last 1))"
     }
     "2" {
-        $LLM_HF_REPO = "unsloth/Qwen3-32B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-32B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED GENERAL KNOWLEDGE: Qwen3 32B Q4"
+        $LLM_HF_REPO = "unsloth/gpt-oss-120b-GGUF"
+        $LLM_HF_MODEL_NAME = "Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: gpt-oss-120b Q4"
     }
     "3" {
-        $LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 30B A3B Q4"
+        $LLM_HF_REPO = "unsloth/GLM-4.5-Air-GGUF"
+        $LLM_HF_MODEL_NAME = "Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: GLM-4.5-Air Q4"
     }
     "4" {
+        $LLM_HF_REPO = "unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
+        $LLM_HF_MODEL_NAME = "Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
+    }
+    "5" {
+        $LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
+        $LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
+    }
+    "6" {
+        $LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+        $LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
+    }
+    "7" {
+        $LLM_HF_REPO = "unsloth/gpt-oss-20b-GGUF"
+        $LLM_HF_MODEL_NAME = "gpt-oss-20b-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: gpt-oss-20b Q4"
+    }
+    "8" {
+        $LLM_HF_REPO = "unsloth/OpenReasoning-Nemotron-32B-GGUF"
+        $LLM_HF_MODEL_NAME = "OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
+    }
+    "9" {
+        $LLM_HF_REPO = "LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
+        $LLM_HF_MODEL_NAME = "LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
+    }
+    "10" {
         $LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-32B-GGUF"
         $LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-32B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
     }
-    "5" {
-        $LLM_HF_REPO = "bartowski/THUDM_GLM-Z1-32B-0414-GGUF"
-        $LLM_HF_MODEL_NAME = "THUDM_GLM-Z1-32B-0414-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED COMPLEX RESEARCH: GLM-4-Z1 32B Q4"
-    }
-    "6" {
-        $LLM_HF_REPO = "unsloth/Llama-4-Scout-17B-16E-Instruct-GGUF"
-        $LLM_HF_MODEL_NAME = "Q4_K_M/Llama-4-Scout-17B-16E-Instruct-Q4_K_M-00001-of-00002.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ACADEMIC KNOWLEDGE: Llama-4 Scout 17B 16E Instruct Q4"
-    }
-    "7" {
-        $LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED GENERAL KNOWLEDGE: Qwen3 8B Q4"
-    }
-    "8" {
-        $LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 14B Q4"
-    }
-    "9" {
-        $LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
-        $LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & TECHNICAL: DeepCoder 14B Q4"
-    }
-    "10" {
-        $LLM_HF_REPO = "jedisct1/MiMo-7B-RL-GGUF"
-        $LLM_HF_MODEL_NAME = "MiMo-7B-RL-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODE: MiMo 7B RL Q4"
-    }
     "11" {
-        $LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
-        $LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATHEMATICAL INTELLIGENCE: OpenMath-Nemotron 14B Q4"
+        $LLM_HF_REPO = "bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
+        $LLM_HF_MODEL_NAME = "ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
     }
     "12" {
-        $LLM_HF_REPO = "irmma/DeepSeek-Prover-V2-7B-Q4_K_M-GGUF"
-        $LLM_HF_MODEL_NAME = "deepseek-prover-v2-7b-q4_k_m-imat.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: DeepSeek-Prover V2 7B Q4"
+        $LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
+        $LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 14B Q4"
     }
     "13" {
-        $LLM_HF_REPO = "unsloth/gemma-3-4b-it-GGUF"
-        $LLM_HF_MODEL_NAME = "gemma-3-4b-it-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL UNDERSTANDING: Gemma-3 4B Q4"
+        $LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
+        $LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 8B Q4"
     }
     "14" {
-        $LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-        $LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+        $LLM_HF_REPO = "unsloth/gemma-3-12b-it-GGUF"
+        $LLM_HF_MODEL_NAME = "gemma-3-12b-it-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
     }
     "15" {
+        $LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
+        $LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
+    }
+    "16" {
         $LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-7B-GGUF"
         $LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-7B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
     }
-    "16" {
+    "17" {
+        $LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
+        $LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
+    }
+    "18" {
+        $LLM_HF_REPO = "bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
+        $LLM_HF_MODEL_NAME = "nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
+    }
+    "19" {
+        $LLM_HF_REPO = "mradermacher/Kimina-Prover-Distill-8B-GGUF"
+        $LLM_HF_MODEL_NAME = "Kimina-Prover-Distill-8B.Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: Kimina Prover Distill 8B Q4"
+    }
+    "20" {
+        $LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
+        $LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+    }
+    "21" {
+        $LLM_HF_REPO = "Intelligent-Internet/II-Medical-8B-1706-GGUF"
+        $LLM_HF_MODEL_NAME = "II-Medical-8B-1706.Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MEDICAL EXPERT: II-Medical-8B Q5"
+    }
+    "22" {
         $LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
         $LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"

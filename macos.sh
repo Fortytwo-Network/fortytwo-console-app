@@ -21,7 +21,7 @@ auto_select_model() {
     AVAILABLE_MEM=$(( $(sysctl -n hw.memsize) / 1024 / 1024 / 1024 ))
     animate_text "    ↳ System analysis: ${AVAILABLE_MEM}GB ${MEMORY_TYPE} detected."
     if [ $AVAILABLE_MEM -ge 30 ]; then
-        animate_text "    🜲 Recommending: ⬢ 6 Qwen3 for problem solving and coding"
+        animate_text "    🜲 Recommending: ⬢ 6 Qwen3 for problem solving & coding"
         LLM_HF_REPO="unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
         LLM_HF_MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
         NODE_NAME="Qwen3 Coder 30B A3B Instruct Q4"
@@ -475,7 +475,7 @@ case $NODE_CLASS in
         ;;
     2)
         LLM_HF_REPO="unsloth/gpt-oss-120b-GGUF"
-        LLM_HF_MODEL_NAME="Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf "
+        LLM_HF_MODEL_NAME="Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
         NODE_NAME="⬢ SUPERIOR GENERALIST: gpt-oss-120b Q4"
         ;;
     3)
