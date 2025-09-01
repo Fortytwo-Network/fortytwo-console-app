@@ -83,7 +83,7 @@ function Auto-Select-Model {
         $global:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
         $global:NODE_NAME = "Qwen3 8B Q4"
     } else {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 22 Qwen 3 7.1B optimized for efficiency"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 23 Qwen 3 7.1B optimized for efficiency"
         $global:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
         $global:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
         $global:NODE_NAME = "Qwen3 1.7B Q4"
@@ -434,7 +434,7 @@ Animate-Text "Choose how your node will contribute its unique strengths to the c
 Write-Host ""
 Auto-Select-Model
 Write-Host ""
-Animate-Text "Use setup assist options [0-1] or pick an option from three model tiers [2-22]:"
+Animate-Text "Use setup assist options [0-1] or pick an option from three model tiers [2-23]:"
 Write-Host ""
 Write-Host "|============================================================================|"
 Animate-Text-x2 "| 0 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                                    |"
@@ -509,53 +509,58 @@ Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 8B Q4"
 Write-Host "|     Smooth daily Q&A with concise reasoning;"
 Write-Host "|     dependable on summaries, explanations, and light code."
 Write-Host "|"
-Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST"
+Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
+Write-Host "|     6.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Nemotron-Nano-9B-v2 Q4"
+Write-Host "|     Compact, high-accuracy step-by-step reasoning with a long context attention;"
+Write-Host "|     fast, reliable summaries, explanations, and coding."
+Write-Host "|"
+Animate-Text-x2 "| 15 $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST"
 Write-Host "|     7.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Gemma-3 4B Q4"
 Write-Host "|     Multilingual chat with long-context support;"
 Write-Host "|     dependable everyday assistant with clear explanations."
 Write-Host "|"
-Animate-Text-x2 "| 15 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+Animate-Text-x2 "| 16 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
 Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT DeepCoder 14B Q4"
 Write-Host "|     Generates accurate code and understands complex programming logic;"
 Write-Host "|     reliable for feature drafts and fixes."
 Write-Host "|"
-Animate-Text-x2 "| 16 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+Animate-Text-x2 "| 17 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
 Write-Host "|     4.8 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 7B Q4"
 Write-Host "|     Balanced coding contest solver;"
 Write-Host "|     step-by-step algorithmic reasoning and efficient code."
 Write-Host "|"
-Animate-Text-x2 "| 17 $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC"
+Animate-Text-x2 "| 18 $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC"
 Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenMath-Nemotron 14B Q4"
 Write-Host "|     Excels at math questions and structured problem-solving;"
 Write-Host "|     clear steps for academic and competition problems."
 Write-Host "|"
-Animate-Text-x2 "| 18 $SYMBOL_MODEL_SELECTED MATH & CODING"
+Animate-Text-x2 "| 19 $SYMBOL_MODEL_SELECTED MATH & CODING"
 Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT AceReason-Nemotron-1.1-7B Q4"
 Write-Host "|     Handles math and logic puzzles with minimal resources;"
 Write-Host "|     concise, step-by-step solutions."
 Write-Host "|"
-Animate-Text-x2 "| 19 $SYMBOL_MODEL_SELECTED THEOREM PROVER"
+Animate-Text-x2 "| 20 $SYMBOL_MODEL_SELECTED THEOREM PROVER"
 Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Kimina Prover Distill 8B Q4"
 Write-Host "|     Specialist in formal logic and proof steps;"
 Write-Host "|     ideal for theorem-style tasks and verification."
 Write-Host "|"
-Animate-Text-x2 "| 20 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING"
+Animate-Text-x2 "| 21 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING"
 Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Tessa-Rust-T1 7B Q4"
 Write-Host "|     Focused on Rust programming; produces idiomatic Rust and"
 Write-Host "|     helps with code generation, fixes and refactors."
 Write-Host "|"
-Animate-Text-x2 "| 21 $SYMBOL_MODEL_SELECTED MEDICAL EXPERT"
+Animate-Text-x2 "| 22 $SYMBOL_MODEL_SELECTED MEDICAL EXPERT"
 Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT II-Medical-8B Q5"
 Write-Host "|     Works through clinical Q&A step by step;"
 Write-Host "|     useful for study and drafting (non-diagnostic)."
 Write-Host "|"
-Animate-Text-x2 "| 22 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL"
+Animate-Text-x2 "| 23 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL"
 Write-Host "|     1.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 1.7B Q4"
 Write-Host "|     Ultra-efficient for basic instructions and quick answers;"
 Write-Host "|     suitable for nodes with tight memory."
 Write-Host "|========= LIGHT TIER END"
 Write-Host ""
-Write-Host "[0] Auto, [1] Import, [2-22] Specialized Model"
+Write-Host "[0] Auto, [1] Import, [2-23] Specialized Model"
 
 $NODE_CLASS = Read-Host "Select your node's specialization option: "
 
@@ -633,46 +638,51 @@ switch ($NODE_CLASS) {
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 8B Q4"
     }
     "14" {
+        $LLM_HF_REPO = "bartowski/nvidia_NVIDIA-Nemotron-Nano-9B-v2-GGUF"
+        $LLM_HF_MODEL_NAME = "nvidia_NVIDIA-Nemotron-Nano-9B-v2-Q4_K_M.gguf"
+        $NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Nemotron-Nano-9B-v2 Q4"
+    }
+    "15" {
         $LLM_HF_REPO = "unsloth/gemma-3-12b-it-GGUF"
         $LLM_HF_MODEL_NAME = "gemma-3-12b-it-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
     }
-    "15" {
+    "16" {
         $LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
         $LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
     }
-    "16" {
+    "17" {
         $LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-7B-GGUF"
         $LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-7B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
     }
-    "17" {
+    "18" {
         $LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
         $LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
     }
-    "18" {
+    "19" {
         $LLM_HF_REPO = "bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
         $LLM_HF_MODEL_NAME = "nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
     }
-    "19" {
+    "20" {
         $LLM_HF_REPO = "mradermacher/Kimina-Prover-Distill-8B-GGUF"
         $LLM_HF_MODEL_NAME = "Kimina-Prover-Distill-8B.Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: Kimina Prover Distill 8B Q4"
     }
-    "20" {
+    "21" {
         $LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
         $LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
     }
-    "21" {
+    "22" {
         $LLM_HF_REPO = "Intelligent-Internet/II-Medical-8B-1706-GGUF"
         $LLM_HF_MODEL_NAME = "II-Medical-8B-1706.Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED MEDICAL EXPERT: II-Medical-8B Q5"
     }
-    "22" {
+    "23" {
         $LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
         $LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
         $NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"

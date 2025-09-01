@@ -36,7 +36,7 @@ auto_select_model() {
         LLM_HF_MODEL_NAME="Qwen3-8B-Q4_K_M.gguf"
         NODE_NAME="Qwen3 8B Q4"
     elif [ $AVAILABLE_MEM -ge 8 ]; then
-        animate_text "    🜲 Recommending: ⬢ 22 Qwen3 1.7B optimized for efficiency"
+        animate_text "    🜲 Recommending: ⬢ 23 Qwen3 1.7B optimized for efficiency"
         LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
         LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
         NODE_NAME="Qwen3 1.7B Q4"
@@ -334,7 +334,7 @@ animate_text "Choose how your node will contribute its unique strengths to the c
 echo
 auto_select_model
 echo
-animate_text "Use setup assist options [0-1] or pick an option from three model tiers [2-22]:"
+animate_text "Use setup assist options [0-1] or pick an option from three model tiers [2-23]:"
 echo
 echo "╔═══════════════════════════════════════════════════════════════════════════╗"
 animate_text_x2 "║ 0 ⌖ AUTO-SELECT - Optimal configuration                                   ║"
@@ -409,53 +409,58 @@ echo "║     5.4 GB ${MEMORY_TYPE} • Qwen3 8B Q4"
 echo "║     Smooth daily Q&A with concise reasoning;"
 echo "║     dependable on summaries, explanations, and light code."
 echo "║     "
-animate_text_x2 "║ 14 ⬢ MULTILINGUAL GENERALIST"
+animate_text_x2 "║ 14 ⬢ EVERYDAY GENERALIST"
+echo "║     6.6 GB ${MEMORY_TYPE} • Nemotron-Nano-9B-v2 Q4"
+echo "║     Compact, high-accuracy step-by-step reasoning with a long context attention;"
+echo "║     fast, reliable summaries, explanations, and coding."
+echo "║     "
+animate_text_x2 "║ 15 ⬢ MULTILINGUAL GENERALIST"
 echo "║     7.7 GB ${MEMORY_TYPE}  • Gemma-3 4B Q4"
 echo "║     Multilingual chat with long-context support;"
 echo "║     dependable everyday assistant with clear explanations."
 echo "║     "
-animate_text_x2 "║ 15 ⬢ PROGRAMMING & ALGORITHMS"
+animate_text_x2 "║ 16 ⬢ PROGRAMMING & ALGORITHMS"
 echo "║     9.3 GB ${MEMORY_TYPE}  • DeepCoder 14B Q4"
 echo "║     Generates accurate code and understands complex programming logic;"
 echo "║     reliable for feature drafts and fixes."
 echo "║     "
-animate_text_x2 "║ 16 ⬢ PROGRAMMING & ALGORITHMS"
+animate_text_x2 "║ 17 ⬢ PROGRAMMING & ALGORITHMS"
 echo "║     4.8 GB ${MEMORY_TYPE}  • OlympicCoder 7B Q4"
 echo "║     Balanced coding contest solver;"
 echo "║     step-by-step algorithmic reasoning and efficient code."
 echo "║     "
-animate_text_x2 "║ 17 ⬢ MATH & FORMAL LOGIC"
+animate_text_x2 "║ 18 ⬢ MATH & FORMAL LOGIC"
 echo "║     9.3 GB ${MEMORY_TYPE}  • OpenMath-Nemotron 14B Q4"
 echo "║     Excels at math questions and structured problem-solving;"
 echo "║     clear steps for academic and competition problems."
 echo "║     "
-animate_text_x2 "║ 18 ⬢ MATH & CODING"
+animate_text_x2 "║ 19 ⬢ MATH & CODING"
 echo "║     4.9 GB ${MEMORY_TYPE}  • AceReason-Nemotron-1.1-7B Q4"
 echo "║     Handles math and logic puzzles with minimal resources;"
 echo "║     concise, step-by-step solutions."
 echo "║     "
-animate_text_x2 "║ 19 ⬢ THEOREM PROVER"
+animate_text_x2 "║ 20 ⬢ THEOREM PROVER"
 echo "║     5.4 GB ${MEMORY_TYPE}  • Kimina Prover Distill 8B Q4"
 echo "║     Specialist in formal logic and proof steps;"
 echo "║     ideal for theorem-style tasks and verification."
 echo "║     "
-animate_text_x2 "║ 20 ⬢ RUST PROGRAMMING"
+animate_text_x2 "║ 21 ⬢ RUST PROGRAMMING"
 echo "║     4.9 GB ${MEMORY_TYPE}  • Tessa-Rust-T1 7B Q4"
 echo "║     Focused on Rust programming; produces idiomatic Rust and"
 echo "║     helps with code generation, fixes and refactors."
 echo "║     "
-animate_text_x2 "║ 21 ⬢ MEDICAL EXPERT"
+animate_text_x2 "║ 22 ⬢ MEDICAL EXPERT"
 echo "║     5.4 GB ${MEMORY_TYPE}  • II-Medical-8B Q5"
 echo "║     Works through clinical Q&A step by step;"
 echo "║     useful for study and drafting (non-diagnostic)."
 echo "║     "
-animate_text_x2 "║ 22 ⬢ LOW MEMORY MODEL"
+animate_text_x2 "║ 23 ⬢ LOW MEMORY MODEL"
 echo "║     1.3 GB ${MEMORY_TYPE}  • Qwen3 1.7B Q4"
 echo "║     Ultra-efficient for basic instructions and quick answers;"
 echo "║     suitable for nodes with tight memory."
 echo "╚═════════ LIGHT TIER END"
 echo
-echo "[0] Auto, [1] Import, [2-22] Specialized Model"
+echo "[0] Auto, [1] Import, [2-23] Specialized Model"
 
 read -r -p "Select your node's specialization option: " NODE_CLASS
 
@@ -534,46 +539,51 @@ case $NODE_CLASS in
         NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 8B Q4"
         ;;
     14)
+        LLM_HF_REPO="bartowski/nvidia_NVIDIA-Nemotron-Nano-9B-v2-GGUF"
+        LLM_HF_MODEL_NAME="nvidia_NVIDIA-Nemotron-Nano-9B-v2-Q4_K_M.gguf"
+        NODE_NAME="⬢ EVERYDAY GENERALIST: Nemotron-Nano-9B-v2 Q4"
+        ;;
+    15)
         LLM_HF_REPO="unsloth/gemma-3-12b-it-GGUF"
         LLM_HF_MODEL_NAME="gemma-3-12b-it-Q4_K_M.gguf"
         NODE_NAME="⬢ MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
         ;;
-    15)
+    16)
         LLM_HF_REPO="bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
         LLM_HF_MODEL_NAME="agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
         NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
         ;;
-    16)
+    17)
         LLM_HF_REPO="bartowski/open-r1_OlympicCoder-7B-GGUF"
         LLM_HF_MODEL_NAME="open-r1_OlympicCoder-7B-Q4_K_M.gguf"
         NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
         ;;
-    17)
+    18)
         LLM_HF_REPO="bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
         LLM_HF_MODEL_NAME="nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
         NODE_NAME="⬢ MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
         ;;
-    18)
+    19)
         LLM_HF_REPO="bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
         LLM_HF_MODEL_NAME="nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
         NODE_NAME="⬢ MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
         ;;
-    19)
+    20)
         LLM_HF_REPO="mradermacher/Kimina-Prover-Distill-8B-GGUF"
         LLM_HF_MODEL_NAME="Kimina-Prover-Distill-8B.Q4_K_M.gguf"
         NODE_NAME="⬢ THEOREM PROVER: Kimina Prover Distill 8B Q4"
         ;;
-    20)
+    21)
         LLM_HF_REPO="bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
         LLM_HF_MODEL_NAME="Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
         NODE_NAME="⬢ RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
         ;;
-    21)
+    22)
         LLM_HF_REPO="Intelligent-Internet/II-Medical-8B-1706-GGUF"
         LLM_HF_MODEL_NAME="II-Medical-8B-1706.Q4_K_M.gguf"
         NODE_NAME="⬢ MEDICAL EXPERT: II-Medical-8B Q5"
         ;;
-    22)
+    23)
         LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
         LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
         NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
