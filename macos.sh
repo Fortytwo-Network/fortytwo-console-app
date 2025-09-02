@@ -510,7 +510,7 @@ case $NODE_CLASS in
         ;;
     9)
         LLM_HF_REPO="LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
-        LLM_HF_MODEL_NAME="LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+        LLM_HF_MODEL_NAME="EXAONE-4.0-32B-Q4_K_M.gguf"
         NODE_NAME="⬢ ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
         ;;
     10)
