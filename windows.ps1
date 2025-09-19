@@ -57,14 +57,17 @@ $BANNER_FULLNAME = [char[]]@(0xA, 0xA, 0x2591, 0x2593, 0x2588, 0x2593, 0x20, 0x2
 
 function Auto-Select-Model {
     $AVAILABLE_MEM = $null
+    $TOTAL_MEM = $null
 
     if (Get-Command nvidia-smi -ErrorAction SilentlyContinue) {
         $AVAILABLE_MEM = ((nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | Select-Object -First 1) -as [double]) / 1024
+        $TOTAL_MEM = ((nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | Select-Object -First 1) -as [double]) / 1024
     } else {
         $TotalMemoryKB = [double]((Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize)
         $AVAILABLE_MEM = $TotalMemoryKB / 1024 / 1024
     }
-    Animate-Text "    $SYMBOL_NEWLINE System analysis: $AVAILABLE_MEM GB $MEMORY_TYPE detected"
+    Animate-Text "    $SYMBOL_NEWLINE System analysis:"
+    Animate-Text "    $SYMBOL_NEWLINE $TOTAL_MEM GB $MEMORY_TYPE total, $AVAILABLE_MEM GB $MEMORY_TYPE available"
 
     $AVAILABLE_MEM_INT = [math]::Round($AVAILABLE_MEM)
     if ($AVAILABLE_MEM_INT -ge 22) {
@@ -88,6 +91,8 @@ function Auto-Select-Model {
         $global:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
         $global:NODE_NAME = "Qwen3 1.7B Q4"
     }
+
+    Animate-Text "    $SYMBOL_NEWLINE Or pick a model smaller than $AVAILABLE_MEM GB"
 }
 
 Write-Host ""
