@@ -60,14 +60,11 @@ auto_select_model() {
         LLM_HF_REPO="unsloth/Qwen3-8B-GGUF"
         LLM_HF_MODEL_NAME="Qwen3-8B-Q4_K_M.gguf"
         NODE_NAME="Qwen3 8B Q4"
-    elif [ $AVAILABLE_MEM -ge 8 ]; then
+    else
         animate_text "    🜲 Recommending: ⬢ 22 Qwen3 1.7B optimized for efficiency"
         LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
         LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
         NODE_NAME="Qwen3 1.7B Q4"
-    else
-        echo "    ✕ ERROR: Insufficient memory. Your system's available Unified Memory does not meet the minimum requirements to run this node. Please check the hardware requirements in our documentation: https://docs.fortytwo.network/docs/hardware-requirements"
-        exit 1
     fi
     animate_text "    ↳ Or pick a model smaller than ${AVAILABLE_MEM} GB"
 }
