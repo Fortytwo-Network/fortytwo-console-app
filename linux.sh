@@ -18,14 +18,34 @@ animate_text_x2() {
 }
 
 auto_select_model() {
-    if command -v nvidia-smi &> /dev/null; then
-        AVAILABLE_MEM=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -n 1 | awk '{print $1 / 1024}')
-    else
-        AVAILABLE_MEM=$(awk '/MemTotal/ {print $2 / 1024 / 1024}' /proc/meminfo)
-    fi
-    animate_text "    ↳ System analysis: ${AVAILABLE_MEM}GB ${MEMORY_TYPE} detected"
 
-    AVAILABLE_MEM_INT=$(printf "%.0f" "$AVAILABLE_MEM")
+    if command -v nvidia-smi >/dev/null 2>&1; then
+        AVAILABLE_MEM=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits 2>/dev/null \
+          | awk 'BEGIN{max=0} {g=$1/1024; if(g>max) max=g} END{printf "%.2f", max}')
+        TOTAL_MEM=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>/dev/null \
+          | awk 'BEGIN{max=0} {g=$1/1024; if(g>max) max=g} END{printf "%.2f", max}')
+    fi
+
+    if [[ -z "$AVAILABLE_MEM" || "$AVAILABLE_MEM" == "0.00" ]]; then
+        AVAILABLE_MEM=$(awk '
+            $1=="MemAvailable:" {avail=$2/1024/1024}
+            $1=="MemFree:"      {free=$2}
+            $1=="Buffers:"      {buf=$2}
+            $1=="Cached:"       {cached=$2}
+            $1=="SReclaimable:" {srec=$2}
+            $1=="Shmem:"        {shm=$2}
+            END{
+              if (avail > 0)      printf "%.2f", avail/1.0;
+              else                 printf "%.2f", (free+buf+cached+srec-shm)/1024/1024;
+            }' /proc/meminfo)
+        TOTAL_MEM=$(awk '/MemTotal/ {print $2 / 1024 / 1024}' /proc/meminfo)
+    fi
+
+
+    AVAILABLE_MEM_INT=$(awk -v v="$AVAILABLE_MEM" 'BEGIN{printf "%d", int(v)}')
+
+    animate_text "    ↳ System analysis:"
+    animate_text "    ↳ ${TOTAL_MEM} GB ${MEMORY_TYPE} total, ${AVAILABLE_MEM} GB ${MEMORY_TYPE} available"
 
     if [ "$AVAILABLE_MEM_INT" -ge 22 ]; then
         animate_text "    🜲 Recommending: ⬢ 6 Qwen3 for problem solving & coding"
@@ -48,6 +68,7 @@ auto_select_model() {
         LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
         NODE_NAME="Qwen3 1.7B Q4"
     fi
+    animate_text "    ↳ Or pick a model smaller than ${AVAILABLE_MEM} GB"
 }
 
 BANNER="

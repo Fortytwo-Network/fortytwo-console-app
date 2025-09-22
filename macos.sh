@@ -18,8 +18,33 @@ animate_text_x2() {
 }
 
 auto_select_model() {
-    AVAILABLE_MEM=$(( $(sysctl -n hw.memsize) / 1024 / 1024 / 1024 ))
-    animate_text "    ↳ System analysis: ${AVAILABLE_MEM}GB ${MEMORY_TYPE} detected."
+
+    TOTAL_BYTES=$(sysctl -n hw.memsize)
+    TOTAL_MEM=$(( TOTAL_BYTES / 1024 / 1024 / 1024 ))
+
+    # Page size
+    PAGESIZE=$(sysctl -n hw.pagesize)
+
+    # Available (htop-style) = total - (active + wired)
+    AVAILABLE_MEM=$(vm_stat | awk -v P="$PAGESIZE" -v T="$TOTAL_BYTES" '
+        /Pages active/ {a=$NF}
+        /Pages wired/  {w=$NF}
+        END{
+          gsub(/[^0-9]/,"",a); gsub(/[^0-9]/,"",w);
+          usedb=(a+w)*P;
+          availb=T-usedb; if (availb < 0) availb=0;
+          # floor to GiB for selection thresholds
+          printf "%d", int(availb/1024/1024/1024);
+        }')
+
+    # Fallback if vm_stat parsing fails
+    if [[ -z "$AVAILABLE_MEM" || "$AVAILABLE_MEM" -le 0 ]]; then
+        AVAILABLE_MEM=$TOTAL_MEM
+    fi
+
+    animate_text "    ↳ System analysis:"
+    animate_text "    ↳ ${TOTAL_MEM} GB ${MEMORY_TYPE} total, ${AVAILABLE_MEM} GB ${MEMORY_TYPE} available"
+
     if [ $AVAILABLE_MEM -ge 30 ]; then
         animate_text "    🜲 Recommending: ⬢ 6 Qwen3 for problem solving & coding"
         LLM_HF_REPO="unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
@@ -44,6 +69,7 @@ auto_select_model() {
         echo "    ✕ ERROR: Insufficient memory. Your system's available Unified Memory does not meet the minimum requirements to run this node. Please check the hardware requirements in our documentation: https://docs.fortytwo.network/docs/hardware-requirements"
         exit 1
     fi
+    animate_text "    ↳ Or pick a model smaller than ${AVAILABLE_MEM} GB"
 }
 
 BANNER="
