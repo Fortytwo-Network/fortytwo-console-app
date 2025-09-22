@@ -60,7 +60,7 @@ function Auto-Select-Model {
     $TOTAL_MEM = $null
 
     if (Get-Command nvidia-smi -ErrorAction SilentlyContinue) {
-        $AVAILABLE_MEM = ((nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | Select-Object -First 1) -as [double]) / 1024
+        $AVAILABLE_MEM = [math]::Round(((nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | Select-Object -First 1) -as [double]) / 1024, 2, [System.MidpointRounding]::AwayFromZero)
         $TOTAL_MEM = ((nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | Select-Object -First 1) -as [double]) / 1024
     } else {
         $TotalMemoryKB = [double]((Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize)
