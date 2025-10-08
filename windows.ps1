@@ -37,6 +37,7 @@ $SYMBOL_CROWN = [char]0x2654
 $SYMBOL_NEWLINE = [char]0x2514
 $SYMBOL_SEPARATOR_DOT = [char]0x2022
 $SYMBOL_MODEL_SELECTED = [char]0x1362
+$SYMBOL_RIGHTWARDS_ARROW = [char]0x2192
 $SYMBOL_MODEL_CUSTOM = [char]0x2736
 $SYMBOL_MODEL_AUTOSELECT = [char]0x1360
 $SYMBOL_MODEL_LASTUSED = [char]0x25C1 
@@ -211,12 +212,12 @@ function Start-ConnectionLoop {
 
             switch ($userChoice) {
                 "1" {
-                    Write-Host "    → Attempting reconnection..."
+                    Write-Host "    $SYMBOL_RIGHTWARDS_ARROW Attempting reconnection..."
                     Write-Host ""
                     continue
                 }
                 "2" {
-                    Write-Host "    → Restarting application..."
+                    Write-Host "    $SYMBOL_RIGHTWARDS_ARROW Restarting application..."
                     & $PSCommandPath
                     exit
                 }
