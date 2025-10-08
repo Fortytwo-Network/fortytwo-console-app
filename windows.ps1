@@ -173,18 +173,63 @@ function Test-UrlAvailability {
         return $false
     }
 }
-Animate-Text " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
-$capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
-$protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
-if ($capsuleOk -and $protocolOk) {
-    Write-Host "    $SYMBOL_STATE_SUCCESS Connected."
-} elseif (-not $capsuleOk -and -not $protocolOk) {
-    Write-Host "    $SYMBOL_STATE_FAILURE ERROR: no connection. Check your internet connection, try using a VPN, and restart the script."
-    exit 1
-} else {
-    Write-Host "    $SYMBOL_STATE_FAILURE ERROR: partial connection failure. Try using a VPN and restart the script."
-    exit 1
+
+function Test-Connection {
+    Animate-Text " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
+
+    $capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
+    $protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
+
+    if ($capsuleOk -and $protocolOk) {
+        Write-Host "    $SYMBOL_STATE_SUCCESS Connected to all services"
+        Write-Host ""
+        return $true
+
+    } elseif (-not $capsuleOk -and -not $protocolOk) {
+        Write-Host "    $SYMBOL_STATE_FAILURE ERROR: No connection to services. Check your internet connection, try using a VPN, and restart the script."
+        Write-Host ""
+        return $false
+
+    } else {
+        Write-Host "    $SYMBOL_STATE_WARNING WARNING: Partial connection detected"
+        Write-Host "    $SYMBOL_SEPARATOR_DOT Capsule endpoint: $(if ($capsuleOk) { "$SYMBOL_STATE_SUCCESS" } else { "$SYMBOL_STATE_FAILURE" })"
+        Write-Host "    $SYMBOL_SEPARATOR_DOT Protocol endpoint: $(if ($protocolOk) { "$SYMBOL_STATE_SUCCESS" } else { "$SYMBOL_STATE_FAILURE" })"
+        Write-Host ""
+        return $false
+    }
 }
+
+function Start-ConnectionLoop {
+    while ($true) {
+        if (Test-Connection) {
+            break
+        } else {
+            Write-Host "    [1] Try Reconnecting"
+            Write-Host "    [2] Restart App"
+            Write-Host ""
+            $userChoice = Read-Host "    Select option"
+
+            switch ($userChoice) {
+                "1" {
+                    Write-Host "    → Attempting reconnection..."
+                    Write-Host ""
+                    continue
+                }
+                "2" {
+                    Write-Host "    → Restarting application..."
+                    & $PSCommandPath
+                    exit
+                }
+                default {
+                    Write-Host "    $SYMBOL_STATE_FAILURE Invalid input. Please try again."
+                    Write-Host ""
+                }
+            }
+        }
+    }
+}
+
+Start-ConnectionLoop
 
 Animate-Text ($SYMBOL_HEADER_IN -join ''),"Checking for the Latest Components Versions",($SYMBOL_HEADER_OUT -join '')
 Write-Host ""
