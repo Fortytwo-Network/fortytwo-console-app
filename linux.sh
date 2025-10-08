@@ -174,7 +174,6 @@ connection_loop() {
         else
             echo "    [1] Try Reconnecting"
             echo "    [2] Restart App"
-            echo
             read -p "    Select option: " user_choice
 
             case "$user_choice" in

@@ -207,7 +207,6 @@ function Start-ConnectionLoop {
         } else {
             Write-Host "    [1] Try Reconnecting"
             Write-Host "    [2] Restart App"
-            Write-Host ""
             $userChoice = Read-Host "    Select option"
 
             switch ($userChoice) {
