@@ -37,6 +37,7 @@ $SYMBOL_CROWN = [char]0x2654
 $SYMBOL_NEWLINE = [char]0x2514
 $SYMBOL_SEPARATOR_DOT = [char]0x2022
 $SYMBOL_MODEL_SELECTED = [char]0x1362
+$SYMBOL_RIGHTWARDS_ARROW = [char]0x2192
 $SYMBOL_MODEL_CUSTOM = [char]0x2736
 $SYMBOL_MODEL_AUTOSELECT = [char]0x1360
 $SYMBOL_MODEL_LASTUSED = [char]0x25C1 
@@ -173,18 +174,62 @@ function Test-UrlAvailability {
         return $false
     }
 }
-Animate-Text " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
-$capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
-$protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
-if ($capsuleOk -and $protocolOk) {
-    Write-Host "    $SYMBOL_STATE_SUCCESS Connected."
-} elseif (-not $capsuleOk -and -not $protocolOk) {
-    Write-Host "    $SYMBOL_STATE_FAILURE ERROR: no connection. Check your internet connection, try using a VPN, and restart the script."
-    exit 1
-} else {
-    Write-Host "    $SYMBOL_STATE_FAILURE ERROR: partial connection failure. Try using a VPN and restart the script."
-    exit 1
+
+function Test-Connection {
+    Animate-Text " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
+
+    $capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
+    $protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
+
+    if ($capsuleOk -and $protocolOk) {
+        Write-Host "    $SYMBOL_STATE_SUCCESS Connected to all services"
+        Write-Host ""
+        return $true
+
+    } elseif (-not $capsuleOk -and -not $protocolOk) {
+        Write-Host "    $SYMBOL_STATE_FAILURE ERROR: No connection to services. Check your internet connection, try using a VPN, and restart the script."
+        Write-Host ""
+        return $false
+
+    } else {
+        Write-Host "    $SYMBOL_STATE_WARNING WARNING: Partial connection detected"
+        Write-Host "    $SYMBOL_SEPARATOR_DOT Capsule endpoint: $(if ($capsuleOk) { "$SYMBOL_STATE_SUCCESS" } else { "$SYMBOL_STATE_FAILURE" })"
+        Write-Host "    $SYMBOL_SEPARATOR_DOT Protocol endpoint: $(if ($protocolOk) { "$SYMBOL_STATE_SUCCESS" } else { "$SYMBOL_STATE_FAILURE" })"
+        Write-Host ""
+        return $false
+    }
 }
+
+function Start-ConnectionLoop {
+    while ($true) {
+        if (Test-Connection) {
+            break
+        } else {
+            Write-Host "    [1] Try Reconnecting"
+            Write-Host "    [2] Restart App"
+            $userChoice = Read-Host "    Select option"
+
+            switch ($userChoice) {
+                "1" {
+                    Write-Host "    $SYMBOL_RIGHTWARDS_ARROW Attempting reconnection..."
+                    Write-Host ""
+                    continue
+                }
+                "2" {
+                    Write-Host "    $SYMBOL_RIGHTWARDS_ARROW Restarting application..."
+                    & $PSCommandPath
+                    exit
+                }
+                default {
+                    Write-Host "    $SYMBOL_STATE_FAILURE Invalid input. Please try again."
+                    Write-Host ""
+                }
+            }
+        }
+    }
+}
+
+Start-ConnectionLoop
 
 Animate-Text ($SYMBOL_HEADER_IN -join ''),"Checking for the Latest Components Versions",($SYMBOL_HEADER_OUT -join '')
 Write-Host ""

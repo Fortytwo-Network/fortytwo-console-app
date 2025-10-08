@@ -134,24 +134,64 @@ if ! command -v curl &> /dev/null; then
     exit 1
 fi
 
-animate_text "Ξ Connection check to update endpoints"
+check_connection() {
+    animate_text "Ξ Connection check to update endpoints"
 
-curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
-CAPSULE_S3_STATUS=$?
+    curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
+    CAPSULE_S3_STATUS=$?
 
-curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
-PROTOCOL_S3_STATUS=$?
+    curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
+    PROTOCOL_S3_STATUS=$?
 
-if [ "$CAPSULE_S3_STATUS" -eq 0 ] && [ "$PROTOCOL_S3_STATUS" -eq 0 ]; then
-  echo "    ✓ Connected"
-  echo
-elif [ "$CAPSULE_S3_STATUS" -ne 0 ] && [ "$PROTOCOL_S3_STATUS" -ne 0 ]; then
-  echo "    ✕ ERROR: no connection. Check your internet connection, try using a VPN, and restart the script."
-  exit 1
-else
-  echo "    ✕ ERROR: partial connection failure. Try using a VPN and restart the script."
-  exit 1
-fi
+    if [ "$CAPSULE_S3_STATUS" -eq 0 ] && [ "$PROTOCOL_S3_STATUS" -eq 0 ]; then
+        echo "    ✓ Connected to all services"
+        echo
+        return 0
+
+    elif [ "$CAPSULE_S3_STATUS" -ne 0 ] && [ "$PROTOCOL_S3_STATUS" -ne 0 ]; then
+        echo "    ✕ ERROR: No connection to services. Check your internet connection, try using a VPN, and restart the script."
+        echo
+        return 1
+
+    else
+        echo "    ⚠ WARNING: Partial connection detected"
+        echo "    • Capsule endpoint: $([ "$CAPSULE_S3_STATUS" -eq 0 ] && echo "✓" || echo "✕")"
+        echo "    • Protocol endpoint: $([ "$PROTOCOL_S3_STATUS" -eq 0 ] && echo "✓" || echo "✕")"
+        echo
+        return 1
+    fi
+}
+
+# shellcheck disable=SC2120
+connection_loop() {
+    while true; do
+        if check_connection; then
+            break
+        else
+            echo "    [1] Try Reconnecting"
+            echo "    [2] Restart App"
+            read -p "    Select option: " user_choice
+
+            case "$user_choice" in
+                1)
+                    echo "    → Attempting reconnection..."
+                    echo
+                    continue
+                    ;;
+                2)
+                    echo "    → Restarting application..."
+                    exec "$0" "$@"
+                    ;;
+                *)
+                    echo "    ✕ Invalid input. Please try again."
+                    echo
+                    ;;
+            esac
+        fi
+    done
+}
+
+connection_loop
 
 animate_text "▒▓░ Checking for the Latest Components Versions ░▓▒"
 echo
