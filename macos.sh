@@ -206,35 +206,35 @@ echo
 animate_text "◰ Setup script — version validation"
 
 # --- Update setup script ---
-INSTALLER_UPDATE_URL="https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-console-app/main/macos.sh"
-SCRIPT_PATH="$0"
-TEMP_FILE=$(mktemp)
-
-curl -fsSL -o "$TEMP_FILE" "$INSTALLER_UPDATE_URL"
-
-# Check download
-if [ ! -s "$TEMP_FILE" ]; then
-    echo "    ✕ ERROR: Failed to download the update. Check your internet connection and try again."
-    exit 1
-fi
-
-# Compare
-if cmp -s "$SCRIPT_PATH" "$TEMP_FILE"; then
-    # No update needed
-    echo "    ✓ Up to date"
-    rm "$TEMP_FILE"
-else
-    echo "    ↳ Updating..."
-    cp "$SCRIPT_PATH" "${SCRIPT_PATH}.bak"
-    cp "$TEMP_FILE" "$SCRIPT_PATH"
-    chmod +x "$SCRIPT_PATH"
-    rm "$TEMP_FILE"
-    echo "    ↺ Restarting script..."
-    sleep 3
-    exec "$SCRIPT_PATH" "$@"
-    echo "    ✕ ERROR: exec failed."
-    exit 1
-fi
+#INSTALLER_UPDATE_URL="https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-console-app/main/macos.sh"
+#SCRIPT_PATH="$0"
+#TEMP_FILE=$(mktemp)
+#
+#curl -fsSL -o "$TEMP_FILE" "$INSTALLER_UPDATE_URL"
+#
+## Check download
+#if [ ! -s "$TEMP_FILE" ]; then
+#    echo "    ✕ ERROR: Failed to download the update. Check your internet connection and try again."
+#    exit 1
+#fi
+#
+## Compare
+#if cmp -s "$SCRIPT_PATH" "$TEMP_FILE"; then
+#    # No update needed
+#    echo "    ✓ Up to date"
+#    rm "$TEMP_FILE"
+#else
+#    echo "    ↳ Updating..."
+#    cp "$SCRIPT_PATH" "${SCRIPT_PATH}.bak"
+#    cp "$TEMP_FILE" "$SCRIPT_PATH"
+#    chmod +x "$SCRIPT_PATH"
+#    rm "$TEMP_FILE"
+#    echo "    ↺ Restarting script..."
+#    sleep 3
+#    exec "$SCRIPT_PATH" "$@"
+#    echo "    ✕ ERROR: exec failed."
+#    exit 1
+#fi
 # --- End Update setup script ---
 
 CAPSULE_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest")
@@ -475,13 +475,17 @@ configure_kv_cache() {
             3)
                 while true; do
                     echo
-                    read -r -p "Define your target cache in GB, min is 'i.e': " GB_SIZE
+                    read -r -p "Define your target cache in GB, min is '0.3' GB: " GB_SIZE
 
                     if [[ "$GB_SIZE" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-                        KV_CACHE_GB=true
-                        KV_CACHE_GB_SIZE="$GB_SIZE"
-                        animate_text "✓ KV-Cache size is set to '${GB_SIZE}' GB."
-                        break 2
+                        if (( $(echo "$GB_SIZE >= 0.3" | bc -l) )); then
+                            KV_CACHE_GB=true
+                            KV_CACHE_GB_SIZE="$GB_SIZE"
+                            animate_text "✓ KV-Cache size is set to '${GB_SIZE}' GB."
+                            break 2
+                        else
+                            echo "✗ Value must be at least 0.3 GB."
+                        fi
                     else
                         echo "✗ Incorrect input."
                     fi
@@ -614,7 +618,7 @@ import_local_model() {
     fi
 
     if [[ ! "$model_path" =~ \.gguf$ ]]; then
-        echo "✗ File is not in GGUF format. Currently only the GGUF model file format is supported."
+        echo "✕ Defined file is not in GGUF format. Currently only the GGUF model file format is supported."
         return 1
     fi
 
