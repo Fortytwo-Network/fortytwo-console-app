@@ -72,25 +72,25 @@ function Auto-Select-Model {
 
     $AVAILABLE_MEM_INT = [math]::Round($AVAILABLE_MEM)
     if ($AVAILABLE_MEM_INT -ge 22) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 6 Qwen3 for problem solving & coding"
-        $global:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
-        $global:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
-        $global:NODE_NAME = "Qwen3 Coder 30B A3B Instruct Q4"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 7 Qwen3 for problem solving & coding"
+        $script:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+        $script:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+        $script:NODE_NAME = "Qwen3 Coder 30B A3B Instruct Q4"
     } elseif ($AVAILABLE_MEM_INT -ge 15) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 12 Qwen3 14B for high-precision logical analysis"
-        $global:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
-        $global:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
-        $global:NODE_NAME = "Qwen3 14B Q4"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 13 Qwen3 14B for high-precision logical analysis"
+        $script:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
+        $script:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
+        $script:NODE_NAME = "Qwen3 14B Q4"
     } elseif ($AVAILABLE_MEM_INT -ge 7) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 13 Qwen3 8B for balanced capability"
-        $global:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
-        $global:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
-        $global:NODE_NAME = "Qwen3 8B Q4"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 14 Qwen3 8B for balanced capability"
+        $script:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
+        $script:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
+        $script:NODE_NAME = "Qwen3 8B Q4"
     } else {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 22 Qwen 3 7.1B optimized for efficiency"
-        $global:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
-        $global:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
-        $global:NODE_NAME = "Qwen3 1.7B Q4"
+        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 23 Qwen 3 7.1B optimized for efficiency"
+        $script:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
+        $script:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
+        $script:NODE_NAME = "Qwen3 1.7B Q4"
     }
 
     Animate-Text "    $SYMBOL_NEWLINE Or pick a model smaller than $AVAILABLE_MEM GB"
@@ -123,6 +123,13 @@ $PROTOCOL_EXEC = "$PROJECT_DIR\FortytwoProtocol.exe"
 $ACCOUNT_PRIVATE_KEY_FILE = "$PROJECT_DIR\.account_private_key"
 
 $UTILS_EXEC="$PROJECT_DIR\FortytwoUtilsWindows.exe"
+
+# KV-cache settings
+$KV_CACHE_MODE="auto"
+$KV_CACHE_TOKENS=$false
+$KV_CACHE_GB=$false
+
+$LLM_IS_LOCAL_PATH=$false
 
 Write-Host "Preparing your node environment..."
 
@@ -477,278 +484,545 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
     }
 }
 
-Write-Host ""
-Animate-Text ($SYMBOL_HEADER_IN -join ''),"The Unique Strength of Your Node",($SYMBOL_HEADER_OUT -join '')
-Write-Host ""
-Animate-Text "Choose how your node will contribute its unique strengths to the collective intelligence."
-Write-Host ""
-Auto-Select-Model
-Write-Host ""
-Animate-Text "Use setup assist options [0-1] or pick an option from three model tiers [2-22]:"
-Write-Host ""
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 0 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                                    |"
-Write-Host "|     Let the system determine the best model for your hardware.             |"
-Write-Host "|     Balanced for performance and capabilities.                             |"
-Write-Host "|============================================================================|"
-Animate-Text-x2 "| 1 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                                 |"
-Write-Host "|============================================================================|"
-Write-Host ""
-Write-Host "|========= EXTREME TIER | Models with very high memory requirements"
-Animate-Text-x2 "| 2 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
-Write-Host "|     65.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GPT-oss 120B Q4"
-Write-Host "|     Frontier-level multi-step answers across coding, math, science,"
-Write-Host "|     general knowledge questions."
-Write-Host "|"
-Animate-Text-x2 "| 3 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
-Write-Host "|     76.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GLM-4.5-Air Q4"
-Write-Host "|     Deliberate multi-step reasoning in logic, math, and coding;"
-Write-Host "|     excels at clear, long-form breakdowns of complex questions."
-Write-Host "|"
-Animate-Text-x2 "| 4 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
-Write-Host "|     31.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Nemotron-Super-49B-v1.5 Q4"
-Write-Host "|     High-precision multi-step reasoning in general domains, math and"
-Write-Host "|     coding; produces clear step-by-step solutions to complex problems."
-Write-Host "|========= EXTREME TIER END"
-Write-Host ""
-Write-Host "|========= HEAVY TIER | Dedicating all Compute to the Node"
-Animate-Text-x2 "| 5 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
-Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 30B A3B Thinking 2507 Q4"
-Write-Host "|     Long-context reasoning at high efficiency, with steady logic,"
-Write-Host "|     math, and coding across large inputs."
-Write-Host "|"
-Animate-Text-x2 "| 6 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
-Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3-Coder-30B-A3B-Instruct Q4"
-Write-Host "|     Writes robust, well-structured code with step-by-step reasoning;"
-Write-Host "|     handles large, multi-file tasks and refactors."
-Write-Host "|"
-Animate-Text-x2 "| 7 $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST"
-Write-Host "|     12.2 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT gpt-oss-20b Q4"
-Write-Host "|     Fast, capable multi-domain reasoning;"
-Write-Host "|     solid for day-to-day coding, math, and research."
-Write-Host "|"
-Animate-Text-x2 "| 8 $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING"
-Write-Host "|     20.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenReasoning Nemotron 32B Q4"
-Write-Host "|     Meticulous step-by-step logic in math, science and code;"
-Write-Host "|     great for explainable solutions and error analysis."
-Write-Host "|"
-Animate-Text-x2 "| 9 $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST"
-Write-Host "|     20.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT EXAONE 4.0 32B Q4"
-Write-Host "|     Strong science and world knowledge with dependable math and coding;"
-Write-Host "|     clear, well-grounded explanations."
-Write-Host "|"
-Animate-Text-x2 "| 10 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
-Write-Host "|     20.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 32B Q4"
-Write-Host "|     Excels at contest-style algorithms;"
-Write-Host "|     produces correct, efficient code with clear step-by-step reasoning."
-Write-Host "|"
-Animate-Text-x2 "| 11 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
-Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Apriel-Nemotron-15b-Thinker Q4"
-Write-Host "|     Deliberate, reflective multi-step reasoning across mixed tasks;"
-Write-Host "|     steady performance on logic, math, and coding."
-Write-Host "|========= HEAVY TIER END"
-Write-Host ""
-Write-Host "|========= LIGHT TIER | Operating the Node in Background"
-Animate-Text-x2 "| 12 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
-Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 14B Q4"
-Write-Host "|     Balanced everyday reasoning with multilingual support;"
-Write-Host "|     clear, reliable answers across common topics."
-Write-Host "|"
-Animate-Text-x2 "| 13 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
-Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 8B Q4"
-Write-Host "|     Smooth daily Q&A with concise reasoning;"
-Write-Host "|     dependable on summaries, explanations, and light code."
-Write-Host "|"
-Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST"
-Write-Host "|     7.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Gemma-3 4B Q4"
-Write-Host "|     Multilingual chat with long-context support;"
-Write-Host "|     dependable everyday assistant with clear explanations."
-Write-Host "|"
-Animate-Text-x2 "| 15 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
-Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT DeepCoder 14B Q4"
-Write-Host "|     Generates accurate code and understands complex programming logic;"
-Write-Host "|     reliable for feature drafts and fixes."
-Write-Host "|"
-Animate-Text-x2 "| 16 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
-Write-Host "|     4.8 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 7B Q4"
-Write-Host "|     Balanced coding contest solver;"
-Write-Host "|     step-by-step algorithmic reasoning and efficient code."
-Write-Host "|"
-Animate-Text-x2 "| 17 $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC"
-Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenMath-Nemotron 14B Q4"
-Write-Host "|     Excels at math questions and structured problem-solving;"
-Write-Host "|     clear steps for academic and competition problems."
-Write-Host "|"
-Animate-Text-x2 "| 18 $SYMBOL_MODEL_SELECTED MATH & CODING"
-Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT AceReason-Nemotron-1.1-7B Q4"
-Write-Host "|     Handles math and logic puzzles with minimal resources;"
-Write-Host "|     concise, step-by-step solutions."
-Write-Host "|"
-Animate-Text-x2 "| 19 $SYMBOL_MODEL_SELECTED THEOREM PROVER"
-Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Kimina Prover Distill 8B Q4"
-Write-Host "|     Specialist in formal logic and proof steps;"
-Write-Host "|     ideal for theorem-style tasks and verification."
-Write-Host "|"
-Animate-Text-x2 "| 20 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING"
-Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Tessa-Rust-T1 7B Q4"
-Write-Host "|     Focused on Rust programming; produces idiomatic Rust and"
-Write-Host "|     helps with code generation, fixes and refactors."
-Write-Host "|"
-Animate-Text-x2 "| 21 $SYMBOL_MODEL_SELECTED MEDICAL EXPERT"
-Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT II-Medical-8B Q5"
-Write-Host "|     Works through clinical Q&A step by step;"
-Write-Host "|     useful for study and drafting (non-diagnostic)."
-Write-Host "|"
-Animate-Text-x2 "| 22 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL"
-Write-Host "|     1.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 1.7B Q4"
-Write-Host "|     Ultra-efficient for basic instructions and quick answers;"
-Write-Host "|     suitable for nodes with tight memory."
-Write-Host "|========= LIGHT TIER END"
-Write-Host ""
-Write-Host "[0] Auto, [1] Import, [2-22] Specialized Model"
+function Configure-KvCache {
+    Write-Host ""
+    Animate-Text "1 : KV-CACHE SET-UP"
+    Write-Host "    - Memory control for longer context."
+    Write-Host "    - Defines how much of your system resources are allocated"
+    Write-Host "      in addition to inference generation."
+    Write-Host "    - Read more: https://docs.fortytwo.network/docs/how-to-pick-the-right-model-for-your-node"
+    Write-Host ""
 
-$NODE_CLASS = Read-Host "Select your node's specialization option: "
+    while ($true) {
+        Write-Host "[0] Default (Mode Auto)"
+        Write-Host "[1] Mode (auto|min|medium|max)"
+        Write-Host "[2] Size in Tokens"
+        Write-Host "[3] Size in GB"
+        $KV_MODE_CHOICE = Read-Host "Select an option"
 
-switch ($NODE_CLASS) {
-    "0" {
-        Write-Host " $SYMBOL_MODEL_AUTOSELECT Analyzing system for optimal configuration:"
-        Auto-Select-Model
-    }
-    "1" {
-        Write-Host "`n================== CUSTOM MODEL IMPORT ===================="
-        Write-Host "     Intended for users familiar with language models.`n"
+        switch ($KV_MODE_CHOICE) {
+            "0" {
+                Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is now managed automatically."
+                $script:KV_CACHE_MODE = "auto"
+                return
+            }
+            "1" {
+                while ($true) {
+                    Write-Host ""
+                    Write-Host "Pick your desired mode:"
+                    Write-Host "[0] Auto"
+                    Write-Host "[1] Min (33% of available memory)"
+                    Write-Host "[2] Medium (66% of available memory)"
+                    Write-Host "[3] Max (100% of available memory)"
+                    $MODE_OPTION = Read-Host "Select an option"
 
-        $LLM_HF_REPO = Read-Host "Enter HuggingFace repository (e.g., Qwen/Qwen2.5-3B-Instruct-GGUF)"
-        $LLM_HF_MODEL_NAME = Read-Host "Enter model filename (e.g., qwen2.5-3b-instruct-q4_k_m.gguf)"
-        $NODE_NAME = " $SYMBOL_MODEL_CUSTOM CUSTOM IMPORT: HuggingFace $($LLM_HF_REPO -split '/' | Select-Object -Last 1))"
-    }
-    "2" {
-        $LLM_HF_REPO = "unsloth/gpt-oss-120b-GGUF"
-        $LLM_HF_MODEL_NAME = "Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: gpt-oss-120b Q4"
-    }
-    "3" {
-        $LLM_HF_REPO = "unsloth/GLM-4.5-Air-GGUF"
-        $LLM_HF_MODEL_NAME = "Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: GLM-4.5-Air Q4"
-    }
-    "4" {
-        $LLM_HF_REPO = "unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
-        $LLM_HF_MODEL_NAME = "Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
-    }
-    "5" {
-        $LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
-    }
-    "6" {
-        $LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
-    }
-    "7" {
-        $LLM_HF_REPO = "unsloth/gpt-oss-20b-GGUF"
-        $LLM_HF_MODEL_NAME = "gpt-oss-20b-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: gpt-oss-20b Q4"
-    }
-    "8" {
-        $LLM_HF_REPO = "unsloth/OpenReasoning-Nemotron-32B-GGUF"
-        $LLM_HF_MODEL_NAME = "OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
-    }
-    "9" {
-        $LLM_HF_REPO = "LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
-        $LLM_HF_MODEL_NAME = "LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
-    }
-    "10" {
-        $LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-32B-GGUF"
-        $LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-32B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
-    }
-    "11" {
-        $LLM_HF_REPO = "bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
-        $LLM_HF_MODEL_NAME = "ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
-    }
-    "12" {
-        $LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 14B Q4"
-    }
-    "13" {
-        $LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 8B Q4"
-    }
-    "14" {
-        $LLM_HF_REPO = "unsloth/gemma-3-12b-it-GGUF"
-        $LLM_HF_MODEL_NAME = "gemma-3-12b-it-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
-    }
-    "15" {
-        $LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
-        $LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
-    }
-    "16" {
-        $LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-7B-GGUF"
-        $LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-7B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
-    }
-    "17" {
-        $LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
-        $LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
-    }
-    "18" {
-        $LLM_HF_REPO = "bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
-        $LLM_HF_MODEL_NAME = "nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
-    }
-    "19" {
-        $LLM_HF_REPO = "mradermacher/Kimina-Prover-Distill-8B-GGUF"
-        $LLM_HF_MODEL_NAME = "Kimina-Prover-Distill-8B.Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: Kimina Prover Distill 8B Q4"
-    }
-    "20" {
-        $LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-        $LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
-    }
-    "21" {
-        $LLM_HF_REPO = "Intelligent-Internet/II-Medical-8B-1706-GGUF"
-        $LLM_HF_MODEL_NAME = "II-Medical-8B-1706.Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED MEDICAL EXPERT: II-Medical-8B Q5"
-    }
-    "22" {
-        $LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
-        $LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
-        $NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"
+                    switch ($MODE_OPTION) {
+                        "0" {
+                            $script:KV_CACHE_MODE = "auto"
+                            Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
+                            return
+                        }
+                        "1" {
+                            $script:KV_CACHE_MODE = "min"
+                            Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
+                            return
+                        }
+                        "2" {
+                            $script:KV_CACHE_MODE = "medium"
+                            Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
+                            return
+                        }
+                        "3" {
+                            $script:KV_CACHE_MODE = "max"
+                            Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
+                            return
+                        }
+                        default {
+                            Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
+                        }
+                    }
+                }
+            }
+            "2" {
+                while ($true) {
+                    Write-Host ""
+                    $TOKEN_SIZE = Read-Host "Define your target cache in tokens, min is 1024"
+
+                    if ($TOKEN_SIZE -match '^\d+$' -and [int]$TOKEN_SIZE -ge 1024) {
+                        $script:KV_CACHE_TOKENS = $true
+                        $script:KV_CACHE_TOKENS_SIZE = $TOKEN_SIZE
+                        Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to $TOKEN_SIZE Tokens."
+                        return
+                    } else {
+                        Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
+                    }
+                }
+            }
+            "3" {
+                while ($true) {
+                    Write-Host ""
+                    $GB_SIZE = Read-Host "Define your target cache in GB, min is '0.3' GB"
+
+                    if ($GB_SIZE -match '^\d+(\.\d+)?$' -and [double]$GB_SIZE -ge 0.3) {
+                        $script:KV_CACHE_GB = $true
+                        $script:KV_CACHE_GB_SIZE = $GB_SIZE
+                        Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to '$GB_SIZE' GB."
+                        return
+                    } else {
+                        if ([double]$GB_SIZE -lt 0.3) {
+                            Write-Host "$SYMBOL_STATE_FAILURE Value must be at least 0.3 GB."
+                        } else {
+                            Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
+                        }
+                    }
+                }
+            }
+            default {
+                Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
+            }
+        }
     }
 
-    Default {
-        Write-Host "No selection made. Continuing with [0] $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT..."
-        Auto-Select-Model
+    Write-Host ""
+    Animate-Text "KV-Cache configuration completed!"
+}
+
+function Show-Settings {
+    while ($true) {
+        Write-Host "[1] KV-Cache Size"
+        Write-Host "[2] Back"
+        $SETTINGS_OPTION = Read-Host "Select an option"
+
+        switch ($SETTINGS_OPTION) {
+            "1" {
+                Configure-KvCache
+            }
+            "2" {
+                return
+            }
+            default {
+                Animate-Text "$SYMBOL_STATE_FAILURE Incorrect input."
+            }
+        }
     }
 }
+
+function Select-CustomModel {
+    Write-Host ""
+    Write-Host "|========= $SYMBOL_MODEL_CUSTOM CUSTOM MODEL IMPORT"
+    Write-Host "|"
+    Write-Host "|  - Intended for users familiar with language models."
+    Write-Host "|  - Import from Hugging Face or import a local model."
+    Write-Host "|  - GGUF model format is expected."
+    Write-Host "|"
+    Write-Host "|========= $SYMBOL_MODEL_CUSTOM"
+
+    while ($true) {
+        Write-Host ""
+        Write-Host "[1] Hugging Face Import"
+        Write-Host "[2] Local GGUF Model Import"
+        Write-Host "[3] Back"
+        $choice = Read-Host "Select an option"
+
+        switch ($choice) {
+            "1" {
+                if (Import-FromHub) {
+                    return $true
+                }
+            }
+            "2" {
+                if (Import-LocalModel) {
+                    return $true
+                }
+            }
+            "3" {
+                return $false
+            }
+            default {
+                Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
+            }
+        }
+    }
+}
+
+function Import-FromHub {
+    Write-Host ""
+    Write-Host "1 : LOADING MODEL FROM HUGGING FACE"
+    Write-Host "Step 1/2"
+    Write-Host "Enter Hugging Face repository, e.g.: 'Qwen/Qwen2.5-3B-Instruct-"
+    Write-Host "GGUF' (skip the quotes). Type 'Cancel' to go back."
+    $repo_path = Read-Host "Define the repository"
+
+    if ($repo_path.ToLower() -eq "cancel") {
+        Write-Host "Cancelled."
+        return $false
+    }
+
+    Write-Host "Step 2/2"
+    Write-Host "Enter model filename. e.g.: 'qwen2.5-3b-instruct-q4_k_m.gguf'"
+    Write-Host "(skip the quotes). For models with multiple files, include the "
+    Write-Host "subpath and define the first one, e.g. 'Q4_K_M/gpt-oss-120b-"
+    Write-Host "Q4_K_M-00001-of-00002.gguf'."
+    Write-Host "Type 'Cancel' to go back."
+    $model_filename = Read-Host "Enter model filename"
+
+    if ($model_filename.ToLower() -eq "cancel") {
+        Write-Host "Cancelled."
+        return $false
+    }
+
+    Write-Host "$SYMBOL_STATE_SUCCESS Model linked successfully"
+
+    $script:LLM_HF_REPO = $repo_path
+    $script:LLM_HF_MODEL_NAME = $model_filename
+    $script:NODE_NAME = "$SYMBOL_MODEL_CUSTOM CUSTOM IMPORT: HuggingFace $($repo_path -split '/' | Select-Object -Last 1)"
+
+    return $true
+}
+
+function Import-LocalModel {
+    Write-Host ""
+    Write-Host "2 : LOADING MODEL FROM CUSTOM LOCATION"
+    Write-Host ""
+    Write-Host "Define the path to the model in form of 'C:\Users\Username\Downloads\"
+    Write-Host "qwen2.5-3b-instruct-q4_k_m.gguf' (skip the quotes). For models with"
+    Write-Host "multiple files, define the first one, e.g. 'C:\Users\Username\"
+    Write-Host "Downloads\gpt-oss-120b-Q4_K_M-00001-of-00002.gguf'."
+    Write-Host "Type 'Cancel' to go back."
+    $model_path = Read-Host "Define the path"
+
+    if ($model_path.ToLower() -eq "cancel") {
+        Write-Host "Cancelled."
+        return $false
+    }
+
+    if (-not (Test-Path $model_path)) {
+        Write-Host "$SYMBOL_STATE_FAILURE Cannot reach the defined path."
+        return $false
+    }
+
+    if ($model_path -notmatch '\.gguf$') {
+        Write-Host "$SYMBOL_STATE_FAILURE Defined file is not in GGUF format. Currently only the GGUF model file format is supported."
+        return $false
+    }
+
+    Write-Host "$SYMBOL_STATE_SUCCESS Model found successfully"
+
+    $script:LLM_IS_LOCAL_PATH = $true
+    $script:LLM_LOCAL_PATH = $model_path
+    $script:NODE_NAME = "$SYMBOL_MODEL_CUSTOM CUSTOM IMPORT: FROM CUSTOM LOCATION $(Split-Path $model_path -Leaf)"
+
+    return $true
+}
+
+function Select-NodeModel {
+    Write-Host ""
+    Animate-Text ($SYMBOL_HEADER_IN -join ''),"The Unique Strength of Your Node",($SYMBOL_HEADER_OUT -join '')
+    Write-Host ""
+    Animate-Text "Choose how your node will contribute its unique strengths to the collective intelligence."
+    Write-Host ""
+    Auto-Select-Model
+    Write-Host ""
+    Animate-Text "Use setup assist options [0-2] or pick an option from three model tiers [3-23]:"
+    Write-Host ""
+    Write-Host "|========= SETUP ASSIST OPTIONS ========================================|"
+    Write-Host "| 0 ⏣ SETTINGS                                                          |"
+    Write-Host "|=======================================================================|"
+    Write-Host "| 1 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                        |"
+    Write-Host "|     Let the system determine the best model for your hardware.        |"
+    Write-Host "|     Balanced for performance and capabilities.                        |"
+    Write-Host "|=======================================================================|"
+    Write-Host "| 2 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                         |"
+    Write-Host "|=======================================================================|"
+    Write-Host ""
+    Write-Host "|========= EXTREME TIER | Models with very high memory requirements"
+    Animate-Text-x2 "| 3 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
+    Write-Host "|     65.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GPT-oss 120B Q4"
+    Write-Host "|     Frontier-level multi-step answers across coding, math, science,"
+    Write-Host "|     general knowledge questions."
+    Write-Host "|"
+    Animate-Text-x2 "| 4 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
+    Write-Host "|     76.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GLM-4.5-Air Q4"
+    Write-Host "|     Deliberate multi-step reasoning in logic, math, and coding;"
+    Write-Host "|     excels at clear, long-form breakdowns of complex questions."
+    Write-Host "|"
+    Animate-Text-x2 "| 5 $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST"
+    Write-Host "|     31.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Nemotron-Super-49B-v1.5 Q4"
+    Write-Host "|     High-precision multi-step reasoning in general domains, math and"
+    Write-Host "|     coding; produces clear step-by-step solutions to complex problems."
+    Write-Host "|========= EXTREME TIER END"
+    Write-Host ""
+    Write-Host "|========= HEAVY TIER | Dedicating all Compute to the Node"
+    Animate-Text-x2 "| 6 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
+    Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 30B A3B Thinking 2507 Q4"
+    Write-Host "|     Long-context reasoning at high efficiency, with steady logic,"
+    Write-Host "|     math, and coding across large inputs."
+    Write-Host "|"
+    Animate-Text-x2 "| 7 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+    Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3-Coder-30B-A3B-Instruct Q4"
+    Write-Host "|     Writes robust, well-structured code with step-by-step reasoning;"
+    Write-Host "|     handles large, multi-file tasks and refactors."
+    Write-Host "|"
+    Animate-Text-x2 "| 8 $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST"
+    Write-Host "|     12.2 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT gpt-oss-20b Q4"
+    Write-Host "|     Fast, capable multi-domain reasoning;"
+    Write-Host "|     solid for day-to-day coding, math, and research."
+    Write-Host "|"
+    Animate-Text-x2 "| 9 $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING"
+    Write-Host "|     20.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenReasoning Nemotron 32B Q4"
+    Write-Host "|     Meticulous step-by-step logic in math, science and code;"
+    Write-Host "|     great for explainable solutions and error analysis."
+    Write-Host "|"
+    Animate-Text-x2 "| 10 $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST"
+    Write-Host "|     20.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT EXAONE 4.0 32B Q4"
+    Write-Host "|     Strong science and world knowledge with dependable math and coding;"
+    Write-Host "|     clear, well-grounded explanations."
+    Write-Host "|"
+    Animate-Text-x2 "| 11 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+    Write-Host "|     20.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 32B Q4"
+    Write-Host "|     Excels at contest-style algorithms;"
+    Write-Host "|     produces correct, efficient code with clear step-by-step reasoning."
+    Write-Host "|"
+    Animate-Text-x2 "| 12 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
+    Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Apriel-Nemotron-15b-Thinker Q4"
+    Write-Host "|     Deliberate, reflective multi-step reasoning across mixed tasks;"
+    Write-Host "|     steady performance on logic, math, and coding."
+    Write-Host "|========= HEAVY TIER END"
+    Write-Host ""
+    Write-Host "|========= LIGHT TIER | Operating the Node in Background"
+    Animate-Text-x2 "| 13 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
+    Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 14B Q4"
+    Write-Host "|     Balanced everyday reasoning with multilingual support;"
+    Write-Host "|     clear, reliable answers across common topics."
+    Write-Host "|"
+    Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST"
+    Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 8B Q4"
+    Write-Host "|     Smooth daily Q&A with concise reasoning;"
+    Write-Host "|     dependable on summaries, explanations, and light code."
+    Write-Host "|"
+    Animate-Text-x2 "| 15 $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST"
+    Write-Host "|     7.7 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Gemma-3 4B Q4"
+    Write-Host "|     Multilingual chat with long-context support;"
+    Write-Host "|     dependable everyday assistant with clear explanations."
+    Write-Host "|"
+    Animate-Text-x2 "| 16 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+    Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT DeepCoder 14B Q4"
+    Write-Host "|     Generates accurate code and understands complex programming logic;"
+    Write-Host "|     reliable for feature drafts and fixes."
+    Write-Host "|"
+    Animate-Text-x2 "| 17 $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS"
+    Write-Host "|     4.8 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OlympicCoder 7B Q4"
+    Write-Host "|     Balanced coding contest solver;"
+    Write-Host "|     step-by-step algorithmic reasoning and efficient code."
+    Write-Host "|"
+    Animate-Text-x2 "| 18 $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC"
+    Write-Host "|     9.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT OpenMath-Nemotron 14B Q4"
+    Write-Host "|     Excels at math questions and structured problem-solving;"
+    Write-Host "|     clear steps for academic and competition problems."
+    Write-Host "|"
+    Animate-Text-x2 "| 19 $SYMBOL_MODEL_SELECTED MATH & CODING"
+    Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT AceReason-Nemotron-1.1-7B Q4"
+    Write-Host "|     Handles math and logic puzzles with minimal resources;"
+    Write-Host "|     concise, step-by-step solutions."
+    Write-Host "|"
+    Animate-Text-x2 "| 20 $SYMBOL_MODEL_SELECTED THEOREM PROVER"
+    Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Kimina Prover Distill 8B Q4"
+    Write-Host "|     Specialist in formal logic and proof steps;"
+    Write-Host "|     ideal for theorem-style tasks and verification."
+    Write-Host "|"
+    Animate-Text-x2 "| 21 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING"
+    Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Tessa-Rust-T1 7B Q4"
+    Write-Host "|     Focused on Rust programming; produces idiomatic Rust and"
+    Write-Host "|     helps with code generation, fixes and refactors."
+    Write-Host "|"
+    Animate-Text-x2 "| 22 $SYMBOL_MODEL_SELECTED MEDICAL EXPERT"
+    Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT II-Medical-8B Q5"
+    Write-Host "|     Works through clinical Q&A step by step;"
+    Write-Host "|     useful for study and drafting (non-diagnostic)."
+    Write-Host "|"
+    Animate-Text-x2 "| 23 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL"
+    Write-Host "|     1.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 1.7B Q4"
+    Write-Host "|     Ultra-efficient for basic instructions and quick answers;"
+    Write-Host "|     suitable for nodes with tight memory."
+    Write-Host "|========= LIGHT TIER END"
+    Write-Host ""
+    Write-Host "[0] Settings"
+    Write-Host "[1] Auto"
+    Write-Host "[2] Import"
+    Write-Host "[3-23] Specialized Model"
+    $NODE_CLASS = Read-Host "Select your node's specialization option"
+
+    switch ($NODE_CLASS) {
+        "0" {
+            Show-Settings
+            Select-NodeModel
+        }
+        "1" {
+            Animate-Text " $SYMBOL_MODEL_AUTOSELECT Analyzing system for optimal configuration:"
+            Auto-Select-Model
+        }
+        "2" {
+            if (-not (Select-CustomModel)) {
+                Select-NodeModel
+            }
+        }
+        "3" {
+            $script:LLM_HF_REPO = "unsloth/gpt-oss-120b-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: gpt-oss-120b Q4"
+        }
+        "4" {
+            $script:LLM_HF_REPO = "unsloth/GLM-4.5-Air-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: GLM-4.5-Air Q4"
+        }
+        "5" {
+            $script:LLM_HF_REPO = "unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
+        }
+        "6" {
+            $script:LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
+        }
+        "7" {
+            $script:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
+        }
+        "8" {
+            $script:LLM_HF_REPO = "unsloth/gpt-oss-20b-GGUF"
+            $script:LLM_HF_MODEL_NAME = "gpt-oss-20b-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: gpt-oss-20b Q4"
+        }
+        "9" {
+            $script:LLM_HF_REPO = "unsloth/OpenReasoning-Nemotron-32B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
+        }
+        "10" {
+            $script:LLM_HF_REPO = "LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
+        }
+        "11" {
+            $script:LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-32B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-32B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
+        }
+        "12" {
+            $script:LLM_HF_REPO = "bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
+            $script:LLM_HF_MODEL_NAME = "ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
+        }
+        "13" {
+            $script:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 14B Q4"
+        }
+        "14" {
+            $script:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 8B Q4"
+        }
+        "15" {
+            $script:LLM_HF_REPO = "unsloth/gemma-3-12b-it-GGUF"
+            $script:LLM_HF_MODEL_NAME = "gemma-3-12b-it-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
+        }
+        "16" {
+            $script:LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
+            $script:LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
+        }
+        "17" {
+            $script:LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-7B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-7B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
+        }
+        "18" {
+            $script:LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
+        }
+        "19" {
+            $script:LLM_HF_REPO = "bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
+        }
+        "20" {
+            $script:LLM_HF_REPO = "mradermacher/Kimina-Prover-Distill-8B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Kimina-Prover-Distill-8B.Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: Kimina Prover Distill 8B Q4"
+        }
+        "21" {
+            $script:LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+        }
+        "22" {
+            $script:LLM_HF_REPO = "Intelligent-Internet/II-Medical-8B-1706-GGUF"
+            $script:LLM_HF_MODEL_NAME = "II-Medical-8B-1706.Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MEDICAL EXPERT: II-Medical-8B Q5"
+        }
+        "23" {
+            $script:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
+            $script:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
+            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"
+        }
+        Default {
+            Animate-Text "No selection made. Continuing with [1] $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT..."
+            Auto-Select-Model
+        }
+    }
+
+    Write-Host ""
+    Write-Host "You chose:"
+    Animate-Text "${NODE_NAME}"
+}
+
+Select-NodeModel
 Write-Host ""
-Write-Host "You chose:"
-Animate-Text "${NODE_NAME}"
-Write-Host ""
-Animate-Text "    $SYMBOL_NEWLINE Downloading the model and preparing the environment may take several minutes..."
-& $UTILS_EXEC --hf-repo $LLM_HF_REPO --hf-model-name $LLM_HF_MODEL_NAME --model-cache $PROJECT_MODEL_CACHE_DIR
-Write-Host ""
+if ($LLM_IS_LOCAL_PATH -eq $false) {
+    Animate-Text "    $SYMBOL_NEWLINE Downloading the model and preparing the environment may take several minutes..."
+    & $UTILS_EXEC --hf-repo $LLM_HF_REPO --hf-model-name $LLM_HF_MODEL_NAME --model-cache $PROJECT_MODEL_CACHE_DIR
+    Write-Host ""
+}
 Animate-Text "Setup completed. Ready to launch."
 # clear
 Animate-Text-x2 ($BANNER_FULLNAME -join '')
 Write-Host ""
 
 function Node-Startup {
-Animate-Text " $SYMBOL_COMP_CAPSULE Starting Capsule..."
+    Animate-Text " $SYMBOL_COMP_CAPSULE Starting Capsule..."
 
-    $global:CAPSULE_PROC = Start-Process -FilePath $CAPSULE_EXEC -ArgumentList "--llm-hf-repo $LLM_HF_REPO --llm-hf-model-name $LLM_HF_MODEL_NAME --model-cache $PROJECT_MODEL_CACHE_DIR" -PassThru -RedirectStandardOutput $CAPSULE_LOGS -RedirectStandardError $CAPSULE_ERR_LOGS -NoNewWindow
+    $CMD_ARGS = @(
+        "--model-cache", $PROJECT_MODEL_CACHE_DIR,
+        "--kv-size-mode", $KV_CACHE_MODE
+    )
+
+    if ($LLM_IS_LOCAL_PATH -eq $true) {
+        $CMD_ARGS += "--llm-model-path"
+        $CMD_ARGS += $LLM_LOCAL_PATH
+    } else {
+        $CMD_ARGS += "--llm-hf-repo"
+        $CMD_ARGS += $LLM_HF_REPO
+        $CMD_ARGS += "--llm-hf-model-name"
+        $CMD_ARGS += $LLM_HF_MODEL_NAME
+    }
+
+    if ($KV_CACHE_TOKENS -eq $true) {
+        $CMD_ARGS += "--kv-size-tokens"
+        $CMD_ARGS += $KV_CACHE_TOKENS_SIZE
+    }
+
+    if ($KV_CACHE_GB -eq $true) {
+        $CMD_ARGS += "--kv-size-gb"
+        $CMD_ARGS += $KV_CACHE_GB_SIZE
+    }
+
+    $global:CAPSULE_PROC = Start-Process -FilePath $CAPSULE_EXEC -ArgumentList $CMD_ARGS -PassThru -RedirectStandardOutput $CAPSULE_LOGS -RedirectStandardError $CAPSULE_ERR_LOGS -NoNewWindow
     Animate-Text "Be patient, it may take some time."
     while ($true) {
         if ($global:CAPSULE_PROC.HasExited) {
