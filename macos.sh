@@ -206,35 +206,35 @@ echo
 animate_text "◰ Setup script — version validation"
 
 # --- Update setup script ---
-#INSTALLER_UPDATE_URL="https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-console-app/main/macos.sh"
-#SCRIPT_PATH="$0"
-#TEMP_FILE=$(mktemp)
-#
-#curl -fsSL -o "$TEMP_FILE" "$INSTALLER_UPDATE_URL"
-#
-## Check download
-#if [ ! -s "$TEMP_FILE" ]; then
-#    echo "    ✕ ERROR: Failed to download the update. Check your internet connection and try again."
-#    exit 1
-#fi
-#
-## Compare
-#if cmp -s "$SCRIPT_PATH" "$TEMP_FILE"; then
-#    # No update needed
-#    echo "    ✓ Up to date"
-#    rm "$TEMP_FILE"
-#else
-#    echo "    ↳ Updating..."
-#    cp "$SCRIPT_PATH" "${SCRIPT_PATH}.bak"
-#    cp "$TEMP_FILE" "$SCRIPT_PATH"
-#    chmod +x "$SCRIPT_PATH"
-#    rm "$TEMP_FILE"
-#    echo "    ↺ Restarting script..."
-#    sleep 3
-#    exec "$SCRIPT_PATH" "$@"
-#    echo "    ✕ ERROR: exec failed."
-#    exit 1
-#fi
+INSTALLER_UPDATE_URL="https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-console-app/main/macos.sh"
+SCRIPT_PATH="$0"
+TEMP_FILE=$(mktemp)
+
+curl -fsSL -o "$TEMP_FILE" "$INSTALLER_UPDATE_URL"
+
+# Check download
+if [ ! -s "$TEMP_FILE" ]; then
+    echo "    ✕ ERROR: Failed to download the update. Check your internet connection and try again."
+    exit 1
+fi
+
+# Compare
+if cmp -s "$SCRIPT_PATH" "$TEMP_FILE"; then
+    # No update needed
+    echo "    ✓ Up to date"
+    rm "$TEMP_FILE"
+else
+    echo "    ↳ Updating..."
+    cp "$SCRIPT_PATH" "${SCRIPT_PATH}.bak"
+    cp "$TEMP_FILE" "$SCRIPT_PATH"
+    chmod +x "$SCRIPT_PATH"
+    rm "$TEMP_FILE"
+    echo "    ↺ Restarting script..."
+    sleep 3
+    exec "$SCRIPT_PATH" "$@"
+    echo "    ✕ ERROR: exec failed."
+    exit 1
+fi
 # --- End Update setup script ---
 
 CAPSULE_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest")
