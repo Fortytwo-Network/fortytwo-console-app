@@ -413,6 +413,7 @@ configure_kv_cache() {
         echo "[2] Size in Tokens"
         echo "[3] Size in GB"
         read -r -p "Select an option: " KV_MODE_CHOICE
+        echo
 
         case $KV_MODE_CHOICE in
             0)
@@ -429,7 +430,7 @@ configure_kv_cache() {
                     echo "[2] Medium (66% of available memory)"
                     echo "[3] Max (100% of available memory)"
                     read -r -p "Select an option: " MODE_OPTION
-
+                    echo
                     case $MODE_OPTION in
                         0)
                             KV_CACHE_MODE="auto"
@@ -461,7 +462,7 @@ configure_kv_cache() {
                 while true; do
                     echo
                     read -r -p "Define your target cache in tokens, min is 1024: " TOKEN_SIZE
-
+                    echo
                     if [[ "$TOKEN_SIZE" =~ ^[0-9]+$ ]] && [ "$TOKEN_SIZE" -ge 1024 ]; then
                         KV_CACHE_TOKENS=true
                         KV_CACHE_TOKENS_SIZE="$TOKEN_SIZE"
@@ -476,7 +477,7 @@ configure_kv_cache() {
                 while true; do
                     echo
                     read -r -p "Define your target cache in GB, min is '0.3' GB: " GB_SIZE
-
+                    echo
                     if [[ "$GB_SIZE" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
                         if (( $(echo "$GB_SIZE >= 0.3" | bc -l) )); then
                             KV_CACHE_GB=true
@@ -506,7 +507,7 @@ show_settings() {
         echo "[1] KV-Cache Size"
         echo "[2] Back"
         read -r -p "Select an option: " SETTINGS_OPTION
-
+        echo
         case $SETTINGS_OPTION in
             1)
                 configure_kv_cache
@@ -536,7 +537,7 @@ select_custom_model() {
         echo "[2] Local GGUF Model Import"
         echo "[3] Back"
         read -p "Select an option: " choice
-
+        echo
         case "$choice" in
             1)
                 import_from_hub
@@ -567,7 +568,7 @@ import_from_hub() {
     echo "Enter Hugging Face repository, e.g.: 'Qwen/Qwen2.5-3B-Instruct-"
     echo "GGUF' (skip the quotes). Type 'Cancel' to go back."
     read -p "Define the repository: " repo_path
-
+    echo
     if [[ "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
         echo "Cancelled."
         return 1
@@ -580,7 +581,7 @@ import_from_hub() {
     echo "Q4_K_M-00001-of-00002.gguf'."
     echo "Type 'Cancel' to go back."
     read -p "Enter model filename: " model_filename
-
+    echo
     if [[ "$(echo "$model_filename" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
         echo "Cancelled."
         return 1
@@ -605,7 +606,7 @@ import_local_model() {
     echo "Q4_K_M-00001-of-00002.gguf'."
     echo "Type 'Cancel' to go back."
     read -p "Define the path: " model_path
-
+    echo
     if [[ "$(echo "$model_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
         echo "Cancelled."
         return 1
@@ -768,7 +769,7 @@ select_node_model() {
     echo "[2] Import"
     echo "[3-23] Specialized Model"
     read -r -p "Select your node's specialization option: " NODE_CLASS
-
+    echo
     case $NODE_CLASS in
         0)
             show_settings
@@ -890,12 +891,10 @@ select_node_model() {
             NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
             ;;
         *)
-            animate_text "No selection made. Continuing with [0] ⌖ AUTO-SELECT..."
+            animate_text "No selection made. Continuing with [1] ⌖ AUTO-SELECT..."
             auto_select_model
             ;;
     esac
-
-    echo
     echo "You chose:"
     animate_text "${NODE_NAME}"
 }
