@@ -763,138 +763,141 @@ select_node_model() {
     echo "║     Ultra-efficient for basic instructions and quick answers;"
     echo "║     suitable for nodes with tight memory."
     echo "╚═════════ LIGHT TIER END"
-    echo
-    echo "[0] Settings"
-    echo "[1] Auto"
-    echo "[2] Import"
-    echo "[3-23] Specialized Model"
-    read -r -p "Select your node's specialization option: " NODE_CLASS
-    echo
-    case $NODE_CLASS in
-        0)
-            show_settings
-            select_node_model
-            ;;
-        1)
-            animate_text "⌖ Analyzing system for optimal configuration:"
-            auto_select_model
-            ;;
-        2)
-            select_custom_model
-            if [[ $? -eq 1 ]]; then
+    while true; do
+        echo
+        echo "[0] Settings"
+        echo "[1] Auto"
+        echo "[2] Import"
+        echo "[3-23] Specialized Model"
+        read -r -p "Select your node's specialization option: " NODE_CLASS
+        echo
+        case $NODE_CLASS in
+            0)
+                show_settings
                 select_node_model
-            fi
-            ;;
-        3)
-            LLM_HF_REPO="unsloth/gpt-oss-120b-GGUF"
-            LLM_HF_MODEL_NAME="Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
-            NODE_NAME="⬢ SUPERIOR GENERALIST: gpt-oss-120b Q4"
-            ;;
-        4)
-            LLM_HF_REPO="unsloth/GLM-4.5-Air-GGUF"
-            LLM_HF_MODEL_NAME="Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
-            NODE_NAME="⬢ SUPERIOR GENERALIST: GLM-4.5-Air Q4"
-            ;;
-        5)
-            LLM_HF_REPO="unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
-            LLM_HF_MODEL_NAME="Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
-            NODE_NAME="⬢ SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
-            ;;
-        6)
-            LLM_HF_REPO="unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
-            LLM_HF_MODEL_NAME="Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
-            NODE_NAME="⬢ ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
-            ;;
-        7)
-            LLM_HF_REPO="unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
-            LLM_HF_MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
-            NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
-            ;;
-        8)
-            LLM_HF_REPO="unsloth/gpt-oss-20b-GGUF"
-            LLM_HF_MODEL_NAME="gpt-oss-20b-Q4_K_M.gguf"
-            NODE_NAME="⬢ ADVANCED GENERALIST: gpt-oss-20b Q4"
-            ;;
-        9)
-            LLM_HF_REPO="unsloth/OpenReasoning-Nemotron-32B-GGUF"
-            LLM_HF_MODEL_NAME="OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
-            NODE_NAME="⬢ MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
-            ;;
-        10)
-            LLM_HF_REPO="LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
-            LLM_HF_MODEL_NAME="LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
-            NODE_NAME="⬢ ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
-            ;;
-        11)
-            LLM_HF_REPO="bartowski/open-r1_OlympicCoder-32B-GGUF"
-            LLM_HF_MODEL_NAME="open-r1_OlympicCoder-32B-Q4_K_M.gguf"
-            NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
-            ;;
-        12)
-            LLM_HF_REPO="bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
-            LLM_HF_MODEL_NAME="ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
-            NODE_NAME="⬢ ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
-            ;;
-        13)
-            LLM_HF_REPO="unsloth/Qwen3-14B-GGUF"
-            LLM_HF_MODEL_NAME="Qwen3-14B-Q4_K_M.gguf"
-            NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 14B Q4"
-            ;;
-        14)
-            LLM_HF_REPO="unsloth/Qwen3-8B-GGUF"
-            LLM_HF_MODEL_NAME="Qwen3-8B-Q4_K_M.gguf"
-            NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 8B Q4"
-            ;;
-        15)
-            LLM_HF_REPO="unsloth/gemma-3-12b-it-GGUF"
-            LLM_HF_MODEL_NAME="gemma-3-12b-it-Q4_K_M.gguf"
-            NODE_NAME="⬢ MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
-            ;;
-        16)
-            LLM_HF_REPO="bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
-            LLM_HF_MODEL_NAME="agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
-            NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
-            ;;
-        17)
-            LLM_HF_REPO="bartowski/open-r1_OlympicCoder-7B-GGUF"
-            LLM_HF_MODEL_NAME="open-r1_OlympicCoder-7B-Q4_K_M.gguf"
-            NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
-            ;;
-        18)
-            LLM_HF_REPO="bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
-            LLM_HF_MODEL_NAME="nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
-            NODE_NAME="⬢ MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
-            ;;
-        19)
-            LLM_HF_REPO="bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
-            LLM_HF_MODEL_NAME="nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
-            NODE_NAME="⬢ MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
-            ;;
-        20)
-            LLM_HF_REPO="mradermacher/Kimina-Prover-Distill-8B-GGUF"
-            LLM_HF_MODEL_NAME="Kimina-Prover-Distill-8B.Q4_K_M.gguf"
-            NODE_NAME="⬢ THEOREM PROVER: Kimina Prover Distill 8B Q4"
-            ;;
-        21)
-            LLM_HF_REPO="bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-            LLM_HF_MODEL_NAME="Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-            NODE_NAME="⬢ RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
-            ;;
-        22)
-            LLM_HF_REPO="Intelligent-Internet/II-Medical-8B-1706-GGUF"
-            LLM_HF_MODEL_NAME="II-Medical-8B-1706.Q4_K_M.gguf"
-            NODE_NAME="⬢ MEDICAL EXPERT: II-Medical-8B Q5"
-            ;;
-        23)
-            LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
-            LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
-            NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
-            ;;
-        *)
-            animate_text "No selection made. Continuing with [1] ⌖ AUTO-SELECT..."
-            auto_select_model
-            ;;
-    esac
+                ;;
+            1)
+                animate_text "⌖ Analyzing system for optimal configuration:"
+                auto_select_model
+                ;;
+            2)
+                select_custom_model
+                if [[ $? -eq 1 ]]; then
+                    select_node_model
+                fi
+                ;;
+            3)
+                LLM_HF_REPO="unsloth/gpt-oss-120b-GGUF"
+                LLM_HF_MODEL_NAME="Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
+                NODE_NAME="⬢ SUPERIOR GENERALIST: gpt-oss-120b Q4"
+                ;;
+            4)
+                LLM_HF_REPO="unsloth/GLM-4.5-Air-GGUF"
+                LLM_HF_MODEL_NAME="Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
+                NODE_NAME="⬢ SUPERIOR GENERALIST: GLM-4.5-Air Q4"
+                ;;
+            5)
+                LLM_HF_REPO="unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
+                LLM_HF_MODEL_NAME="Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
+                NODE_NAME="⬢ SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
+                ;;
+            6)
+                LLM_HF_REPO="unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
+                LLM_HF_MODEL_NAME="Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
+                NODE_NAME="⬢ ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
+                ;;
+            7)
+                LLM_HF_REPO="unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+                LLM_HF_MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
+                ;;
+            8)
+                LLM_HF_REPO="unsloth/gpt-oss-20b-GGUF"
+                LLM_HF_MODEL_NAME="gpt-oss-20b-Q4_K_M.gguf"
+                NODE_NAME="⬢ ADVANCED GENERALIST: gpt-oss-20b Q4"
+                ;;
+            9)
+                LLM_HF_REPO="unsloth/OpenReasoning-Nemotron-32B-GGUF"
+                LLM_HF_MODEL_NAME="OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
+                ;;
+            10)
+                LLM_HF_REPO="LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
+                LLM_HF_MODEL_NAME="LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+                NODE_NAME="⬢ ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
+                ;;
+            11)
+                LLM_HF_REPO="bartowski/open-r1_OlympicCoder-32B-GGUF"
+                LLM_HF_MODEL_NAME="open-r1_OlympicCoder-32B-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
+                ;;
+            12)
+                LLM_HF_REPO="bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
+                LLM_HF_MODEL_NAME="ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
+                NODE_NAME="⬢ ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
+                ;;
+            13)
+                LLM_HF_REPO="unsloth/Qwen3-14B-GGUF"
+                LLM_HF_MODEL_NAME="Qwen3-14B-Q4_K_M.gguf"
+                NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 14B Q4"
+                ;;
+            14)
+                LLM_HF_REPO="unsloth/Qwen3-8B-GGUF"
+                LLM_HF_MODEL_NAME="Qwen3-8B-Q4_K_M.gguf"
+                NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 8B Q4"
+                ;;
+            15)
+                LLM_HF_REPO="unsloth/gemma-3-12b-it-GGUF"
+                LLM_HF_MODEL_NAME="gemma-3-12b-it-Q4_K_M.gguf"
+                NODE_NAME="⬢ MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
+                ;;
+            16)
+                LLM_HF_REPO="bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
+                LLM_HF_MODEL_NAME="agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
+                ;;
+            17)
+                LLM_HF_REPO="bartowski/open-r1_OlympicCoder-7B-GGUF"
+                LLM_HF_MODEL_NAME="open-r1_OlympicCoder-7B-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
+                ;;
+            18)
+                LLM_HF_REPO="bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
+                LLM_HF_MODEL_NAME="nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
+                ;;
+            19)
+                LLM_HF_REPO="bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
+                LLM_HF_MODEL_NAME="nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
+                ;;
+            20)
+                LLM_HF_REPO="mradermacher/Kimina-Prover-Distill-8B-GGUF"
+                LLM_HF_MODEL_NAME="Kimina-Prover-Distill-8B.Q4_K_M.gguf"
+                NODE_NAME="⬢ THEOREM PROVER: Kimina Prover Distill 8B Q4"
+                ;;
+            21)
+                LLM_HF_REPO="bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
+                LLM_HF_MODEL_NAME="Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
+                NODE_NAME="⬢ RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+                ;;
+            22)
+                LLM_HF_REPO="Intelligent-Internet/II-Medical-8B-1706-GGUF"
+                LLM_HF_MODEL_NAME="II-Medical-8B-1706.Q4_K_M.gguf"
+                NODE_NAME="⬢ MEDICAL EXPERT: II-Medical-8B Q5"
+                ;;
+            23)
+                LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
+                LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
+                NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
+                ;;
+            *)
+                echo "✕ Incorrect input."
+                continue
+                ;;
+        esac
+        break
+    done
     echo "You chose:"
     animate_text "${NODE_NAME}"
 }

@@ -846,135 +846,138 @@ function Select-NodeModel {
     Write-Host "|     suitable for nodes with tight memory."
     Write-Host "|========= LIGHT TIER END"
     Write-Host ""
-    Write-Host "[0] Settings"
-    Write-Host "[1] Auto"
-    Write-Host "[2] Import"
-    Write-Host "[3-23] Specialized Model"
-    $NODE_CLASS = Read-Host "Select your node's specialization option"
+    while ($true) {
+        Write-Host "[0] Settings"
+        Write-Host "[1] Auto"
+        Write-Host "[2] Import"
+        Write-Host "[3-23] Specialized Model"
+        $NODE_CLASS = Read-Host "Select your node's specialization option"
 
-    switch ($NODE_CLASS) {
-        "0" {
-            Show-Settings
-            Select-NodeModel
-        }
-        "1" {
-            Animate-Text " $SYMBOL_MODEL_AUTOSELECT Analyzing system for optimal configuration:"
-            Auto-Select-Model
-        }
-        "2" {
-            if (-not (Select-CustomModel)) {
+        switch ($NODE_CLASS) {
+            "0" {
+                Show-Settings
                 Select-NodeModel
             }
+            "1" {
+                Animate-Text " $SYMBOL_MODEL_AUTOSELECT Analyzing system for optimal configuration:"
+                Auto-Select-Model
+            }
+            "2" {
+                if (-not (Select-CustomModel)) {
+                    Select-NodeModel
+                }
+            }
+            "3" {
+                $script:LLM_HF_REPO = "unsloth/gpt-oss-120b-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: gpt-oss-120b Q4"
+            }
+            "4" {
+                $script:LLM_HF_REPO = "unsloth/GLM-4.5-Air-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: GLM-4.5-Air Q4"
+            }
+            "5" {
+                $script:LLM_HF_REPO = "unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
+            }
+            "6" {
+                $script:LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
+            }
+            "7" {
+                $script:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
+            }
+            "8" {
+                $script:LLM_HF_REPO = "unsloth/gpt-oss-20b-GGUF"
+                $script:LLM_HF_MODEL_NAME = "gpt-oss-20b-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: gpt-oss-20b Q4"
+            }
+            "9" {
+                $script:LLM_HF_REPO = "unsloth/OpenReasoning-Nemotron-32B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
+            }
+            "10" {
+                $script:LLM_HF_REPO = "LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
+            }
+            "11" {
+                $script:LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-32B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-32B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
+            }
+            "12" {
+                $script:LLM_HF_REPO = "bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
+                $script:LLM_HF_MODEL_NAME = "ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
+            }
+            "13" {
+                $script:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 14B Q4"
+            }
+            "14" {
+                $script:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 8B Q4"
+            }
+            "15" {
+                $script:LLM_HF_REPO = "unsloth/gemma-3-12b-it-GGUF"
+                $script:LLM_HF_MODEL_NAME = "gemma-3-12b-it-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
+            }
+            "16" {
+                $script:LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
+                $script:LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
+            }
+            "17" {
+                $script:LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-7B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-7B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
+            }
+            "18" {
+                $script:LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
+            }
+            "19" {
+                $script:LLM_HF_REPO = "bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
+            }
+            "20" {
+                $script:LLM_HF_REPO = "mradermacher/Kimina-Prover-Distill-8B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Kimina-Prover-Distill-8B.Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: Kimina Prover Distill 8B Q4"
+            }
+            "21" {
+                $script:LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+            }
+            "22" {
+                $script:LLM_HF_REPO = "Intelligent-Internet/II-Medical-8B-1706-GGUF"
+                $script:LLM_HF_MODEL_NAME = "II-Medical-8B-1706.Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MEDICAL EXPERT: II-Medical-8B Q5"
+            }
+            "23" {
+                $script:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"
+            }
+            Default {
+                Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
+                continue
+            }
         }
-        "3" {
-            $script:LLM_HF_REPO = "unsloth/gpt-oss-120b-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: gpt-oss-120b Q4"
-        }
-        "4" {
-            $script:LLM_HF_REPO = "unsloth/GLM-4.5-Air-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: GLM-4.5-Air Q4"
-        }
-        "5" {
-            $script:LLM_HF_REPO = "unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
-        }
-        "6" {
-            $script:LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
-        }
-        "7" {
-            $script:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
-        }
-        "8" {
-            $script:LLM_HF_REPO = "unsloth/gpt-oss-20b-GGUF"
-            $script:LLM_HF_MODEL_NAME = "gpt-oss-20b-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: gpt-oss-20b Q4"
-        }
-        "9" {
-            $script:LLM_HF_REPO = "unsloth/OpenReasoning-Nemotron-32B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
-        }
-        "10" {
-            $script:LLM_HF_REPO = "LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
-        }
-        "11" {
-            $script:LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-32B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-32B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
-        }
-        "12" {
-            $script:LLM_HF_REPO = "bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
-            $script:LLM_HF_MODEL_NAME = "ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
-        }
-        "13" {
-            $script:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 14B Q4"
-        }
-        "14" {
-            $script:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED EVERYDAY GENERALIST: Qwen3 8B Q4"
-        }
-        "15" {
-            $script:LLM_HF_REPO = "unsloth/gemma-3-12b-it-GGUF"
-            $script:LLM_HF_MODEL_NAME = "gemma-3-12b-it-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
-        }
-        "16" {
-            $script:LLM_HF_REPO = "bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
-            $script:LLM_HF_MODEL_NAME = "agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
-        }
-        "17" {
-            $script:LLM_HF_REPO = "bartowski/open-r1_OlympicCoder-7B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "open-r1_OlympicCoder-7B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
-        }
-        "18" {
-            $script:LLM_HF_REPO = "bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
-        }
-        "19" {
-            $script:LLM_HF_REPO = "bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
-        }
-        "20" {
-            $script:LLM_HF_REPO = "mradermacher/Kimina-Prover-Distill-8B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Kimina-Prover-Distill-8B.Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED THEOREM PROVER: Kimina Prover Distill 8B Q4"
-        }
-        "21" {
-            $script:LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
-        }
-        "22" {
-            $script:LLM_HF_REPO = "Intelligent-Internet/II-Medical-8B-1706-GGUF"
-            $script:LLM_HF_MODEL_NAME = "II-Medical-8B-1706.Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED MEDICAL EXPERT: II-Medical-8B Q5"
-        }
-        "23" {
-            $script:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
-            $script:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
-            $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"
-        }
-        Default {
-            Animate-Text "No selection made. Continuing with [1] $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT..."
-            Auto-Select-Model
-        }
+        break
     }
 
     Write-Host ""
