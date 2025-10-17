@@ -597,6 +597,7 @@ import_from_hub() {
     read -p "Define the repository: " repo_path
     echo
     if [[ "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
+        echo
         echo "Cancelled."
         return 1
     fi
