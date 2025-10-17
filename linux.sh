@@ -764,9 +764,10 @@ select_node_model() {
     echo "║     ideal for theorem-style tasks and verification."
     echo "║     "
     animate_text_x2 "║ 21 ⬢ RUST PROGRAMMING"
-    echo "║     4.9 GB ${MEMORY_TYPE}  • Tessa-Rust-T1 7B Q4"
-    echo "║     Focused on Rust programming; produces idiomatic Rust and"
-    echo "║     helps with code generation, fixes and refactors."
+    echo "║     9 GB ${MEMORY_TYPE}  • Strand-Rust-Coder 14B Q4"
+    echo "║     Built by Fortytwo:"
+    echo "║     Rust specialist that outputs idiomatic, compile-ready code and"
+    echo "║     handles fixes/refactors; state-of-the-art on Rust benchmarks."
     echo "║     "
     animate_text_x2 "║ 22 ⬢ MEDICAL EXPERT"
     echo "║     5.4 GB ${MEMORY_TYPE}  • II-Medical-8B Q5"
@@ -892,9 +893,9 @@ select_node_model() {
                 NODE_NAME="⬢ THEOREM PROVER: Kimina Prover Distill 8B Q4"
                 ;;
             21)
-                LLM_HF_REPO="bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-                LLM_HF_MODEL_NAME="Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-                NODE_NAME="⬢ RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+                LLM_HF_REPO="Fortytwo-Network/Strand-Rust-Coder-14B-v1-GGUF"
+                LLM_HF_MODEL_NAME="Fortytwo_Strand-Rust-Coder-14B-v1-Q4_K_M.gguf"
+                NODE_NAME="⬢ RUST PROGRAMMING: Strand-Rust-Coder 14B Q4"
                 ;;
             22)
                 LLM_HF_REPO="Intelligent-Internet/II-Medical-8B-1706-GGUF"

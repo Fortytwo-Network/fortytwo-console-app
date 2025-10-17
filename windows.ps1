@@ -831,9 +831,10 @@ function Select-NodeModel {
     Write-Host "|     ideal for theorem-style tasks and verification."
     Write-Host "|"
     Animate-Text-x2 "| 21 $SYMBOL_MODEL_SELECTED RUST PROGRAMMING"
-    Write-Host "|     4.9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Tessa-Rust-T1 7B Q4"
-    Write-Host "|     Focused on Rust programming; produces idiomatic Rust and"
-    Write-Host "|     helps with code generation, fixes and refactors."
+    Write-Host "|     9 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Strand-Rust-Coder 14B Q4"
+    Write-Host "|     Built by Fortytwo:"
+    Write-Host "|     Rust specialist that outputs idiomatic, compile-ready code and"
+    Write-Host "|     handles fixes/refactors; state-of-the-art on Rust benchmarks."
     Write-Host "|"
     Animate-Text-x2 "| 22 $SYMBOL_MODEL_SELECTED MEDICAL EXPERT"
     Write-Host "|     5.4 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT II-Medical-8B Q5"
@@ -981,9 +982,9 @@ function Select-NodeModel {
                 $exit = $true
             }
             "21" {
-                $script:LLM_HF_REPO = "bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-                $script:LLM_HF_MODEL_NAME = "Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+                $script:LLM_HF_REPO = "Fortytwo-Network/Strand-Rust-Coder-14B-v1-GGUF"
+                $script:LLM_HF_MODEL_NAME = "Fortytwo_Strand-Rust-Coder-14B-v1-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED RUST PROGRAMMING: Strand-Rust-Coder 14B Q4"
                 $exit = $true
             }
             "22" {
