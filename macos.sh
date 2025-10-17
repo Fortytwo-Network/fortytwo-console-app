@@ -909,6 +909,7 @@ select_node_model() {
                 NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
                 ;;
             *)
+                echo
                 echo "✕ Incorrect input."
                 continue
                 ;;

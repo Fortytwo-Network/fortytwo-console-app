@@ -1019,6 +1019,7 @@ function Select-NodeModel {
                 $exit = $true
             }
             Default {
+                Write-Host ""
                 Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
                 continue
             }
