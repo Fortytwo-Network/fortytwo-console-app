@@ -424,14 +424,17 @@ configure_kv_cache() {
     echo "    - Read more: https://docs.fortytwo.network/docs/how-to-pick-the-right-model-for-your-node"
     echo
     while true; do
+        echo
         echo "[0] Default (Mode Auto)"
         echo "[1] Mode (auto|min|medium|max)"
         echo "[2] Size in Tokens"
         echo "[3] Size in GB"
         read -r -p "Select an option: " KV_MODE_CHOICE
         echo
+
         case $KV_MODE_CHOICE in
             0)
+                echo
                 animate_text "✓ KV-Cache size is now managed automatically."
                 KV_CACHE_MODE="auto"
                 break
@@ -449,25 +452,30 @@ configure_kv_cache() {
                     case $MODE_OPTION in
                         0)
                             KV_CACHE_MODE="auto"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         1)
                             KV_CACHE_MODE="min"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         2)
                             KV_CACHE_MODE="medium"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         3)
                             KV_CACHE_MODE="max"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         *)
+                            echo
                             echo "✗ Incorrect input."
                             ;;
                     esac
@@ -484,6 +492,7 @@ configure_kv_cache() {
                         animate_text "✓ KV-Cache size is set to ${TOKEN_SIZE} Tokens."
                         break 2
                     else
+                        echo
                         echo "✗ Incorrect input."
                     fi
                 done
@@ -508,6 +517,7 @@ configure_kv_cache() {
                 done
                 ;;
             *)
+                echo
                 echo "✗ Incorrect input."
                 ;;
         esac
@@ -519,6 +529,7 @@ configure_kv_cache() {
 
 show_settings() {
     while true; do
+        echo
         echo "[1] KV-Cache Size"
         echo "[2] Back"
         read -r -p "Select an option: " SETTINGS_OPTION
@@ -570,6 +581,7 @@ select_custom_model() {
                 return 1
                 ;;
             *)
+                echo
                 echo "✕ Incorrect input."
                 ;;
         esac
@@ -583,7 +595,7 @@ import_from_hub() {
     echo "Enter Hugging Face repository, e.g.: 'Qwen/Qwen2.5-3B-Instruct-"
     echo "GGUF' (skip the quotes). Type 'Cancel' to go back."
     read -p "Define the repository: " repo_path
-
+    echo
     if [[ "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
         echo "Cancelled."
         return 1
@@ -596,12 +608,13 @@ import_from_hub() {
     echo "Q4_K_M-00001-of-00002.gguf'."
     echo "Type 'Cancel' to go back."
     read -p "Enter model filename: " model_filename
-
+    echo
     if [[ "$(echo "$model_filename" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
+        echo
         echo "Cancelled."
         return 1
     fi
-
+    echo
     echo "✓ Model linked successfully"
 
     LLM_HF_REPO="$repo_path"
@@ -621,23 +634,26 @@ import_local_model() {
     echo "Q4_K_M-00001-of-00002.gguf'."
     echo "Type 'Cancel' to go back."
     read -p "Define the path: " model_path
-
+    echo
     if [[ "$(echo "$model_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
+        echo
         echo "Cancelled."
         return 1
     fi
     model_path="${model_path/#\~/$HOME}"
 
     if [[ ! -f "$model_path" ]]; then
+        echo
         echo "✗ Cannot reach the defined path."
         return 1
     fi
 
     if [[ ! "$model_path" =~ \.gguf$ ]]; then
+        echo
         echo "✕ Defined file is not in GGUF format. Currently only the GGUF model file format is supported."
         return 1
     fi
-
+    echo
     echo "✓ Model found successfully"
 
     LLM_IS_LOCAL_PATH=true
@@ -646,7 +662,6 @@ import_local_model() {
 
     return 0
 }
-
 
 select_node_model() {
     echo
