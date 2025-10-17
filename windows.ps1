@@ -7,7 +7,7 @@ function Animate-Text {
         foreach ($char in $text.ToCharArray()) {
             try {
                 Write-Host -NoNewline $char -ErrorAction SilentlyContinue
-                Start-Sleep -Milliseconds 2
+                Start-Sleep -Milliseconds 1.5
             } catch {
                 Write-Host $text -ErrorAction SilentlyContinue
             }
@@ -40,7 +40,7 @@ $SYMBOL_MODEL_SELECTED = [char]0x1362
 $SYMBOL_RIGHTWARDS_ARROW = [char]0x2192
 $SYMBOL_MODEL_CUSTOM = [char]0x2736
 $SYMBOL_MODEL_AUTOSELECT = [char]0x1360
-$SYMBOL_MODEL_LASTUSED = [char]0x25C1 
+$SYMBOL_MODEL_LASTUSED = [char]0x25C1
 $SYMBOL_COMP_SETUPSCRIPT = [char]0x144E
 $SYMBOL_COMP_CONNECTION = [char]0x39E
 $SYMBOL_COMP_CAPSULE = [char]0x1403
@@ -68,26 +68,26 @@ function Auto-Select-Model {
         $AVAILABLE_MEM = $TotalMemoryKB / 1024 / 1024
     }
     Animate-Text "    $SYMBOL_NEWLINE System analysis:"
-    Animate-Text "    $SYMBOL_NEWLINE $TOTAL_MEM GB $MEMORY_TYPE total, $AVAILABLE_MEM GB $MEMORY_TYPE available"
+    Animate-Text-x2 "    $SYMBOL_NEWLINE $TOTAL_MEM GB $MEMORY_TYPE total, $AVAILABLE_MEM GB $MEMORY_TYPE available"
 
     $AVAILABLE_MEM_INT = [math]::Round($AVAILABLE_MEM)
     if ($AVAILABLE_MEM_INT -ge 22) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 7 Qwen3 for problem solving & coding"
+        Animate-Text-x2 "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 7 Qwen3 for problem solving & coding"
         $script:LLM_HF_REPO = "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
         $script:LLM_HF_MODEL_NAME = "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
         $script:NODE_NAME = "Qwen3 Coder 30B A3B Instruct Q4"
     } elseif ($AVAILABLE_MEM_INT -ge 15) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 13 Qwen3 14B for high-precision logical analysis"
+        Animate-Text-x2 "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 13 Qwen3 14B for high-precision logical analysis"
         $script:LLM_HF_REPO = "unsloth/Qwen3-14B-GGUF"
         $script:LLM_HF_MODEL_NAME = "Qwen3-14B-Q4_K_M.gguf"
         $script:NODE_NAME = "Qwen3 14B Q4"
     } elseif ($AVAILABLE_MEM_INT -ge 7) {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 14 Qwen3 8B for balanced capability"
+        Animate-Text-x2 "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 14 Qwen3 8B for balanced capability"
         $script:LLM_HF_REPO = "unsloth/Qwen3-8B-GGUF"
         $script:LLM_HF_MODEL_NAME = "Qwen3-8B-Q4_K_M.gguf"
         $script:NODE_NAME = "Qwen3 8B Q4"
     } else {
-        Animate-Text "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 23 Qwen 3 7.1B optimized for efficiency"
+        Animate-Text-x2 "    $SYMBOL_CROWN Recommending: $SYMBOL_MODEL_SELECTED 23 Qwen 3 7.1B optimized for efficiency"
         $script:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
         $script:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
         $script:NODE_NAME = "Qwen3 1.7B Q4"
@@ -183,7 +183,7 @@ function Test-UrlAvailability {
 }
 
 function Test-Connection {
-    Animate-Text " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
+    Animate-Text-x2 " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
 
     $capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
     $protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
@@ -238,7 +238,7 @@ function Start-ConnectionLoop {
 
 Start-ConnectionLoop
 
-Animate-Text ($SYMBOL_HEADER_IN -join ''),"Checking for the Latest Components Versions",($SYMBOL_HEADER_OUT -join '')
+Animate-Text-x2 ($SYMBOL_HEADER_IN -join ''),"Checking for the Latest Components Versions",($SYMBOL_HEADER_OUT -join '')
 Write-Host ""
 Animate-Text " $SYMBOL_COMP_SETUPSCRIPT Setup script - version validation"
 
@@ -280,7 +280,7 @@ trap {
 }
 
 $CAPSULE_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest").Trim()
-Animate-Text " $SYMBOL_COMP_CAPSULE Capsule - version $CAPSULE_VERSION"
+Animate-Text-x2 " $SYMBOL_COMP_CAPSULE Capsule - version $CAPSULE_VERSION"
 if (Test-Path $CAPSULE_EXEC) {
     $CURRENT_CAPSULE_VERSION_OUTPUT = & $CAPSULE_EXEC --version 2>$null
     if ($CURRENT_CAPSULE_VERSION_OUTPUT -match $CAPSULE_VERSION) {
@@ -337,7 +337,7 @@ if (Test-Path $CAPSULE_EXEC) {
     }
 }
 $PROTOCOL_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest").Trim()
-Animate-Text " $SYMBOL_COMP_NODE Protocol Node - version $PROTOCOL_VERSION"
+Animate-Text-x2 " $SYMBOL_COMP_NODE Protocol Node - version $PROTOCOL_VERSION"
 $DOWNLOAD_PROTOCOL_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-windows-amd64.exe"
 if (Test-Path $PROTOCOL_EXEC) {
     $CURRENT_PROTOCOL_VERSION_OUTPUT = & $PROTOCOL_EXEC --version 2>$null
@@ -354,7 +354,7 @@ if (Test-Path $PROTOCOL_EXEC) {
     Animate-Text "    $SYMBOL_STATE_SUCCESS Installed to: $PROTOCOL_EXEC"
 }
 $UTILS_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/latest").Trim()
-Animate-Text " $SYMBOL_COMP_UTILS Utils - version $UTILS_VERSION"
+Animate-Text-x2 " $SYMBOL_COMP_UTILS Utils - version $UTILS_VERSION"
 $DOWNLOAD_UTILS_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsWindows.exe"
 if (Test-Path $UTILS_EXEC) {
     $CURRENT_UTILS_VERSION_OUTPUT = & $UTILS_EXEC --version 2>$null
@@ -372,16 +372,16 @@ if (Test-Path $UTILS_EXEC) {
 }
 
 Write-Host ""
-Animate-Text ($SYMBOL_HEADER_IN -join ''),"Identity Initialization",($SYMBOL_HEADER_OUT -join '')
+Animate-Text-x2 ($SYMBOL_HEADER_IN -join ''),"Identity Initialization",($SYMBOL_HEADER_OUT -join '')
 
 if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
     $ACCOUNT_PRIVATE_KEY = Get-Content $ACCOUNT_PRIVATE_KEY_FILE
     Write-Host ""
     Animate-Text "    $SYMBOL_NEWLINE Private key found at $PROJECT_DIR /.account_private_key."
     Animate-Text "    $SYMBOL_NEWLINE Initiating the node using an existing identity."
-    Animate-Text "    $SYMBOL_STATE_WARNING Keep the private key safe. Do not share with anyone."
-    Write-Host "    $SYMBOL_STATE_WARNING Recover your node or access your wallet with it."
-    Write-Host "    $SYMBOL_STATE_WARNING We will not be able to recover it if it is lost."
+    Animate-Text-x2 "    $SYMBOL_STATE_WARNING Keep the private key safe. Do not share with anyone."
+    Animate-Text-x2 "    $SYMBOL_STATE_WARNING Recover your node or access your wallet with it."
+    Animate-Text-x2 "    $SYMBOL_STATE_WARNING We will not be able to recover it if it is lost."
 } else {
     Write-Host ""
     Write-Host "|==================== NETWORK IDENTITY ===================|"
@@ -417,9 +417,9 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
                     Animate-Text " ",($SYMBOL_STATE_HAPPYFACE -join ''),"The identity successfully restored!"
                     Write-Host ""
                     Animate-Text "    $SYMBOL_NEWLINE Private key saved to $PROJECT_DIR /.account_private_key."
-                    Animate-Text "    $SYMBOL_STATE_WARNING Keep the key secure. Do not share with anybody."
-                    Write-Host "    $SYMBOL_STATE_WARNING Restore your node or access your wallet with it."
-                    Write-Host "    $SYMBOL_STATE_WARNING We will not be able to recover it would it be lost."
+                    Animate-Text-x2 "    $SYMBOL_STATE_WARNING Keep the key secure. Do not share with anybody."
+                    Animate-Text-x2 "    $SYMBOL_STATE_WARNING Restore your node or access your wallet with it."
+                    Animate-Text-x2 "    $SYMBOL_STATE_WARNING We will not be able to recover it would it be lost."
                     break
                 }
             } catch {
@@ -491,9 +491,9 @@ function Configure-KvCache {
     Write-Host "    - Defines how much of your system resources are allocated"
     Write-Host "      in addition to inference generation."
     Write-Host "    - Read more: https://docs.fortytwo.network/docs/how-to-pick-the-right-model-for-your-node"
-    Write-Host ""
 
     while ($true) {
+        Write-Host ""
         Write-Host "[0] Default (Mode Auto)"
         Write-Host "[1] Mode (auto|min|medium|max)"
         Write-Host "[2] Size in Tokens"
@@ -502,6 +502,7 @@ function Configure-KvCache {
 
         switch ($KV_MODE_CHOICE) {
             "0" {
+                Write-Host ""
                 Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is now managed automatically."
                 $script:KV_CACHE_MODE = "auto"
                 return
@@ -519,25 +520,30 @@ function Configure-KvCache {
                     switch ($MODE_OPTION) {
                         "0" {
                             $script:KV_CACHE_MODE = "auto"
+                            Write-Host ""
                             Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
                             return
                         }
                         "1" {
                             $script:KV_CACHE_MODE = "min"
+                            Write-Host ""
                             Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
                             return
                         }
                         "2" {
                             $script:KV_CACHE_MODE = "medium"
+                            Write-Host ""
                             Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
                             return
                         }
                         "3" {
                             $script:KV_CACHE_MODE = "max"
+                            Write-Host ""
                             Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to Mode $script:KV_CACHE_MODE."
                             return
                         }
                         default {
+                            Write-Host ""
                             Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
                         }
                     }
@@ -578,6 +584,7 @@ function Configure-KvCache {
                 }
             }
             default {
+                Write-Host ""
                 Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
             }
         }
@@ -589,6 +596,7 @@ function Configure-KvCache {
 
 function Show-Settings {
     while ($true) {
+        Write-Host ""
         Write-Host "[1] KV-Cache Size"
         Write-Host "[2] Back"
         $SETTINGS_OPTION = Read-Host "Select an option"
@@ -601,6 +609,7 @@ function Show-Settings {
                 return
             }
             default {
+                Write-Host ""
                 Animate-Text "$SYMBOL_STATE_FAILURE Incorrect input."
             }
         }
@@ -639,6 +648,7 @@ function Select-CustomModel {
                 return $false
             }
             default {
+                Write-Host ""
                 Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
             }
         }
@@ -654,6 +664,7 @@ function Import-FromHub {
     $repo_path = Read-Host "Define the repository"
 
     if ($repo_path.ToLower() -eq "cancel") {
+        Write-Host ""
         Write-Host "Cancelled."
         return $false
     }
@@ -667,10 +678,12 @@ function Import-FromHub {
     $model_filename = Read-Host "Enter model filename"
 
     if ($model_filename.ToLower() -eq "cancel") {
+        Write-Host ""
         Write-Host "Cancelled."
         return $false
     }
 
+    Write-Host ""
     Write-Host "$SYMBOL_STATE_SUCCESS Model linked successfully"
 
     $script:LLM_HF_REPO = $repo_path
@@ -692,20 +705,24 @@ function Import-LocalModel {
     $model_path = Read-Host "Define the path"
 
     if ($model_path.ToLower() -eq "cancel") {
+        Write-Host ""
         Write-Host "Cancelled."
         return $false
     }
 
     if (-not (Test-Path $model_path)) {
+        Write-Host ""
         Write-Host "$SYMBOL_STATE_FAILURE Cannot reach the defined path."
         return $false
     }
 
     if ($model_path -notmatch '\.gguf$') {
+        Write-Host ""
         Write-Host "$SYMBOL_STATE_FAILURE Defined file is not in GGUF format. Currently only the GGUF model file format is supported."
         return $false
     }
 
+    Write-Host ""
     Write-Host "$SYMBOL_STATE_SUCCESS Model found successfully"
 
     $script:LLM_IS_LOCAL_PATH = $true
@@ -726,13 +743,13 @@ function Select-NodeModel {
     Animate-Text "Use setup assist options [0-2] or pick an option from three model tiers [3-23]:"
     Write-Host ""
     Write-Host "|========= SETUP ASSIST OPTIONS ========================================|"
-    Write-Host "| 0 ⏣ SETTINGS                                                          |"
+    Animate-Text-x2 "| 0 ⏣ SETTINGS                                                          |"
     Write-Host "|=======================================================================|"
-    Write-Host "| 1 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                        |"
+    Animate-Text-x2 "| 1 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                        |"
     Write-Host "|     Let the system determine the best model for your hardware.        |"
     Write-Host "|     Balanced for performance and capabilities.                        |"
     Write-Host "|=======================================================================|"
-    Write-Host "| 2 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                         |"
+    Animate-Text-x2 "| 2 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                         |"
     Write-Host "|=======================================================================|"
     Write-Host ""
     Write-Host "|========= EXTREME TIER | Models with very high memory requirements"
@@ -846,8 +863,8 @@ function Select-NodeModel {
     Write-Host "|     Ultra-efficient for basic instructions and quick answers;"
     Write-Host "|     suitable for nodes with tight memory."
     Write-Host "|========= LIGHT TIER END"
-    Write-Host ""
     while ($true) {
+        Write-Host ""
         Write-Host "[0] Settings"
         Write-Host "[1] Auto"
         Write-Host "[2] Import"
