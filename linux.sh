@@ -424,14 +424,17 @@ configure_kv_cache() {
     echo "    - Read more: https://docs.fortytwo.network/docs/how-to-pick-the-right-model-for-your-node"
     echo
     while true; do
+        echo
         echo "[0] Default (Mode Auto)"
         echo "[1] Mode (auto|min|medium|max)"
         echo "[2] Size in Tokens"
         echo "[3] Size in GB"
         read -r -p "Select an option: " KV_MODE_CHOICE
         echo
+
         case $KV_MODE_CHOICE in
             0)
+                echo
                 animate_text "✓ KV-Cache size is now managed automatically."
                 KV_CACHE_MODE="auto"
                 break
@@ -449,25 +452,30 @@ configure_kv_cache() {
                     case $MODE_OPTION in
                         0)
                             KV_CACHE_MODE="auto"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         1)
                             KV_CACHE_MODE="min"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         2)
                             KV_CACHE_MODE="medium"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         3)
                             KV_CACHE_MODE="max"
+                            echo
                             animate_text "✓ KV-Cache size is set to Mode ${KV_CACHE_MODE}."
                             break 2
                             ;;
                         *)
+                            echo
                             echo "✗ Incorrect input."
                             ;;
                     esac
@@ -484,6 +492,7 @@ configure_kv_cache() {
                         animate_text "✓ KV-Cache size is set to ${TOKEN_SIZE} Tokens."
                         break 2
                     else
+                        echo
                         echo "✗ Incorrect input."
                     fi
                 done
@@ -503,11 +512,13 @@ configure_kv_cache() {
                             echo "✗ Value must be at least 0.3 GB."
                         fi
                     else
+                        echo
                         echo "✗ Incorrect input."
                     fi
                 done
                 ;;
             *)
+                echo
                 echo "✗ Incorrect input."
                 ;;
         esac
@@ -519,6 +530,7 @@ configure_kv_cache() {
 
 show_settings() {
     while true; do
+        echo
         echo "[1] KV-Cache Size"
         echo "[2] Back"
         read -r -p "Select an option: " SETTINGS_OPTION
@@ -531,6 +543,7 @@ show_settings() {
                 break
                 ;;
             *)
+                echo
                 animate_text "✕ Incorrect input."
                 ;;
         esac
@@ -570,6 +583,7 @@ select_custom_model() {
                 return 1
                 ;;
             *)
+                echo
                 echo "✕ Incorrect input."
                 ;;
         esac
@@ -579,16 +593,17 @@ select_custom_model() {
 import_from_hub() {
     echo
     echo "1 : LOADING MODEL FROM HUGGING FACE"
+    echo
     echo "Step 1/2"
     echo "Enter Hugging Face repository, e.g.: 'Qwen/Qwen2.5-3B-Instruct-"
     echo "GGUF' (skip the quotes). Type 'Cancel' to go back."
     read -p "Define the repository: " repo_path
-
     if [[ "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
+        echo
         echo "Cancelled."
         return 1
     fi
-
+    echo
     echo "Step 2/2"
     echo "Enter model filename. e.g.: 'qwen2.5-3b-instruct-q4_k_m.gguf'"
     echo "(skip the quotes). For models with multiple files, include the "
@@ -596,12 +611,13 @@ import_from_hub() {
     echo "Q4_K_M-00001-of-00002.gguf'."
     echo "Type 'Cancel' to go back."
     read -p "Enter model filename: " model_filename
-
+    echo
     if [[ "$(echo "$model_filename" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
+        echo
         echo "Cancelled."
         return 1
     fi
-
+    echo
     echo "✓ Model linked successfully"
 
     LLM_HF_REPO="$repo_path"
@@ -621,23 +637,26 @@ import_local_model() {
     echo "Q4_K_M-00001-of-00002.gguf'."
     echo "Type 'Cancel' to go back."
     read -p "Define the path: " model_path
-
+    echo
     if [[ "$(echo "$model_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
+        echo
         echo "Cancelled."
         return 1
     fi
     model_path="${model_path/#\~/$HOME}"
 
     if [[ ! -f "$model_path" ]]; then
+        echo
         echo "✗ Cannot reach the defined path."
         return 1
     fi
 
     if [[ ! "$model_path" =~ \.gguf$ ]]; then
+        echo
         echo "✕ Defined file is not in GGUF format. Currently only the GGUF model file format is supported."
         return 1
     fi
-
+    echo
     echo "✓ Model found successfully"
 
     LLM_IS_LOCAL_PATH=true
@@ -646,7 +665,6 @@ import_local_model() {
 
     return 0
 }
-
 
 select_node_model() {
     echo
@@ -764,9 +782,10 @@ select_node_model() {
     echo "║     ideal for theorem-style tasks and verification."
     echo "║     "
     animate_text_x2 "║ 21 ⬢ RUST PROGRAMMING"
-    echo "║     4.9 GB ${MEMORY_TYPE}  • Tessa-Rust-T1 7B Q4"
-    echo "║     Focused on Rust programming; produces idiomatic Rust and"
-    echo "║     helps with code generation, fixes and refactors."
+    echo "║     9 GB ${MEMORY_TYPE}  • Strand-Rust-Coder 14B Q4"
+    echo "║     Built by Fortytwo:"
+    echo "║     Rust specialist that outputs idiomatic, compile-ready code and"
+    echo "║     handles fixes/refactors; state-of-the-art on Rust benchmarks."
     echo "║     "
     animate_text_x2 "║ 22 ⬢ MEDICAL EXPERT"
     echo "║     5.4 GB ${MEMORY_TYPE}  • II-Medical-8B Q5"
@@ -892,9 +911,9 @@ select_node_model() {
                 NODE_NAME="⬢ THEOREM PROVER: Kimina Prover Distill 8B Q4"
                 ;;
             21)
-                LLM_HF_REPO="bartowski/Tesslate_Tessa-Rust-T1-7B-GGUF"
-                LLM_HF_MODEL_NAME="Tesslate_Tessa-Rust-T1-7B-Q4_K_M.gguf"
-                NODE_NAME="⬢ RUST PROGRAMMING: Tessa-Rust-T1 7B Q4"
+                LLM_HF_REPO="Fortytwo-Network/Strand-Rust-Coder-14B-v1-GGUF"
+                LLM_HF_MODEL_NAME="Fortytwo_Strand-Rust-Coder-14B-v1-Q4_K_M.gguf"
+                NODE_NAME="⬢ RUST PROGRAMMING: Strand-Rust-Coder 14B Q4"
                 ;;
             22)
                 LLM_HF_REPO="Intelligent-Internet/II-Medical-8B-1706-GGUF"
@@ -907,6 +926,7 @@ select_node_model() {
                 NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
                 ;;
             *)
+                echo
                 echo "✕ Incorrect input."
                 continue
                 ;;
