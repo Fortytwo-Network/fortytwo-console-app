@@ -887,6 +887,7 @@ function Select-NodeModel {
             "2" {
                 if (-not (Select-CustomModel)) {
                     Select-NodeModel
+                } else {
                     $exit = $true
                 }
             }
