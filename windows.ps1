@@ -658,6 +658,7 @@ function Select-CustomModel {
 function Import-FromHub {
     Write-Host ""
     Write-Host "1 : LOADING MODEL FROM HUGGING FACE"
+    Write-Host ""
     Write-Host "Step 1/2"
     Write-Host "Enter Hugging Face repository, e.g.: 'Qwen/Qwen2.5-3B-Instruct-"
     Write-Host "GGUF' (skip the quotes). Type 'Cancel' to go back."
@@ -668,7 +669,7 @@ function Import-FromHub {
         Write-Host "Cancelled."
         return $false
     }
-
+    Write-Host ""
     Write-Host "Step 2/2"
     Write-Host "Enter model filename. e.g.: 'qwen2.5-3b-instruct-q4_k_m.gguf'"
     Write-Host "(skip the quotes). For models with multiple files, include the "

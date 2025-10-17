@@ -591,17 +591,17 @@ select_custom_model() {
 import_from_hub() {
     echo
     echo "1 : LOADING MODEL FROM HUGGING FACE"
+    echo
     echo "Step 1/2"
     echo "Enter Hugging Face repository, e.g.: 'Qwen/Qwen2.5-3B-Instruct-"
     echo "GGUF' (skip the quotes). Type 'Cancel' to go back."
     read -p "Define the repository: " repo_path
-    echo
     if [[ "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" == "cancel" ]]; then
         echo
         echo "Cancelled."
         return 1
     fi
-
+    echo
     echo "Step 2/2"
     echo "Enter model filename. e.g.: 'qwen2.5-3b-instruct-q4_k_m.gguf'"
     echo "(skip the quotes). For models with multiple files, include the "
