@@ -560,6 +560,7 @@ function Configure-KvCache {
                         Animate-Text "$SYMBOL_STATE_SUCCESS KV-Cache size is set to $TOKEN_SIZE Tokens."
                         return
                     } else {
+                        Write-Host ""
                         Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
                     }
                 }
@@ -578,6 +579,7 @@ function Configure-KvCache {
                         if ([double]$GB_SIZE -lt 0.3) {
                             Write-Host "$SYMBOL_STATE_FAILURE Value must be at least 0.3 GB."
                         } else {
+                            Write-Host ""
                             Write-Host "$SYMBOL_STATE_FAILURE Incorrect input."
                         }
                     }

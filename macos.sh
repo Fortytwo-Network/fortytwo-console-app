@@ -496,6 +496,7 @@ configure_kv_cache() {
                             echo "✗ Value must be at least 0.3 GB."
                         fi
                     else
+                        echo
                         echo "✗ Incorrect input."
                     fi
                 done
@@ -526,6 +527,7 @@ show_settings() {
                 break
                 ;;
             *)
+                echo
                 animate_text "✕ Incorrect input."
                 ;;
         esac
