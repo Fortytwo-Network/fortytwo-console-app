@@ -938,6 +938,7 @@ select_node_model() {
         esac
         break
     done
+    echo
     echo "Model selected:"
     animate_text "${NODE_NAME}"
 }
