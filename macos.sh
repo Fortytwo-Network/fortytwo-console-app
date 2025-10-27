@@ -84,13 +84,13 @@ BANNER="
 "
 BANNER_FULLNAME="
 
- ▒██  ░█▓░  ▒███  ▒███   ▒█████▒             █▓           ▒▓
-████░ ████░ ▒███  ▒███   ▒█▒     ▒▓░▒  ▒██▓░▓██▒▒▓▓   ▓▒▒███▓░█▓  █▓  ▓█  ▒▓░▒
- ▒▓░   ▒▓░  ▒███  ▒███   ▒████▒ ▒█  ▓█ ██▒ ░ ██░  █▓  ▓█░ ██  ██ ▓▓█  ██ ▒█  ▓█
- ░▓▓   ░▓▓  ▒███  ▒███   ▒█░    █▓  █▓ ▓█    █▒   ▒█▒█▓   █▓  ░█▒█▒██▒█▓ █▓  █▓
-████░ ████░ ▒███  ▒███   ▒█░    ▒█  ▓█ ██    █▓    ▓██░   ██   ███ ▒██▒  ▒█  ▓█
- ▒██   ░▓▒  ▒███  ▒███   ▒█░     ░▒▓░  █▓    ░░▓▒   ▓█░   ▒░▓▒  █▒  █▒░   ░▓▓░
-                                                 ░░█▓
+░▓█▓  ░▓█▓  ▒███  ▒███  ▒█████             █▓          █▓
+████░ ████░ ▒███  ▒███  ▒█▓   ░██▓░  ▓██▓░███▓▒█▓   █▓███▓░█▓  █░  █▓ ░██▓░
+▒█▓░  ░█▓░  ▒███  ▒███  ▒████ █▓  █▓ █▓ ░░ █▓  ░█▓ ▓█▓ █▓  █▓ ▓█▓ ▓█▓ █▓  █▓
+░▓█▓  ░▓█▓  ▒███  ▒███  ▒█▓   █▓  █▓ █▓    █▓   ░█▒█▓  █▓  ▓█▒█▒█▒█▓░ █▓  █▓
+████░ ████░ ▒███  ▒███  ▒█▓   █▓  █▓ █▓    █▓    ▓██▓  █▓   ███░███▓  █▓  █▓
+▒█▓░  ░█▓░  ▒███  ▒███  ▒█▓    ▓█▓░  █▓    ▓█▓░   █▓   ▓█▓▒  █▓░ █▓░   ▓█▓░
+                                                ▒█▓░
 "
 animate_text_x2 "$BANNER"
 animate_text "      Welcome to ::|| Fortytwo, Noderunner."
@@ -325,7 +325,7 @@ else
     echo
     IDENTITY_OPTION=${IDENTITY_OPTION:-1}
     if [[ "$IDENTITY_OPTION" == "2" ]]; then
-        animate_text "[2] Recovering existing identity"
+        animate_text "2 : RECOVERING EXISTING IDENTITY"
         echo
         while true; do
             read -r -p "Enter your identity recovery phrase (12, 18, or 24 words), then press Enter: " ACCOUNT_SEED_PHRASE
@@ -344,7 +344,7 @@ else
             fi
         done
     else
-        animate_text "[1] Creating a new identity with an activation code"
+        animate_text "1 : CREATING A NEW IDENTITY WITH AN ACTIVATION CODE"
         echo
         "$UTILS_EXEC" --check-drop-service || exit 1
         while true; do
@@ -514,6 +514,8 @@ configure_kv_cache() {
 
 show_settings() {
     while true; do
+        echo
+        echo "0 : ⏣ SETTINGS"
         echo
         echo "[1] KV-Cache Size"
         echo "[2] Back"

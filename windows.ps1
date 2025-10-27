@@ -36,8 +36,9 @@ function Animate-Text-x2 {
 $SYMBOL_CROWN = [char]0x2654
 $SYMBOL_NEWLINE = [char]0x2514
 $SYMBOL_SEPARATOR_DOT = [char]0x2022
-$SYMBOL_MODEL_SELECTED = [char]0x1362
+$SYMBOL_SETTINGS = [char]0x1368
 $SYMBOL_RIGHTWARDS_ARROW = [char]0x2192
+$SYMBOL_MODEL_SELECTED = [char]0x1362
 $SYMBOL_MODEL_CUSTOM = [char]0x2736
 $SYMBOL_MODEL_AUTOSELECT = [char]0x1360
 $SYMBOL_MODEL_LASTUSED = [char]0x25C1
@@ -403,7 +404,7 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
     if (-not $IDENTITY_OPTION) { $IDENTITY_OPTION = "1" }
 
     if ($IDENTITY_OPTION -eq "2") {
-        Animate-Text "[2] Recovering existing identity"
+        Animate-Text "2 : RECOVERING EXISTING IDENTITY"
         Write-Host ""
         while ($true) {
             $ACCOUNT_SEED_PHRASE = Read-Host "Enter your account recovery phrase (12, 18, or 24 words), then press Enter"
@@ -428,7 +429,7 @@ if (Test-Path $ACCOUNT_PRIVATE_KEY_FILE) {
             }
         }
     } else {
-        Animate-Text "[1] Creating a new identity with an activation code"
+        Animate-Text "1 : CREATING A NEW IDENTITY WITH AN ACTIVATION CODE"
         Write-Host ""
         & $UTILS_EXEC --check-drop-service; if ($LASTEXITCODE) { exit 1 }
         while ($true) {
@@ -599,6 +600,8 @@ function Configure-KvCache {
 function Show-Settings {
     while ($true) {
         Write-Host ""
+        Write-Host "0 : $SYMBOL_SETTINGS SETTINGS"
+        Write-Host ""
         Write-Host "[1] KV-Cache Size"
         Write-Host "[2] Back"
         $SETTINGS_OPTION = Read-Host "Select an option"
@@ -746,13 +749,13 @@ function Select-NodeModel {
     Animate-Text "Use setup assist options [0-2] or pick an option from three model tiers [3-23]:"
     Write-Host ""
     Write-Host "|========= SETUP ASSIST OPTIONS ========================================|"
-    Animate-Text-x2 "| 0 ⏣ SETTINGS                                                          |"
+    Animate-Text-x2 "| 0 $SYMBOL_SETTINGS SETTINGS                                                          |"
     Write-Host "|=======================================================================|"
-    Animate-Text-x2 "| 1 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                        |"
+    Animate-Text-x2 "| 1 $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT - Optimal configuration                               |"
     Write-Host "|     Let the system determine the best model for your hardware.        |"
     Write-Host "|     Balanced for performance and capabilities.                        |"
     Write-Host "|=======================================================================|"
-    Animate-Text-x2 "| 2 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                         |"
+    Animate-Text-x2 "| 2 $SYMBOL_MODEL_CUSTOM IMPORT CUSTOM - Advanced configuration                            |"
     Write-Host "|=======================================================================|"
     Write-Host ""
     Write-Host "|========= EXTREME TIER | Models with very high memory requirements"
