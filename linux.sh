@@ -806,13 +806,16 @@ select_node_model() {
         echo "[2] Import"
         echo "[3-23] Specialized Model"
         read -r -p "Select your node's specialization option: " NODE_CLASS
-        echo
+        
         case $NODE_CLASS in
             0)
                 show_settings
                 select_node_model
                 ;;
             1)
+                echo
+                echo "1 : AUTO-SELECT"
+                echo
                 animate_text "⌖ Analyzing system for optimal configuration:"
                 auto_select_model
                 ;;
@@ -935,12 +938,11 @@ select_node_model() {
         esac
         break
     done
-    echo "You chose:"
+    echo "Model selected:"
     animate_text "${NODE_NAME}"
 }
 
 select_node_model
-echo
 if [[ "$LLM_IS_LOCAL_PATH" == false ]]; then
     animate_text "    ↳ Downloading the model and preparing the environment may take several minutes..."
     "$UTILS_EXEC" --hf-repo "$LLM_HF_REPO" --hf-model-name "$LLM_HF_MODEL_NAME" --model-cache "$PROJECT_MODEL_CACHE_DIR"

@@ -886,6 +886,9 @@ function Select-NodeModel {
                 $exit = $true
             }
             "1" {
+                Write-Host ""
+                Write-Host "1 : $SYMBOL_MODEL_AUTOSELECT AUTO-SELECT"
+                Write-Host ""
                 Animate-Text " $SYMBOL_MODEL_AUTOSELECT Analyzing system for optimal configuration:"
                 Auto-Select-Model
                 $exit = $true
@@ -1033,12 +1036,11 @@ function Select-NodeModel {
     }
 
     Write-Host ""
-    Write-Host "You chose:"
+    Write-Host "Model selected:"
     Animate-Text "${NODE_NAME}"
 }
 
 Select-NodeModel
-Write-Host ""
 if ($LLM_IS_LOCAL_PATH -eq $false) {
     Animate-Text "    $SYMBOL_NEWLINE Downloading the model and preparing the environment may take several minutes..."
     & $UTILS_EXEC --hf-repo $LLM_HF_REPO --hf-model-name $LLM_HF_MODEL_NAME --model-cache $PROJECT_MODEL_CACHE_DIR
