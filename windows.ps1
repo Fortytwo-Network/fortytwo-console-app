@@ -868,13 +868,18 @@ function Select-NodeModel {
     Write-Host "|     1.3 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3 1.7B Q4"
     Write-Host "|     Ultra-efficient for basic instructions and quick answers;"
     Write-Host "|     suitable for nodes with tight memory."
+    Write-Host "|"
+    Animate-Text-x2 "| 24 $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL"
+    Write-Host "|     1.2 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT VibeThinker 1.5B Q4"
+    Write-Host "|     Efficient reasoning performance with math and coding problems;"
+    Write-Host "|     suitable for nodes with limited memory."
     Write-Host "|========= LIGHT TIER END"
     while ($true) {
         Write-Host ""
         Write-Host "[0] Settings"
         Write-Host "[1] Auto"
         Write-Host "[2] Import"
-        Write-Host "[3-23] Specialized Model"
+        Write-Host "[3-24] Specialized Model"
         $NODE_CLASS = Read-Host "Select your node's specialization option"
 
         $exit = $false
@@ -1024,6 +1029,12 @@ function Select-NodeModel {
                 $script:LLM_HF_REPO = "unsloth/Qwen3-1.7B-GGUF"
                 $script:LLM_HF_MODEL_NAME = "Qwen3-1.7B-Q4_K_M.gguf"
                 $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: Qwen3 1.7B Q4"
+                $exit = $true
+            }
+            "24" {
+                $script:LLM_HF_REPO = "mradermacher/VibeThinker-1.5B-GGUF"
+                $script:LLM_HF_MODEL_NAME = "VibeThinker-1.5B.Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED LOW MEMORY MODEL: VibeThinker 1.5B Q4"
                 $exit = $true
             }
             Default {

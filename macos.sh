@@ -783,13 +783,18 @@ select_node_model() {
     echo "║     1.3 GB ${MEMORY_TYPE}  • Qwen3 1.7B Q4"
     echo "║     Ultra-efficient for basic instructions and quick answers;"
     echo "║     suitable for nodes with tight memory."
+    echo "║     "
+    animate_text_x2 "║ 24 ⬢ LOW MEMORY MODEL"
+    echo "║     1.2 GB ${MEMORY_TYPE}  • VibeThinker 1.5B Q4"
+    echo "║     Efficient reasoning performance with math and coding problems;"
+    echo "║     suitable for nodes with limited memory."
     echo "╚═════════ LIGHT TIER END"
     while true; do
         echo
         echo "[0] Settings"
         echo "[1] Auto"
         echo "[2] Import"
-        echo "[3-23] Specialized Model"
+        echo "[3-24] Specialized Model"
         read -r -p "Select your node's specialization option: " NODE_CLASS
         
         case $NODE_CLASS in
@@ -914,6 +919,11 @@ select_node_model() {
                 LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
                 LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
                 NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
+                ;;
+            24)
+                LLM_HF_REPO="mradermacher/VibeThinker-1.5B-GGUF"
+                LLM_HF_MODEL_NAME="VibeThinker-1.5B.Q4_K_M.gguf"
+                NODE_NAME="⬢ LOW MEMORY MODEL: VibeThinker 1.5B Q4"
                 ;;
             *)
                 echo

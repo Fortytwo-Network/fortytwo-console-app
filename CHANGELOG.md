@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2025.11.20.0] - 2025-11-20
+### Added
+- Added new low memory model: VibeThinker 1.5B
+
 ## [v2025.10.28.0] - 2025-10-28
 ### Added
 - (Windows) SETTINGS symbol added instead of the illegal symbol that caused visualization issues.
