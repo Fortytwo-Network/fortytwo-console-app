@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2025.11.20.0] - 2025-11-20
+### Added
+- Added new low memory model: VibeThinker 1.5B
+
 ## [v2025.11.13.0] - 2025-11-13
 ### Changed
 - (Windows) Extend cleanup when updating the capsule
