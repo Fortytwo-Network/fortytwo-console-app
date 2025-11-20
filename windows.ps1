@@ -295,6 +295,10 @@ if (Test-Path $CAPSULE_EXEC) {
             Remove-Item $CAPSULE_EXEC -Force
             Remove-Item "$PROJECT_DIR\cublas64_12.dll" -Force
             Remove-Item "$PROJECT_DIR\cublasLt64_12.dll" -Force
+            Remove-Item "$PROJECT_DIR\MSVCP140.DLL" -Force
+            Remove-Item "$PROJECT_DIR\VCOMP140.DLL" -Force
+            Remove-Item "$PROJECT_DIR\VCRUNTIME140.DLL" -Force
+            Remove-Item "$PROJECT_DIR\VCRUNTIME140_1.DLL" -Force
             Expand-Archive -Path $CAPSULE_ZIP -DestinationPath $PROJECT_DIR -Force
             Remove-Item $CAPSULE_ZIP -Force
 
