@@ -148,10 +148,10 @@ fi
 check_connection() {
     animate_text "Ξ Connection check to update endpoints"
 
-    curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
+    curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/latest"
     CAPSULE_S3_STATUS=$?
 
-    curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
+    curl -s --connect-timeout 3 --max-time 5 -o /dev/null "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/latest"
     PROTOCOL_S3_STATUS=$?
 
     if [ "$CAPSULE_S3_STATUS" -eq 0 ] && [ "$PROTOCOL_S3_STATUS" -eq 0 ]; then
@@ -240,9 +240,9 @@ else
 fi
 # --- End Update setup script ---
 
-CAPSULE_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest")
+CAPSULE_VERSION=$(curl -s "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/latest")
 animate_text "⎔ Capsule — version $CAPSULE_VERSION"
-DOWNLOAD_CAPSULE_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-linux-amd64"
+DOWNLOAD_CAPSULE_URL="https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-linux-amd64"
 if [[ -f "$CAPSULE_EXEC" ]]; then
     CURRENT_CAPSULE_VERSION_OUTPUT=$("$CAPSULE_EXEC" --version 2>/dev/null)
     if [[ "$CURRENT_CAPSULE_VERSION_OUTPUT" == *"$CAPSULE_VERSION"* ]]; then
@@ -270,9 +270,9 @@ else
     chmod +x "$CAPSULE_EXEC"
     animate_text "    ✓ Installed to: $CAPSULE_EXEC"
 fi
-PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest")
+PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/latest")
 animate_text "⏃ Protocol Node — version $PROTOCOL_VERSION"
-DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-linux-amd64"
+DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-linux-amd64"
 if [[ -f "$PROTOCOL_EXEC" ]]; then
     CURRENT_PROTOCOL_VERSION_OUTPUT=$("$PROTOCOL_EXEC" --version 2>/dev/null)
 
@@ -290,9 +290,9 @@ else
     chmod +x "$PROTOCOL_EXEC"
     animate_text "    ✓ Installed to: $PROTOCOL_EXEC"
 fi
-UTILS_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/latest")
+UTILS_VERSION=$(curl -s "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/utilities/latest")
 animate_text "⨳ Utils — version $UTILS_VERSION"
-DOWNLOAD_UTILS_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsLinux"
+DOWNLOAD_UTILS_URL="https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsLinux"
 if [[ -f "$UTILS_EXEC" ]]; then
     CURRENT_UTILS_VERSION_OUTPUT=$("$UTILS_EXEC" --version 2>/dev/null)
     if [[ "$CURRENT_UTILS_VERSION_OUTPUT" == *"$UTILS_VERSION"* ]]; then
@@ -1047,9 +1047,9 @@ while true; do
         animate_text "Node has stopped with exit code: $PROTOCOL_EXIT_CODE"
         if [ "$PROTOCOL_EXIT_CODE" -eq 20 ]; then
             animate_text "New protocol version is available!"
-            PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest")
+            PROTOCOL_VERSION=$(curl -s "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/latest")
             animate_text "⏃ Protocol Node — version $PROTOCOL_VERSION"
-            DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-linux-amd64"
+            DOWNLOAD_PROTOCOL_URL="https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-linux-amd64"
             animate_text "    ↳ Updating..."
             curl -L -o "$PROTOCOL_EXEC" "$DOWNLOAD_PROTOCOL_URL"
             chmod +x "$PROTOCOL_EXEC"

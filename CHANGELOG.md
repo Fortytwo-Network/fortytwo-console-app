@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2025.11.24.0] - 2025-11-24
+### Changed
+- Updated s3 links 
+
 ## [v2025.11.20.0] - 2025-11-20
 ### Added
 - Added new low memory model: VibeThinker 1.5B
