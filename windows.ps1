@@ -186,8 +186,8 @@ function Test-UrlAvailability {
 function Test-Connection {
     Animate-Text-x2 " $SYMBOL_COMP_CONNECTION Connection check to update endpoints"
 
-    $capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/latest"
-    $protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/latest"
+    $capsuleOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest"
+    $protocolOk = Test-UrlAvailability -Url "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest"
 
     if ($capsuleOk -and $protocolOk) {
         Write-Host "    $SYMBOL_STATE_SUCCESS Connected to all services"
@@ -280,7 +280,7 @@ trap {
     Cleanup
 }
 
-$CAPSULE_VERSION = (Invoke-RestMethod "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/latest").Trim()
+$CAPSULE_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/latest").Trim()
 Animate-Text-x2 " $SYMBOL_COMP_CAPSULE Capsule - version $CAPSULE_VERSION"
 if (Test-Path $CAPSULE_EXEC) {
     $CURRENT_CAPSULE_VERSION_OUTPUT = & $CAPSULE_EXEC --version 2>$null
@@ -289,7 +289,7 @@ if (Test-Path $CAPSULE_EXEC) {
     } else {
         if (Get-Command "nvidia-smi.exe" -ErrorAction SilentlyContinue) {
             Animate-Text "    $SYMBOL_NEWLINE NVIDIA detected. Downloading CUDA Capsule..."
-            $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/windows-amd64-cuda124.zip"
+            $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/windows-amd64-cuda124.zip"
             Start-BitsTransfer -Source $DOWNLOAD_CAPSULE_URL -Destination $CAPSULE_ZIP
             Animate-Text "    $SYMBOL_NEWLINE Extracting CUDA Capsule..."
             Remove-Item $CAPSULE_EXEC -Force
@@ -312,7 +312,7 @@ if (Test-Path $CAPSULE_EXEC) {
             Animate-Text "    $SYMBOL_STATE_SUCCESS Successfully updated"
         } else {
             Write-Host "    $SYMBOL_NEWLINE No NVIDIA GPU detected. Downloading CPU Capsule..."
-            $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-windows-amd64.exe"
+            $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-windows-amd64.exe"
             Start-BitsTransfer -Source $DOWNLOAD_CAPSULE_URL -Destination $CAPSULE_EXEC
             Animate-Text "    $SYMBOL_STATE_SUCCESS Successfully updated"
         }
@@ -320,7 +320,7 @@ if (Test-Path $CAPSULE_EXEC) {
 } else {
     if (Get-Command "nvidia-smi.exe" -ErrorAction SilentlyContinue) {
         Animate-Text "    $SYMBOL_NEWLINE NVIDIA detected. Downloading CUDA Capsule..."
-        $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/windows-amd64-cuda124.zip"
+        $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/windows-amd64-cuda124.zip"
         Start-BitsTransfer -Source $DOWNLOAD_CAPSULE_URL -Destination $CAPSULE_ZIP
         Animate-Text "    $SYMBOL_NEWLINE Extracting CUDA Capsule..."
         Expand-Archive -Path $CAPSULE_ZIP -DestinationPath $PROJECT_DIR -Force
@@ -336,14 +336,14 @@ if (Test-Path $CAPSULE_EXEC) {
         Animate-Text "    $SYMBOL_STATE_SUCCESS Installed to: $CAPSULE_EXEC"
     } else {
         Animate-Text "    $SYMBOL_NEWLINE No NVIDIA GPU detected. Downloading CPU Capsule..."
-        $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-windows-amd64.exe"
+        $DOWNLOAD_CAPSULE_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/capsule/v$CAPSULE_VERSION/FortytwoCapsule-windows-amd64.exe"
         Start-BitsTransfer -Source $DOWNLOAD_CAPSULE_URL -Destination $CAPSULE_EXEC
         Animate-Text "    $SYMBOL_STATE_SUCCESS Installed to: $CAPSULE_EXEC"
     }
 }
-$PROTOCOL_VERSION = (Invoke-RestMethod "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/latest").Trim()
+$PROTOCOL_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest").Trim()
 Animate-Text-x2 " $SYMBOL_COMP_NODE Protocol Node - version $PROTOCOL_VERSION"
-$DOWNLOAD_PROTOCOL_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-windows-amd64.exe"
+$DOWNLOAD_PROTOCOL_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-windows-amd64.exe"
 if (Test-Path $PROTOCOL_EXEC) {
     $CURRENT_PROTOCOL_VERSION_OUTPUT = & $PROTOCOL_EXEC --version 2>$null
     if ($CURRENT_PROTOCOL_VERSION_OUTPUT -match $PROTOCOL_VERSION) {
@@ -358,9 +358,9 @@ if (Test-Path $PROTOCOL_EXEC) {
     Start-BitsTransfer -Source $DOWNLOAD_PROTOCOL_URL -Destination $PROTOCOL_EXEC
     Animate-Text "    $SYMBOL_STATE_SUCCESS Installed to: $PROTOCOL_EXEC"
 }
-$UTILS_VERSION = (Invoke-RestMethod "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/utilities/latest").Trim()
+$UTILS_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/latest").Trim()
 Animate-Text-x2 " $SYMBOL_COMP_UTILS Utils - version $UTILS_VERSION"
-$DOWNLOAD_UTILS_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsWindows.exe"
+$DOWNLOAD_UTILS_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/utilities/v$UTILS_VERSION/FortytwoUtilsWindows.exe"
 if (Test-Path $UTILS_EXEC) {
     $CURRENT_UTILS_VERSION_OUTPUT = & $UTILS_EXEC --version 2>$null
     if ($CURRENT_UTILS_VERSION_OUTPUT -match $UTILS_VERSION) {
@@ -1148,11 +1148,11 @@ while ($true) {
         $PROTOCOL_EXIT_CODE = $PROTOCOL_PROC.ExitCode
         Write-Host ""
         Write-Output " $SYMBOL_COMP_NODE Node has stopped. Restarting..."
-        $PROTOCOL_VERSION = (Invoke-RestMethod "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/latest").Trim()
+        $PROTOCOL_VERSION = (Invoke-RestMethod "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/latest").Trim()
         if (-not($CURRENT_PROTOCOL_VERSION_OUTPUT -match $PROTOCOL_VERSION)) {
             Write-Output " $SYMBOL_STATE_WARNING New protocol version is available!"
             Animate-Text " $SYMBOL_COMP_NODE Protocol Node - version $PROTOCOL_VERSION"
-            $DOWNLOAD_PROTOCOL_URL = "https://fortytwo-network-packages-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-windows-amd64.exe"
+            $DOWNLOAD_PROTOCOL_URL = "https://fortytwo-network-public.s3.us-east-2.amazonaws.com/protocol/v$PROTOCOL_VERSION/FortytwoProtocolNode-windows-amd64.exe"
             Animate-Text "    $SYMBOL_NEWLINE Updating..."
             Start-BitsTransfer -Source $DOWNLOAD_PROTOCOL_URL -Destination $PROTOCOL_EXEC
             Animate-Text "    $SYMBOL_STATE_SUCCESS Successfully updated"
