@@ -1,5 +1,5 @@
-# Fortytwo Inference Node
+# Fortytwo Network Node
 
-For a complete guide on how to download, install, and operate a Fortytwo Inference Node, please refer to the official documentation:
+For a complete guide on how to download, install, and operate a Fortytwo node, please refer to the official documentation:
 
-**[Fortytwo Inference Node Documentation](https://docs.fortytwo.network/docs/quick-start)**
+**[Fortytwo Node Documentation](https://docs.fortytwo.network/docs/quick-start#/)**
