@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2025.12.19.0] - 2025-12-19
+### Changed
+- (Windows) Resolved script execution warnings
+
 ## [v2025.11.20.0] - 2025-11-20
 ### Added
 - Added new low memory model: VibeThinker 1.5B

@@ -176,7 +176,7 @@ function Test-UrlAvailability {
         [string]$Url
     )
     try {
-        $response = Invoke-WebRequest -Uri $Url -Method Head -TimeoutSec 5 -ErrorAction Stop
+        $response = Invoke-WebRequest -UseBasicParsing -Uri $Url -Method Head -TimeoutSec 5 -ErrorAction Stop
         return $true
     } catch {
         return $false
@@ -250,7 +250,7 @@ $TempFile = [System.IO.Path]::GetTempFileName()
 
 # Download updated script
 try {
-    Invoke-WebRequest -Uri $UpdateUrl -OutFile $TempFile -ErrorAction Stop
+    Invoke-WebRequest -UseBasicParsing -Uri $UpdateUrl -OutFile $TempFile -ErrorAction Stop
 } catch {
     Write-Output "    $SYMBOL_STATE_FAILURE ERROR: Failed to download the update. Check your internet connection and try again."
     exit 1
