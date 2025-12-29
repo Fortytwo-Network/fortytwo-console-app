@@ -673,119 +673,141 @@ select_node_model() {
     echo "║ 2 ✶ IMPORT CUSTOM - Advanced configuration                                ║"
     echo "╚═══════════════════════════════════════════════════════════════════════════╝"
     echo
+    echo "╔═════════ ULTRA TIER | Models with ultra high memory requirements"
+    animate_text_x2 "║ 3 ⬢ ULTRA GENERALIST"
+    echo "║     652.1 GB ${MEMORY_TYPE} • Kimi-K2-Thinking Q4"
+    echo "║     Efficient Mixture of Experts reasoning; balanced accuracy, coherence,"
+    echo "║     and efficiency across general and technical tasks."
+    echo "║   "
+    animate_text_x2 "║ 4 ⬢ ULTRA GENERALIST"
+    echo "║     226.8 GB ${MEMORY_TYPE} • GLM-4.7 Q4"
+    echo "║     Versatile generalist with standout coding,"
+    echo "║     creative and complex reasoning skills."
+    echo "╚═════════ ULTRA TIER END"
+    echo
     echo "╔═════════ EXTREME TIER | Models with very high memory requirements"
-    animate_text_x2 "║ 3 ⬢ SUPERIOR GENERALIST"
-    echo "║     65.9 GB ${MEMORY_TYPE} • GPT-oss 120B Q4"
+    animate_text_x2 "║ 5 ⬢ SUPERIOR GENERALIST"
+    echo "║     65.9 GB ${MEMORY_TYPE} • gpt-oss-120B Q4"
     echo "║     Frontier-level multi-step answers across coding, math, science,"
     echo "║     general knowledge questions."
     echo "║   "
-    animate_text_x2 "║ 4 ⬢ SUPERIOR GENERALIST"
+    animate_text_x2 "║ 6 ⬢ SUPERIOR GENERALIST"
     echo "║     76.5 GB ${MEMORY_TYPE} • GLM-4.5-Air Q4"
     echo "║     Deliberate multi-step reasoning in logic, math, and coding;"
     echo "║     excels at clear, long-form breakdowns of complex questions."
     echo "║   "
-    animate_text_x2 "║ 5 ⬢ SUPERIOR GENERALIST"
+    animate_text_x2 "║ 7 ⬢ SUPERIOR GENERALIST"
     echo "║     31.7 GB ${MEMORY_TYPE} • Nemotron-Super-49B-v1.5 Q4"
     echo "║     High-precision multi-step reasoning in general domains, math and"
     echo "║     coding; produces clear step-by-step solutions to complex problems."
     echo "╚═════════ EXTREME TIER END"
     echo
     echo "╔═════════ HEAVY TIER | Dedicating all Compute to the Node"
-    animate_text_x2 "║ 6 ⬢ ADVANCED REASONING"
-    echo "║     19.5 GB ${MEMORY_TYPE} • Qwen3 30B A3B Thinking 2507 Q4"
+    animate_text_x2 "║ 8 ⬢ ADVANCED REASONING"
+    echo "║     19.5 GB ${MEMORY_TYPE} • Qwen3-30B-A3B-Thinking-2507 Q4"
     echo "║     Long-context reasoning at high efficiency, with steady logic,"
     echo "║     math, and coding across large inputs."
     echo "║     "
-    animate_text_x2 "║ 7 ⬢ PROGRAMMING & ALGORITHMS"
+    animate_text_x2 "║ 9 ⬢ PROGRAMMING & ALGORITHMS"
     echo "║     19.5 GB ${MEMORY_TYPE} • Qwen3-Coder-30B-A3B-Instruct Q4"
     echo "║     Writes robust, well-structured code with step-by-step reasoning;"
     echo "║     handles large, multi-file tasks and refactors."
     echo "║     "
-    animate_text_x2 "║ 8 ⬢ ADVANCED GENERALIST"
-    echo "║     12.2 GB ${MEMORY_TYPE} • gpt-oss-20b Q4"
+    animate_text_x2 "║ 10 ⬢ ADVANCED GENERALIST"
+    echo "║     12.2 GB ${MEMORY_TYPE} • gpt-oss-20B Q4"
     echo "║     Fast, capable multi-domain reasoning;"
     echo "║     solid for day-to-day coding, math, and research."
     echo "║     "
-    animate_text_x2 "║ 9 ⬢ MATH, SCIENCE & CODING"
-    echo "║     20.9 GB ${MEMORY_TYPE} • OpenReasoning Nemotron 32B Q4"
+    animate_text_x2 "║ 11 ⬢ MATH, SCIENCE & CODING"
+    echo "║     20.9 GB ${MEMORY_TYPE} • OpenReasoning-Nemotron-32B Q4"
     echo "║     Meticulous step-by-step logic in math, science and code;"
     echo "║     great for explainable solutions and error analysis."
     echo "║     "
-    animate_text_x2 "║ 10 ⬢ ADVANCED GENERALIST"
-    echo "║     20.3 GB ${MEMORY_TYPE} • EXAONE 4.0 32B Q4"
+    animate_text_x2 "║ 12 ⬢ ADVANCED GENERALIST"
+    echo "║     20.3 GB ${MEMORY_TYPE} • EXAONE-4.0-32B Q4"
     echo "║     Strong science and world knowledge with dependable math and coding;"
     echo "║     clear, well-grounded explanations."
     echo "║     "
-    animate_text_x2 "║ 11 ⬢ PROGRAMMING & ALGORITHMS"
-    echo "║     20.9 GB ${MEMORY_TYPE} • OlympicCoder 32B Q4"
+    animate_text_x2 "║ 13 ⬢ PROGRAMMING & ALGORITHMS"
+    echo "║     20.9 GB ${MEMORY_TYPE} • OlympicCoder-32B Q4"
     echo "║     Excels at contest-style algorithms;"
     echo "║     produces correct, efficient code with clear step-by-step reasoning."
-    echo "║     "
-    animate_text_x2 "║ 12 ⬢ ADVANCED REASONING"
-    echo "║     9.6 GB ${MEMORY_TYPE} • Apriel-Nemotron-15b-Thinker Q4"
-    echo "║     Deliberate, reflective multi-step reasoning across mixed tasks;"
-    echo "║     steady performance on logic, math, and coding."
     echo "╚═════════ HEAVY TIER END"
     echo
     echo "╔═════════ LIGHT TIER | Operating the Node in Background"
-    animate_text_x2 "║ 13 ⬢ EVERYDAY GENERALIST"
-    echo "║     9.6 GB ${MEMORY_TYPE} • Qwen3 14B Q4"
+    animate_text_x2 "║ 14 ⬢ ADVANCED REASONING"
+    echo "║     9.6 GB ${MEMORY_TYPE} • Apriel-Nemotron-15B-Thinker Q4"
+    echo "║     Deliberate, reflective multi-step reasoning across mixed tasks;"
+    echo "║     steady performance on logic, math, and coding."
+    echo "║     "
+    animate_text_x2 "║ 15 ⬢ EVERYDAY GENERALIST"
+    echo "║     9.6 GB ${MEMORY_TYPE} • Qwen3-14B Q4"
     echo "║     Balanced everyday reasoning with multilingual support;"
     echo "║     clear, reliable answers across common topics."
     echo "║     "
-    animate_text_x2 "║ 14 ⬢ EVERYDAY GENERALIST"
+    animate_text_x2 "║ 16 ⬢ EVERYDAY GENERALIST"
     echo "║     5.4 GB ${MEMORY_TYPE} • Qwen3 8B Q4"
     echo "║     Smooth daily Q&A with concise reasoning;"
     echo "║     dependable on summaries, explanations, and light code."
     echo "║     "
-    animate_text_x2 "║ 15 ⬢ MULTILINGUAL GENERALIST"
-    echo "║     7.7 GB ${MEMORY_TYPE}  • Gemma-3 4B Q4"
+    animate_text_x2 "║ 17 ⬢ MULTILINGUAL GENERALIST"
+    echo "║     7.7 GB ${MEMORY_TYPE}  • Gemma-3-12B Q4"
     echo "║     Multilingual chat with long-context support;"
     echo "║     dependable everyday assistant with clear explanations."
     echo "║     "
-    animate_text_x2 "║ 16 ⬢ PROGRAMMING & ALGORITHMS"
-    echo "║     9.3 GB ${MEMORY_TYPE}  • DeepCoder 14B Q4"
+    animate_text_x2 "║ 18 ⬢ PROGRAMMING & ALGORITHMS"
+    echo "║     9.3 GB ${MEMORY_TYPE}  • DeepCoder-14B Q4"
     echo "║     Generates accurate code and understands complex programming logic;"
     echo "║     reliable for feature drafts and fixes."
     echo "║     "
-    animate_text_x2 "║ 17 ⬢ PROGRAMMING & ALGORITHMS"
-    echo "║     4.8 GB ${MEMORY_TYPE}  • OlympicCoder 7B Q4"
+    animate_text_x2 "║ 19 ⬢ PROGRAMMING & ALGORITHMS"
+    echo "║     4.8 GB ${MEMORY_TYPE}  • OlympicCoder-7B Q4"
     echo "║     Balanced coding contest solver;"
     echo "║     step-by-step algorithmic reasoning and efficient code."
     echo "║     "
-    animate_text_x2 "║ 18 ⬢ MATH & FORMAL LOGIC"
-    echo "║     9.3 GB ${MEMORY_TYPE}  • OpenMath-Nemotron 14B Q4"
+    animate_text_x2 "║ 20 ⬢ MATH & STEM"
+    echo "║     5.4 GB ${MEMORY_TYPE}  • Rnj-1-8B Q4"
+    echo "║     Long-context reasoning abilities for science and technical questions;"
+    echo "║     strong capabilities in code and maths."
+    echo "║     "
+    animate_text_x2 "║ 21 ⬢ MATH & FORMAL LOGIC"
+    echo "║     9.3 GB ${MEMORY_TYPE}  • OpenMath-Nemotron-14B Q4"
     echo "║     Excels at math questions and structured problem-solving;"
     echo "║     clear steps for academic and competition problems."
     echo "║     "
-    animate_text_x2 "║ 19 ⬢ MATH & CODING"
+    animate_text_x2 "║ 22 ⬢ MATH & CODING"
     echo "║     4.9 GB ${MEMORY_TYPE}  • AceReason-Nemotron-1.1-7B Q4"
     echo "║     Handles math and logic puzzles with minimal resources;"
     echo "║     concise, step-by-step solutions."
     echo "║     "
-    animate_text_x2 "║ 20 ⬢ THEOREM PROVER"
-    echo "║     5.4 GB ${MEMORY_TYPE}  • Kimina Prover Distill 8B Q4"
+    animate_text_x2 "║ 23 ⬢ THEOREM PROVER"
+    echo "║     5.4 GB ${MEMORY_TYPE}  • Kimina-Prover-Distill-8B Q4"
     echo "║     Specialist in formal logic and proof steps;"
     echo "║     ideal for theorem-style tasks and verification."
     echo "║     "
-    animate_text_x2 "║ 21 ⬢ RUST PROGRAMMING"
-    echo "║     9 GB ${MEMORY_TYPE}  • Strand-Rust-Coder 14B Q4"
+    animate_text_x2 "║ 24 ⬢ RUST PROGRAMMING"
+    echo "║     9 GB ${MEMORY_TYPE}  • Strand-Rust-Coder-14B-v1 Q4"
     echo "║     Built by Fortytwo:"
     echo "║     Rust specialist that outputs idiomatic, compile-ready code and"
     echo "║     handles fixes/refactors; state-of-the-art on Rust benchmarks."
     echo "║     "
-    animate_text_x2 "║ 22 ⬢ MEDICAL EXPERT"
+    animate_text_x2 "║ 25 ⬢ MATH & STEM"
+    echo "║     2.6 GB ${MEMORY_TYPE}  • Nanbeige4-3B-Thinking-2511 Q4"
+    echo "║     Thoughtful step-by-step solver;"
+    echo "║     excels at competition math, graduate science, and function calling."
+    echo "║     "
+    animate_text_x2 "║ 26 ⬢ MEDICAL EXPERT"
     echo "║     5.4 GB ${MEMORY_TYPE}  • II-Medical-8B Q5"
     echo "║     Works through clinical Q&A step by step;"
     echo "║     useful for study and drafting (non-diagnostic)."
     echo "║     "
-    animate_text_x2 "║ 23 ⬢ LOW MEMORY MODEL"
-    echo "║     1.3 GB ${MEMORY_TYPE}  • Qwen3 1.7B Q4"
+    animate_text_x2 "║ 27 ⬢ LOW MEMORY MODEL"
+    echo "║     1.3 GB ${MEMORY_TYPE}  • Qwen3-1.7B Q4"
     echo "║     Ultra-efficient for basic instructions and quick answers;"
     echo "║     suitable for nodes with tight memory."
     echo "║     "
-    animate_text_x2 "║ 24 ⬢ LOW MEMORY MODEL"
-    echo "║     1.2 GB ${MEMORY_TYPE}  • VibeThinker 1.5B Q4"
+    animate_text_x2 "║ 28 ⬢ LOW MEMORY MODEL"
+    echo "║     1.2 GB ${MEMORY_TYPE}  • VibeThinker-1.5B Q4"
     echo "║     Efficient reasoning performance with math and coding problems;"
     echo "║     suitable for nodes with limited memory."
     echo "╚═════════ LIGHT TIER END"
@@ -794,7 +816,7 @@ select_node_model() {
         echo "[0] Settings"
         echo "[1] Auto"
         echo "[2] Import"
-        echo "[3-24] Specialized Model"
+        echo "[3-28] Specialized Model"
         read -r -p "Select your node's specialization option: " NODE_CLASS
         
         case $NODE_CLASS in
@@ -816,114 +838,134 @@ select_node_model() {
                 fi
                 ;;
             3)
-                LLM_HF_REPO="unsloth/gpt-oss-120b-GGUF"
-                LLM_HF_MODEL_NAME="Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
-                NODE_NAME="⬢ SUPERIOR GENERALIST: gpt-oss-120b Q4"
+                LLM_HF_REPO="unsloth/Kimi-K2-Thinking-GGUF"
+                LLM_HF_MODEL_NAME="Q4_K_M/Kimi-K2-Thinking-Q4_K_M-00001-of-00013.gguf"
+                NODE_NAME="⬢ ULTRA GENERALIST: Kimi-K2-Thinking Q4"
                 ;;
             4)
+                LLM_HF_REPO="unsloth/GLM-4.7-GGUF"
+                LLM_HF_MODEL_NAME="GLM-4.7-Q4_K_M-00001-of-00005.gguf"
+                NODE_NAME="⬢ ULTRA GENERALIST: GLM-4.7 Q4"
+                ;;
+            5)
+                LLM_HF_REPO="unsloth/gpt-oss-120b-GGUF"
+                LLM_HF_MODEL_NAME="Q4_K_M/gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"
+                NODE_NAME="⬢ SUPERIOR GENERALIST: gpt-oss-120B Q4"
+                ;;
+            6)
                 LLM_HF_REPO="unsloth/GLM-4.5-Air-GGUF"
                 LLM_HF_MODEL_NAME="Q4_K_M/GLM-4.5-Air-Q4_K_M-00001-of-00002.gguf"
                 NODE_NAME="⬢ SUPERIOR GENERALIST: GLM-4.5-Air Q4"
                 ;;
-            5)
+            7)
                 LLM_HF_REPO="unsloth/Llama-3_3-Nemotron-Super-49B-v1_5-GGUF"
                 LLM_HF_MODEL_NAME="Llama-3_3-Nemotron-Super-49B-v1_5-Q4_K_M.gguf"
                 NODE_NAME="⬢ SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
                 ;;
-            6)
+            8)
                 LLM_HF_REPO="unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
                 LLM_HF_MODEL_NAME="Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
-                NODE_NAME="⬢ ADVANCED REASONING: Qwen3 30B A3B Thinking 2507 Q4"
+                NODE_NAME="⬢ ADVANCED REASONING: Qwen3-30B-A3B-Thinking-2507 Q4"
                 ;;
-            7)
+            9)
                 LLM_HF_REPO="unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
                 LLM_HF_MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
                 NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: Qwen3-Coder-30B-A3B-Instruct Q4"
                 ;;
-            8)
+            10)
                 LLM_HF_REPO="unsloth/gpt-oss-20b-GGUF"
                 LLM_HF_MODEL_NAME="gpt-oss-20b-Q4_K_M.gguf"
-                NODE_NAME="⬢ ADVANCED GENERALIST: gpt-oss-20b Q4"
-                ;;
-            9)
-                LLM_HF_REPO="unsloth/OpenReasoning-Nemotron-32B-GGUF"
-                LLM_HF_MODEL_NAME="OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
-                NODE_NAME="⬢ MATH, SCIENCE & CODING: OpenReasoning Nemotron 32B Q4"
-                ;;
-            10)
-                LLM_HF_REPO="LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
-                LLM_HF_MODEL_NAME="LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
-                NODE_NAME="⬢ ADVANCED GENERALIST: EXAONE 4.0 32B Q4"
+                NODE_NAME="⬢ ADVANCED GENERALIST: gpt-oss-20B Q4"
                 ;;
             11)
-                LLM_HF_REPO="bartowski/open-r1_OlympicCoder-32B-GGUF"
-                LLM_HF_MODEL_NAME="open-r1_OlympicCoder-32B-Q4_K_M.gguf"
-                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 32B Q4"
+                LLM_HF_REPO="unsloth/OpenReasoning-Nemotron-32B-GGUF"
+                LLM_HF_MODEL_NAME="OpenReasoning-Nemotron-32B-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH, SCIENCE & CODING: OpenReasoning-Nemotron-32B Q4"
                 ;;
             12)
+                LLM_HF_REPO="LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
+                LLM_HF_MODEL_NAME="LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+                NODE_NAME="⬢ ADVANCED GENERALIST: EXAONE-4.0-32B Q4"
+                ;;
+            13)
+                LLM_HF_REPO="bartowski/open-r1_OlympicCoder-32B-GGUF"
+                LLM_HF_MODEL_NAME="open-r1_OlympicCoder-32B-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder-32B Q4"
+                ;;
+            14)
                 LLM_HF_REPO="bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
                 LLM_HF_MODEL_NAME="ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
                 NODE_NAME="⬢ ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
                 ;;
-            13)
+            15)
                 LLM_HF_REPO="unsloth/Qwen3-14B-GGUF"
                 LLM_HF_MODEL_NAME="Qwen3-14B-Q4_K_M.gguf"
-                NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 14B Q4"
-                ;;
-            14)
-                LLM_HF_REPO="unsloth/Qwen3-8B-GGUF"
-                LLM_HF_MODEL_NAME="Qwen3-8B-Q4_K_M.gguf"
-                NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3 8B Q4"
-                ;;
-            15)
-                LLM_HF_REPO="unsloth/gemma-3-12b-it-GGUF"
-                LLM_HF_MODEL_NAME="gemma-3-12b-it-Q4_K_M.gguf"
-                NODE_NAME="⬢ MULTILINGUAL GENERALIST: Gemma-3 4B Q4"
+                NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3-14B Q4"
                 ;;
             16)
-                LLM_HF_REPO="bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
-                LLM_HF_MODEL_NAME="agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
-                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: DeepCoder 14B Q4"
+                LLM_HF_REPO="unsloth/Qwen3-8B-GGUF"
+                LLM_HF_MODEL_NAME="Qwen3-8B-Q4_K_M.gguf"
+                NODE_NAME="⬢ EVERYDAY GENERALIST: Qwen3-8B Q4"
                 ;;
             17)
-                LLM_HF_REPO="bartowski/open-r1_OlympicCoder-7B-GGUF"
-                LLM_HF_MODEL_NAME="open-r1_OlympicCoder-7B-Q4_K_M.gguf"
-                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder 7B Q4"
+                LLM_HF_REPO="unsloth/gemma-3-12b-it-GGUF"
+                LLM_HF_MODEL_NAME="gemma-3-12b-it-Q4_K_M.gguf"
+                NODE_NAME="⬢ MULTILINGUAL GENERALIST: Gemma-3-12B Q4"
                 ;;
             18)
-                LLM_HF_REPO="bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
-                LLM_HF_MODEL_NAME="nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
-                NODE_NAME="⬢ MATH & FORMAL LOGIC: OpenMath-Nemotron 14B Q4"
+                LLM_HF_REPO="bartowski/agentica-org_DeepCoder-14B-Preview-GGUF"
+                LLM_HF_MODEL_NAME="agentica-org_DeepCoder-14B-Preview-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: DeepCoder-14B Q4"
                 ;;
             19)
+                LLM_HF_REPO="bartowski/open-r1_OlympicCoder-7B-GGUF"
+                LLM_HF_MODEL_NAME="open-r1_OlympicCoder-7B-Q4_K_M.gguf"
+                NODE_NAME="⬢ PROGRAMMING & ALGORITHMS: OlympicCoder-7B Q4"
+                ;;
+            20)
+                LLM_HF_REPO="bartowski/EssentialAI_rnj-1-instruct-GGUF"
+                LLM_HF_MODEL_NAME="EssentialAI_rnj-1-instruct-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH & STEM: Rnj-1-8B Q4"
+                ;;
+            21)
+                LLM_HF_REPO="bartowski/nvidia_OpenMath-Nemotron-14B-GGUF"
+                LLM_HF_MODEL_NAME="nvidia_OpenMath-Nemotron-14B-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH & FORMAL LOGIC: OpenMath-Nemotron-14B Q4"
+                ;;
+            22)
                 LLM_HF_REPO="bartowski/nvidia_AceReason-Nemotron-1.1-7B-GGUF"
                 LLM_HF_MODEL_NAME="nvidia_AceReason-Nemotron-1.1-7B-Q4_K_M.gguf"
                 NODE_NAME="⬢ MATH & CODING: AceReason-Nemotron-1.1-7B Q4"
                 ;;
-            20)
+            23)
                 LLM_HF_REPO="mradermacher/Kimina-Prover-Distill-8B-GGUF"
                 LLM_HF_MODEL_NAME="Kimina-Prover-Distill-8B.Q4_K_M.gguf"
-                NODE_NAME="⬢ THEOREM PROVER: Kimina Prover Distill 8B Q4"
+                NODE_NAME="⬢ THEOREM PROVER: Kimina-Prover-Distill-8B Q4"
                 ;;
-            21)
+            24)
                 LLM_HF_REPO="Fortytwo-Network/Strand-Rust-Coder-14B-v1-GGUF"
                 LLM_HF_MODEL_NAME="Fortytwo_Strand-Rust-Coder-14B-v1-Q4_K_M.gguf"
-                NODE_NAME="⬢ RUST PROGRAMMING: Strand-Rust-Coder 14B Q4"
+                NODE_NAME="⬢ RUST PROGRAMMING: Strand-Rust-Coder-14B-v1 Q4"
                 ;;
-            22)
+            25)
+                LLM_HF_REPO="bartowski/Nanbeige_Nanbeige4-3B-Thinking-2511-GGUF"
+                LLM_HF_MODEL_NAME="Nanbeige_Nanbeige4-3B-Thinking-2511-Q4_K_M.gguf"
+                NODE_NAME="⬢ MATH & STEM: Nanbeige4-3B-Thinking-2511 Q4"
+                ;;
+            26)
                 LLM_HF_REPO="Intelligent-Internet/II-Medical-8B-1706-GGUF"
                 LLM_HF_MODEL_NAME="II-Medical-8B-1706.Q4_K_M.gguf"
                 NODE_NAME="⬢ MEDICAL EXPERT: II-Medical-8B Q5"
                 ;;
-            23)
+            27)
                 LLM_HF_REPO="unsloth/Qwen3-1.7B-GGUF"
                 LLM_HF_MODEL_NAME="Qwen3-1.7B-Q4_K_M.gguf"
-                NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3 1.7B Q4"
+                NODE_NAME="⬢ LOW MEMORY MODEL: Qwen3-1.7B Q4"
                 ;;
-            24)
+            28)
                 LLM_HF_REPO="mradermacher/VibeThinker-1.5B-GGUF"
                 LLM_HF_MODEL_NAME="VibeThinker-1.5B.Q4_K_M.gguf"
-                NODE_NAME="⬢ LOW MEMORY MODEL: VibeThinker 1.5B Q4"
+                NODE_NAME="⬢ LOW MEMORY MODEL: VibeThinker-1.5B Q4"
                 ;;
             *)
                 echo
