@@ -825,7 +825,7 @@ function Select-NodeModel {
     Write-Host ""
     Write-Host "|========= LIGHT TIER | Operating the Node in Background"
     Animate-Text-x2 "| 14 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
-    Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Apriel-Nemotron-15b-Thinker Q4"
+    Write-Host "|     9.6 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Apriel-Nemotron-15B-Thinker Q4"
     Write-Host "|     Deliberate, reflective multi-step reasoning across mixed tasks;"
     Write-Host "|     steady performance on logic, math, and coding."
     Write-Host "|"
@@ -1000,7 +1000,7 @@ function Select-NodeModel {
             "14" {
                 $script:LLM_HF_REPO = "bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
                 $script:LLM_HF_MODEL_NAME = "ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
-                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Apriel-Nemotron-15B-Thinker Q4"
                 $exit = $true
             }
             "15" {

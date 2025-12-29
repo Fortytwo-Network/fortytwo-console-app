@@ -895,7 +895,7 @@ select_node_model() {
             14)
                 LLM_HF_REPO="bartowski/ServiceNow-AI_Apriel-Nemotron-15b-Thinker-GGUF"
                 LLM_HF_MODEL_NAME="ServiceNow-AI_Apriel-Nemotron-15b-Thinker-Q4_K_M.gguf"
-                NODE_NAME="⬢ ADVANCED REASONING: Apriel-Nemotron-15b-Thinker Q4"
+                NODE_NAME="⬢ ADVANCED REASONING: Apriel-Nemotron-15B-Thinker Q4"
                 ;;
             15)
                 LLM_HF_REPO="unsloth/Qwen3-14B-GGUF"
