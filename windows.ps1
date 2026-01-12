@@ -987,7 +987,7 @@ function Select-NodeModel {
             }
             "12" {
                 $script:LLM_HF_REPO = "LGAI-EXAONE/EXAONE-4.0-32B-GGUF"
-                $script:LLM_HF_MODEL_NAME = "LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf"
+                $script:LLM_HF_MODEL_NAME = "EXAONE-4.0-32B-Q4_K_M.gguf"
                 $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED GENERALIST: EXAONE-4.0-32B Q4"
                 $exit = $true
             }
