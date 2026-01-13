@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2026.01.13.0] - 2026-01-13
+### Changed
+- Changed the outdated model file name: LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf -> EXAONE-4.0-32B-Q4_K_M.gguf
+
 ## [v2025.12.30.0] - 2025-12-30
 ### Added
 Added new featured models: 
