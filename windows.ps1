@@ -939,7 +939,7 @@ function Select-NodeModel {
             }            
             "4" {
                 $script:LLM_HF_REPO = "unsloth/GLM-4.7-GGUF"
-                $script:LLM_HF_MODEL_NAME = "GLM-4.7-Q4_K_M-00001-of-00005.gguf"
+                $script:LLM_HF_MODEL_NAME = "Q4_K_M/GLM-4.7-Q4_K_M-00001-of-00005.gguf"
                 $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ULTRA GENERALIST: GLM-4.7 Q4"
                 $exit = $true
             }
