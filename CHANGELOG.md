@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2026.01.13.1] - 2026-01-13
+### Fixed
+- Changed the model file name path: GLM-4.7-Q4_K_M-00001-of-00005.gguf -> Q4_K_M/GLM-4.7-Q4_K_M-00001-of-00005.gguf
+
 ## [v2026.01.13.0] - 2026-01-13
 ### Changed
 - Changed the outdated model file name: LGAI-EXAONE_EXAONE-4.0-32B-Q4_K_M.gguf -> EXAONE-4.0-32B-Q4_K_M.gguf

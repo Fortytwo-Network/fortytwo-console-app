@@ -859,7 +859,7 @@ select_node_model() {
                 ;;
             4)
                 LLM_HF_REPO="unsloth/GLM-4.7-GGUF"
-                LLM_HF_MODEL_NAME="GLM-4.7-Q4_K_M-00001-of-00005.gguf"
+                LLM_HF_MODEL_NAME="Q4_K_M/GLM-4.7-Q4_K_M-00001-of-00005.gguf"
                 NODE_NAME="⬢ ULTRA GENERALIST: GLM-4.7 Q4"
                 ;;
             5)
