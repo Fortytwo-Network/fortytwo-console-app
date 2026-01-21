@@ -1,4 +1,17 @@
 # Changelog
+## [v2026.01.22.0] - 2026-01-22
+### Added
+Added new featured model: 
+- **GLM-4.7-Flash Q4**: Long-context reasoning at high efficiency, with steady logic, math, and coding across large inputs.
+*REPO = unsloth/GLM-4.7-Flash-GGUF*
+*MODEL NAME = GLM-4.7-Flash-Q4_K_M.gguf*
+### Changed
+- New model takes place of an older one on position #8: **Qwen3-30B-A3B-Thinking-2507 Q4** -> **GLM-4.7-Flash Q4**
+### Removed
+Removed an older featured model:
+- **Qwen3-30B-A3B-Thinking-2507 Q4**
+*REPO = unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF*
+*MODEL NAME = Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf*
 
 ## [v2026.01.13.1] - 2026-01-13
 ### Fixed
@@ -12,7 +25,7 @@
 ### Added
 Added new featured models: 
 - **Kimi-K2-Thinking**: Efficient Mixture of Experts reasoning; balanced accuracy, coherence, and efficiency across general and technical tasks.
-*REPO = unsloth/Kimi-K2-Thinking-GGUF*<br />
+*REPO = unsloth/Kimi-K2-Thinking-GGUF*
 *MODEL NAME = Q4_K_M/Kimi-K2-Thinking-Q4_K_M-000XX-of-00013.gguf*
 - **MiniMax-M2.1**: Versatile generalist with standout coding, creative and complex reasoning skills.
 *REPO = unsloth/GLM-4.7-GGUF*
