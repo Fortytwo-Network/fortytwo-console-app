@@ -1,5 +1,5 @@
 # Changelog
-## [v2026.01.22.0] - 2026-01-22
+## [v2026.01.23.0] - 2026-01-23
 ### Added
 Added new featured model: 
 - **GLM-4.7-Flash Q4**: Long-context reasoning at high efficiency, with steady logic, math, and coding across large inputs.
