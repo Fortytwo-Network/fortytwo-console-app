@@ -719,7 +719,7 @@ select_node_model() {
     echo
     echo "╔═════════ HEAVY TIER | Dedicating all Compute to the Node"
     animate_text_x2 "║ 8 ⬢ ADVANCED REASONING"
-    echo "║     19.5 GB ${MEMORY_TYPE} • Qwen3-30B-A3B-Thinking-2507 Q4"
+    echo "║     19.2 GB ${MEMORY_TYPE} • GLM-4.7-Flash Q4"
     echo "║     Long-context reasoning at high efficiency, with steady logic,"
     echo "║     math, and coding across large inputs."
     echo "║     "
@@ -878,9 +878,9 @@ select_node_model() {
                 NODE_NAME="⬢ SUPERIOR GENERALIST: Nemotron-Super-49B-v1.5 Q4"
                 ;;
             8)
-                LLM_HF_REPO="unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
-                LLM_HF_MODEL_NAME="Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
-                NODE_NAME="⬢ ADVANCED REASONING: Qwen3-30B-A3B-Thinking-2507 Q4"
+                LLM_HF_REPO="unsloth/GLM-4.7-Flash-GGUF"
+                LLM_HF_MODEL_NAME="GLM-4.7-Flash-Q4_K_M.gguf"
+                NODE_NAME="⬢ ADVANCED REASONING: GLM-4.7-Flash Q4"
                 ;;
             9)
                 LLM_HF_REPO="unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"

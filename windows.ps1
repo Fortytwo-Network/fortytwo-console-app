@@ -793,7 +793,7 @@ function Select-NodeModel {
     Write-Host ""
     Write-Host "|========= HEAVY TIER | Dedicating all Compute to the Node"
     Animate-Text-x2 "| 8 $SYMBOL_MODEL_SELECTED ADVANCED REASONING"
-    Write-Host "|     19.5 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT Qwen3-30B-A3B-Thinking-2507 Q4"
+    Write-Host "|     19.2 GB $MEMORY_TYPE $SYMBOL_SEPARATOR_DOT GLM-4.7-Flash Q4"
     Write-Host "|     Long-context reasoning at high efficiency, with steady logic,"
     Write-Host "|     math, and coding across large inputs."
     Write-Host "|"
@@ -962,9 +962,9 @@ function Select-NodeModel {
                 $exit = $true
             }
             "8" {
-                $script:LLM_HF_REPO = "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
-                $script:LLM_HF_MODEL_NAME = "Qwen3-30B-A3B-Thinking-2507-Q4_K_M.gguf"
-                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: Qwen3-30B-A3B-Thinking-2507 Q4"
+                $script:LLM_HF_REPO = "unsloth/GLM-4.7-Flash-GGUF"
+                $script:LLM_HF_MODEL_NAME = "GLM-4.7-Flash-Q4_K_M.gguf"
+                $script:NODE_NAME = " $SYMBOL_MODEL_SELECTED ADVANCED REASONING: GLM-4.7-Flash Q4"
                 $exit = $true
             }
             "9" {
