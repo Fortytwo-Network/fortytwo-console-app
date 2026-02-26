@@ -209,7 +209,7 @@ echo
 animate_text "◰ Setup script — version validation"
 
 # --- Update setup script ---
-INSTALLER_UPDATE_URL="https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-console-app/main/linux.sh"
+INSTALLER_UPDATE_URL="https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-p2p-inference-scripts/main/linux.sh"
 SCRIPT_PATH="$0"
 TEMP_FILE=$(mktemp)
 
