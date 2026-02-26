@@ -1,4 +1,9 @@
 # Changelog
+
+## [v2026.02.26.0] - 2026-02-26
+### Changed
+- Updated github self-checker
+
 ## [v2026.01.23.0] - 2026-01-23
 ### Added
 Added new featured model: 

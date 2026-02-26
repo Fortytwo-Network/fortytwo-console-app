@@ -244,7 +244,7 @@ Write-Host ""
 Animate-Text " $SYMBOL_COMP_SETUPSCRIPT Setup script - version validation"
 
 # --- Update setup script ---
-$UpdateUrl = "https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-console-app/main/windows.ps1"
+$UpdateUrl = "https://raw.githubusercontent.com/Fortytwo-Network/fortytwo-p2p-inference-scripts/main/windows.ps1"
 $ScriptPath = $MyInvocation.MyCommand.Path
 $TempFile = [System.IO.Path]::GetTempFileName()
 
